@@ -1,4 +1,6 @@
 /*
+	code from <javascript the definition book>
+		
 
 	One important use of the Arguments object is to write functions that operate on any number of arguments.
 	function max behaves the same way like the built-in function Math.max()
