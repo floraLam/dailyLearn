@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>8旋转数组的最小数字</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+        
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>8旋转数组的最小数字</h3>
+       把一个数组中最开始的若干个元素搬到数组的尾部，我们称之为数组的旋转，输入一个递增序列的数组的一个旋转，输出旋转数组的最小元素。<br>
+       例如，数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    var a = [3,4,5,1,2];
+    function minInOrder(arr){
+        for(var i = 0;i<arr.length;i++){
+            if(arr[i]>a[i+1])
+                break;
+        }
+        
+        var newArr = arr.splice(i+1,arr.length-i).concat(arr);//[1,2,3,4,5]
+        var newArr = arr.concat(arr.splice(0,i+1));//类似地算法
+        //注意将一个数组拼接到另外一个数组的后面，要使用concat，而不可以使用newArr.splice(newArr.length,0,arr);因为splice只会将数组形式的数组拼接到原数组后，而非逐个元素拼接
+        return 
+    }
+    console.info("将 3,4,5,1,2 翻转，结果为："+minInOrder(a));
+    console.info("输入minInOrder查看源码！");
+    </script>
+</html>
+

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>9斐波那契数列</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+       
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>9斐波那契数列</h3>
+        写一个函数，输入n，求斐波那契数列的第n项。<br>
+        f(n) = 0(n =0)<br>
+        f(n) = 1(n=1)<br>
+        f(n) = f(n-1)+f(n-2) n>1<br>
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+        function fibonacci(n){
+            if(n<=0)
+                return 0;
+            if(n == 1)
+                return 1;
+            return fibonacci(n-1)+fibonacci(n-2);
+            //这种解法会伴随n的增大而急剧增大，试试上递归方法计算的时间复杂度会以n的指数方式递增的
+        }
+        function fibonacci2(n){
+            var result = [0,1];
+            if(n<2)
+                return result[n];
+            var fibiNMOne = 1;
+            var fibiNMTwo = 0;
+            var fibN = 0;
+            for(var i = 2;i<=n;i++){
+                fibiN = fibiNMOne+fibiNMTwo;
+                fibiNMTwo = fibiNMOne;
+                fibiNMOne = fibiN;
+            }
+            return fibiN;
+        }
+        console.time('使用递归算法时间');
+        console.info("使用递归算法　　："+fibonacci(20));
+        console.timeEnd('使用递归算法时间');
+        console.time('避免重复计算时间');
+        console.info("避免重复计算算法："+fibonacci2(20));
+        console.timeEnd('避免重复计算时间');
+        
+        
+    </script>
+</html>
+

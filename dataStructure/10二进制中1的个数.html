@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>10二进制中1的个数</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+      
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>10二进制中1的个数</h3>
+       请实现一个函数，输入一个整数，输出该数二进制标识中1的个数，例如把0表示成二进制是1001，有2位是1，因此如果输入9，该函数输出2
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    function numberOf1(n){
+        //当n的二进制有多少位，就要执行多少次遍历
+        var count = 0;
+        while(n){
+            if(n & 1)
+                count ++;
+
+            n = n >> 1;
+        }
+        return count;
+    }
+    console.time("方法一执行时间");
+    console.info(numberOf1(984));
+    console.timeEnd("方法一执行时间");
+    function numberOf12(n){
+        //和n的二进制位数无关，二进制中有多少个1，就执行多少次
+        var count = 0;
+        while(n){
+            count++;
+            n = (n-1) & n;
+        }
+        return count;
+    }
+    console.time("方法二执行时间");
+    console.info(numberOf12(984));
+    console.timeEnd("方法二执行时间");
+
+    console.info("输入numberOf1查看方法一源码，输入numberOf12查看方法二源码！")
+    
+    </script>
+</html>
+

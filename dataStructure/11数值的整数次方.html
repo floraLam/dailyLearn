@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>11数值的整数次方</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+     
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>11数值的整数次方</h3>
+       实现函数prower(base,exponent)求base的exponent次方
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    function power(base,exponent){
+        if(isNaN(base) || isNaN(exponent) || exponent<0){
+            throw new Error("arguments type Error");
+        }
+        var result = 1;
+        for(var i =1 ;i<exponent;i++){
+            result *= base;
+        }
+        return result;
+    }
+    console.info("计算power(3,5)："+power(3,5));
+    console.info("输入power查看源码！");
+    </script>
+</html>
+

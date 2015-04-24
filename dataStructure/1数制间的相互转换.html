@@ -34,10 +34,16 @@
         var base = 2;
         var newNum = mulBase(num, base);
         console.info(num + " 转成 " + base + " 进制，为 " + newNum);
-        num = 125;
-        base = 8;
+        num = 12455;
+        base = 10;
         var newNum = mulBase(num, base);
+        console.time("自定义算法实现时间");
         console.info(num + " 转成 " + base + " 进制，为 " + newNum);
+        console.timeEnd("自定义算法实现时间");
+
+        console.time("使用parseInt实现时间");
+        console.info(num + " 转成 " + base + " 进制，为 " + parseInt(num,base));
+        console.timeEnd("使用parseInt实现时间");
         console.info("输入mulBase获取源码！");
     </script>
 </html>

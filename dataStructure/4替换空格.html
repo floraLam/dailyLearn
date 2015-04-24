@@ -31,10 +31,7 @@
         //获取多少个空格
         for(var i = 0;i<originLength;i++){
             if(str[i] ==' '){
-               
-               console.info(i);
               str.split("").splice(0,1).join('');
-             console.info(str);
             }
         }
        
@@ -47,7 +44,7 @@
             方法二：
             正则表达式全局匹配
             s.replace(/\s/g,"%20"); 
-            方法三：使用全局函数escape
+            方法三：使用全局函数escape（原生方法，推荐使用）
             escape(s);
             但是要注意该方法不会对 ASCII 字母和数字进行编码，也不会对下面这些 ASCII 标点符号进行编码： * @ - _ + . / 。其他所有的字符都会被转义序列替换。
             方法四：encodeURI 方法 
@@ -62,10 +59,21 @@
         */
 
     }
+    console.time('使用自定义算法时间');
     console.info("结果："+replaceBlank(s));
-    console.info("查找结果："+encodeURI(s));//测试用，非必须代码
+    console.timeEnd('使用自定义算法时间');
+
+    console.time('使用encodeURI时间');
+    console.info("结果："+encodeURI(s));//测试用，非必须代码
+    console.timeEnd('使用encodeURI时间');
     
-    console.info("查找结果："+s.replace('/\s/g'),"%20");//测试用，非必须代码
+    console.time('使用正则表达式时间');
+    console.info("结果："+s.replace('/\s/g'),"%20");//测试用，非必须代码
+    console.timeEnd('使用正则表达式时间');
+
+    
+    
+    
     console.info("输入replaceBlank获取源码！");
     </script>
 </html>

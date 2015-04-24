@@ -1,21 +1,49 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
-        <title>test dailyLearn</title>
+        <title>6重建二叉树</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="description" content="使用javascript实现数据结构和算法题目" />
         <meta name="keywords" content="数据结构和算法,javascript" />
         <meta name="author" content="floraLam" />
-        <script src="common/max.js"></script>
+        <script src="../ADT/tree.js"></script>
         <script></script>
     </head>
     <body style = "font-family:'微软雅黑'">
-        <h3>测试页面，什么都没有，勿慌！</h3>
-       
+        <h3>6重建二叉树</h3>
+       输入某二叉树的前序遍历和中序遍历结果，请重建出该二叉树。假设输入的谦虚遍历和后序遍历的结果中都不含重复的数字。<br/>
+       例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历{4,7,2,1,5,3,8,6}<br/>
+       重建出二叉树，并且输出它的头结点。<br/>
 
         <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;">请问你可爱的小“F12”，索取答案!</div>
         
 	</body>
+    <script>
+        var nums = new BST();
+        nums.insert(23);
+        nums.insert(45);
+        nums.insert(16);
+        nums.insert(37);
+        nums.insert(3);
+        nums.insert(99);
+        nums.insert(22);
+        console.info("Inorder traversal: ");
+        inOrder(nums.root);
+        console.info(nums);
+
+
+        var pre = [1,2,4,7,3,5,6,8];
+        var ino = [4,7,2,1,5,3,8,6];
+        function constructTree(preorder,inorder,length){
+            if(preorder == null || inorder == null ){
+                throw new Error("arguments type Error");
+            }
+            return constructCore(preorder,preorder+length-1,inorder,inorder+length-1);
+        }
+        function constructCore(startPre,endPre,startIno,endIno){
+
+        }
+    </script>
 </html>
 

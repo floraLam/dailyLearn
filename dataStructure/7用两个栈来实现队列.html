@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>7用两个栈来实现队列</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+        <script src="../ADT/stack.js"></script>
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>7用两个栈来实现队列</h3>
+        用两个栈来实现一个队列。<br/>
+        队列的声明如下，<br/>
+        请实现它的两个函数appendTail和deleteHead，分别完成在队列尾部插入结点和在队列头部删除结点的功能<br/>
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    var stack1 = new Stack();//stack1负责入队列
+    var stack2 = new Stack();//stack2负责出队列
+    function CQueue_appendTail(element){
+        if(element == null){
+            throw new Error("arguments type Error");
+        }
+        stack1.push(element);
+    }
+    function CQueue_deleteHead(){
+        /*if(stack2.length() == 0){
+            throw new Error("queue is empty");
+        }*/
+        if(stack2.length() == 0){
+            while(stack1.length()>0){
+                stack2.push(stack1.pop());
+            }
+        }
+      
+        while(stack2.length()>0){
+            return stack2.pop();
+        }
+        /*
+            备注：同样的道理能够，实现用两个队列来实现栈的进栈和出栈的操作
+            queue1是用来入栈的
+            依次将queue1填满，
+            出栈时，当queue1 的元素个数大于1的时候，依次将queue1中的元素压入queue2中，
+                    当queue1 的元素个数为1的时候，输出queue1中剩下的这个元素
+                    最后将queue2中的元素放回queue1中
+            queue2相当于中转站，盛放除需要出栈以外的其他剩余元素
+        */
+    }
+    console.info("将a,b,c,d依次送入队列中");
+    CQueue_appendTail("a");
+    CQueue_appendTail("b");
+    CQueue_appendTail("c");
+    CQueue_appendTail("d");
+    console.info("出队列一次：");
+    console.info(CQueue_deleteHead());
+    console.info("出队列二次：");
+    console.info(CQueue_deleteHead());
+    console.info("将e送入队列");
+    CQueue_appendTail("e");
+    console.info("连续三次出队列");
+    console.info(CQueue_deleteHead());
+    console.info(CQueue_deleteHead());
+    console.info(CQueue_deleteHead());
+
+    console.info("查看入队列源码，请输入CQueue_appendTail");
+    console.info("查看出队列源码，请输入CQueue_deleteHead");
+    </script>
+</html>
+
