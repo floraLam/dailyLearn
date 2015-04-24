@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>2回文</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+        <script src="../ADT/stack.js"></script>
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>2回文</h3>
+       
+        回文是指这样一种现象：一个单词、短语或数字，从前往后写和从后往前写都是一样的。
+比如，单词“dad”、“racecar”就是回文；如果忽略空格和标点符号，下面这个句子也是回
+文，“A man, a plan, a canal: Panama”；数字1001 也是回文
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    /*
+        回文是指这样一种现象：一个单词、短语或数字，从前往后写和从后往前写都是一样的。
+比如，单词“dad”、“racecar”就是回文；如果忽略空格和标点符号，下面这个句子也是回
+文，“A man, a plan, a canal: Panama”；数字1001 也是回文
+    */
+    function isPalindrome(word){
+        //使用栈
+        var s = new Stack();
+        for(var i = 0;i<word.length;i++){
+            s.push(word[i]);
+        }
+        var rword ="";
+    
+        while(s.length() >0){
+            rword += s.pop();
+        }
+     
+        if(word == rword){
+
+            return true;
+        }else{
+            return false;
+        }
+        /*
+            备注：对于字符串翻转，可以使用Array的方法：
+            'fdfdfdfdfefe'.split('').reverse().join("")
+        */
+    }
+  
+    console.info(isPalindrome('fdfdfdfdfefe')?"'fdfdfdfdfefe'是回文":"'fdfdfdfdfefe'不是回文");
+    console.info(isPalindrome('fdfdfdfdfefeefefdfdfdfdf')?"'fdfdfdfdfefeefefdfdfdfdf'是回文":"'fdfdfdfdfefeefefdfdfdfdf'不是回文");
+    </script>
+</html>
+

@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>5从尾到头打印链表</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+        <script src="../ADT/llist.js"></script>
+        <script src="../ADT/stack.js"></script>
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>5从尾到头打印链表</h3>
+        输入一个链表的头结点，从尾到头反过来打印出每个节点的值
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+        //引入ADT中的 链表，创建一个链表
+        var cities = new LList();
+        cities.insert("Conway", "head");
+        cities.insert("Russellville", "Conway");
+        cities.insert("Carlisle", "Russellville");
+        cities.insert("Alma", "Carlisle");
+        //cities.display();
+        
+        function printListReversingly(phead){
+
+            //典型的后进先出，可以使用栈来实现
+            var s = new Stack();//中转站
+            var newList = new LList();
+            var p = phead;//存储当前节点
+
+            if(phead != null){
+                //入栈
+                while(p != null){
+                    s.push(p);
+                    p = p.next;
+                }
+                //出栈
+                while( s.top !=0){
+                    console.info(s.peek().element);
+                    s.pop();
+                }
+            }
+         
+            
+        }
+        console.info("原始列表为：");
+        console.info(cities.display());
+        console.info("逆序输出：");
+        printListReversingly(cities.head);
+
+        console.info("输入printListReversingly获取源码！");
+
+
+        function printListReversingly_recursively(phead){
+            if(phead != null){
+                if (phead.next !=null) {
+                    printListReversingly_recursively(phead.next);
+                };
+                console.info(phead.element);
+            }
+            /*但是存在一个问题，当链表非常长，就会导致函数调用层级很深，从而很有可能导致函数调用栈溢出，显式用栈基于循环实现代码更强健*/
+
+        }
+        console.info("使用递归算法：");
+        printListReversingly_recursively(cities.head);
+        console.info("输入printListReversingly_recursively获取源码！");
+
+    </script>
+</html>
+

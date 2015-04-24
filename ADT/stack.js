@@ -4,6 +4,7 @@ function Stack(){
 	this.push =push;
 	this.pop = pop;
 	this.peek = peek;
+	this.length = length;
 }
 function push(element){
 	this.dataStore[this.top++] = element;

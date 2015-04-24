@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>1数制间的相互转换</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+        <script src="../ADT/stack.js"></script>
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>1数制间的相互转换</h3>
+       将一个数字从一种数制转换成另一种数制。
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+        function mulBase(num, base) {
+            var s = new Stack();
+            do {
+                s.push(num % base);
+                num = Math.floor(num /= base);
+            } while (num > 0);
+            var converted = "";
+            while (s.length() > 0) {
+                converted += s.pop();
+            }
+            return converted;
+        }
+        var num = 32;
+        var base = 2;
+        var newNum = mulBase(num, base);
+        console.info(num + " 转成 " + base + " 进制，为 " + newNum);
+        num = 125;
+        base = 8;
+        var newNum = mulBase(num, base);
+        console.info(num + " 转成 " + base + " 进制，为 " + newNum);
+        console.info("输入mulBase获取源码！");
+    </script>
+</html>
+

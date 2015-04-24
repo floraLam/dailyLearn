@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>3二维数组中查找</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+    </head>
+    <body style = "font-family:'微软雅黑'">
+       <h3>3二维数组中查找</h3>
+        请实现一个函数，把字符串中的每个空格替换成"%20"，例如"We are happy"，则输出"We%20are%20happy"<br>
+      
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    /*
+    请实现一个函数，把字符串中的每个空格替换成"%20"，例如"We are happy"，则输出"We%20are%20happy"
+    */
+
+    var s = "We are happy";
+    function replaceBlank(str){
+        var originLength = str.length;
+        var numberLength = 0;
+        var newLength = originLength+0;//替换后的新长度
+         var indexOfOrignal = originLength-1;
+        var indexOfNew = 0;
+        var i =0;
+
+        //获取多少个空格
+        for(var i = 0;i<originLength;i++){
+            if(str[i] ==' '){
+               
+               console.info(i);
+              str.split("").splice(0,1).join('');
+             console.info(str);
+            }
+        }
+       
+      
+        return str;
+        //从后往前匹配，避免反复多次将空格后字符串后移,时间复杂度由原来的O(n^2)降为O(n)
+
+        /*
+            对于javascript这门灵活的语言，有另外的实现方法：
+            方法二：
+            正则表达式全局匹配
+            s.replace(/\s/g,"%20"); 
+            方法三：使用全局函数escape
+            escape(s);
+            但是要注意该方法不会对 ASCII 字母和数字进行编码，也不会对下面这些 ASCII 标点符号进行编码： * @ - _ + . / 。其他所有的字符都会被转义序列替换。
+            方法四：encodeURI 方法 
+            返回编码为有效的统一资源标识符 (URI) 的字符串。
+
+
+            escape不编码字符有69个：*，+，-，.，/，@，_，0-9，a-z，A-Z 
+
+            encodeURI不编码字符有82个：!，#，$，&，'，(，)，*，+，,，-，.，/，:，;，=，?，@，_，~，0-9，a-z，A-Z 
+
+            encodeURIComponent不编码字符有71个：!， '，(，)，*，-，.，_，~，0-9，a-z，A-Z 
+        */
+
+    }
+    console.info("结果："+replaceBlank(s));
+    console.info("查找结果："+encodeURI(s));//测试用，非必须代码
+    
+    console.info("查找结果："+s.replace('/\s/g'),"%20");//测试用，非必须代码
+    console.info("输入replaceBlank获取源码！");
+    </script>
+</html>
+

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>3二维数组中查找</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>3二维数组中查找</h3>
+        二维数组没行、每列递增排序。例如<br>
+        1 2 3 4 <br>
+        2 4 9 12<br>
+        4 7 10 13<br>
+        6 8 11 15<br>
+
+        请完成一个函数，输入这样的二维数组和一个整数，判断数组中是否含有该整数<br>
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;">请问你可爱的小“F12”，索取答案!</div>
+		
+	</body>
+    <script>
+    /*二维数组没行、每列递增排序。例如
+        1 2 3 4 
+        2 4 9 12
+        4 7 10 13
+        6 8 11 15
+
+    请完成一个函数，输入这样的二维数组和一个整数，判断数组中是否含有该整数
+    */
+    var a = [[1,2,3,4],[2,4,9,12],[4,7,10,13],[6,8,11,15]];
+    var n = 7;
+    function findInMatrix(array,num){
+        //防御性检测 ：数组判断和数组判断
+        if(Object.prototype.toString.call(array) !== '[object Array]' || isNaN(num)){
+            throw new Error("arguments type Error") ;
+        }
+        var rows = a.length , cols = a[0].length;
+        var found = false;
+        if(array != [] && rows>0 && cols>0){
+            /*  从第一行最后一个元素开始遍历，
+                当数组中当前数比目标数大，则往左边（列减一）；
+                当数组中当前数比目标是小，则行加一 。
+                从数组右上角开始，逐步缩小范围
+            */
+            var col = cols-1,row = 0;
+            while(col >= 0 && row <rows){
+                if(array[row][col] == num ){//或者可以使用arra[row *cols+col]获取当前数组中的值
+                    found = true;
+                    break;
+                }else if(array[row][col] >num){
+                    col--;
+                    
+                }else{
+                    row++;
+                    
+                }
+            }
+
+        }
+        return found;
+        /*
+            备注 ：判断某对象是否为数组
+                1,ES5函数isArray(),该函数测试对象的内部[[Class]]属性是否为Array:
+                    Arrray.isArray(a);
+                2,判断对象的构造函数是否为Array:
+                    a.constructor === Array
+                3,使用对象内部[[Class]]属性创建结果字符串：
+                    Object.prototype.toString.call(a)
+                4,使用instanceof操作符测试对象是否继承自Array：
+                    （但由于，一个页面的iframe不会继承自另外一个页面的iframe，该方法不可靠）
+                    a instanceof Array
+            */
+    };
+
+     console.info("查找结果："+(findInMatrix(a,n)==true?"在数组中找到数组":"在数组中没找到数组"));//测试用，非必须代码
+     console.info("输入findInMatrix获取源码！");
+    </script>
+</html>
+
