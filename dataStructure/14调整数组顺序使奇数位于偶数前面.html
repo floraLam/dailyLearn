@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+		<head>
+				<title>14调整数组顺序使奇数位于偶数前面</title>
+				<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+				<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+				<meta name="description" content="使用javascript实现数据结构和算法题目" />
+				<meta name="keywords" content="数据结构和算法,javascript" />
+				<meta name="author" content="floraLam" />
+				
+				<script></script>
+		</head>
+		<body style = "font-family:'微软雅黑'">
+				<h3>14调整数组顺序使奇数位于偶数前面</h3>
+			   输入一个整数数组，实现一个函数来调用该数组中数字的顺序，使得所有技术位于数组的前半部分，所有偶数位于数组的后半部分
+
+				<div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;">请问你可爱的小“F12”，索取答案!</div>
+				
+	</body>
+		<script>
+			var data = [4,8,1,2,6,7,9,4];
+
+			//常规方法，使用变量存储偶数，存储奇数，再合并
+			function recorderOddEven(data){
+				var evenArr = [];
+				var oddArr = [];
+				for(var i = 0;i<data.length;i++){
+					if((data[i] & 1) == 0){
+						evenArr.push(data[i]);
+					}else{
+						oddArr.push(data[i]);
+					}
+				}
+				return oddArr.concat(evenArr);
+			}
+			
+
+			console.info("常规解法：");
+			console.info(recorderOddEven(data));
+			console.info("输入recorderOddEven获取源码");
+
+
+			//判断是否为偶数
+			function isEven(n){
+				return (n & 1) == 0;
+			}
+			function recorder(data,callback){
+				//修改代码，上面是解决一问题的算法，我们需要的是解决一系列问题的算法，即当转移数组的条件被修改时，我们不需要修改函数内部的源码
+				//使偶数排列在奇数前，将判断条件作为回调函数，
+				var arr1 = [];
+				var arr2 = [];
+
+				for(var i = 0;i<data.length;i++){
+					if(callback(data[i])){
+						arr1.push(data[i]);
+					}else{
+						arr2.push(data[i]);
+					}
+				}
+				return arr1.concat(arr2);
+
+				//但需要注意判断函数真假和数组排序的顺序的关系
+			}
+			console.info("使用回调函数，提高可扩展性：");
+			console.info(recorder(data,isEven));
+			console.info("输入recorder获取源码");
+		</script>
+</html>
+

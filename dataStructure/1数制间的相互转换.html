@@ -30,10 +30,33 @@
             }
             return converted;
         }
+
+        function mulBase_regular(num,base){
+            var answer = "";
+            if(/\d+/.test(num)) {
+                while(num != 0) {
+                    answer += Math.abs(num%base);
+                    num = parseInt(num/base);
+                }
+                if(answer.length == 0)
+                    answer = "0";
+                return answer;
+            } else {
+                return 0;
+            }
+        }
+
+        
+
         var num = 32;
         var base = 2;
         var newNum = mulBase(num, base);
-        console.info(num + " 转成 " + base + " 进制，为 " + newNum);
+        console.time("模拟堆操作实现时间");
+        console.info(num + " 转成 " + base + " 进制，模拟堆操作为 " + newNum);
+        console.timeEnd("模拟堆操作实现时间");
+        console.time("常规方法实现时间");
+        console.info(num + " 转成 " + base + " 进制，常规方法　为 " + mulBase_regular(num,base));
+        console.timeEnd("常规方法实现时间");
         num = 12455;
         base = 10;
         var newNum = mulBase(num, base);
@@ -44,7 +67,8 @@
         console.time("使用parseInt实现时间");
         console.info(num + " 转成 " + base + " 进制，为 " + parseInt(num,base));
         console.timeEnd("使用parseInt实现时间");
-        console.info("输入mulBase获取源码！");
+        console.info("输入mulBase获取“模拟堆算法”源码！");
+        console.info("输入mulBase_regular获取“常规算法”源码！");
     </script>
 </html>
 

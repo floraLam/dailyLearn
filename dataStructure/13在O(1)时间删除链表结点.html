@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>13在O(1)时间删除链表结点</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+        <script src="../ADT/llist.js"></script>
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>13在O(1)时间删除链表结点</h3>
+       给定单项链表的头指针和一个结点指针，定义一个函数在O(1)时间删除该结点。
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    var l = new LList();
+    l.insert("1","head");
+    l.insert("2","1");
+    l.insert("3","2");
+    l.insert("4","3");
+    l.insert("5","4");
+    l.insert("6","5");
+    l.insert("7","6");
+    l.insert("8","7");
+    l.insert("9","8");
+
+    function deleteListNode(head,element){
+        //防御性检测，head必须继承自节点Node，即排除了null和undefined的可能
+        if(!(head instanceof Node) || element == undefined)
+            throw new Error("arguments type Error");
+        //删除的为头结点
+        var currNode = head;
+        while(!(currNode.next == null) && (currNode.next.element != element)){
+            currNode = currNode.next;
+        }
+       
+        if(!(currNode.next == null)){
+            currNode.next = currNode.next.next;
+        }
+        return head;
+    }
+    console.info("删除之前的链表：");
+    console.info(l.head);
+    console.info("删除5节点后的链表：");
+    console.info(deleteListNode(l.head,"5"));
+
+    console.info("输入deleteListNode查看源码！");
+    </script>
+</html>
+
