@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>21包含min函数的栈</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+        <script src="../ADT/stack.js"></script>
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>21包含min函数的栈</h3>
+       定义栈的数据结构，请在该类型中实现一个能够得到站的最小元素min函数，在该栈中，调用min/push/pop的时间复杂度为O(0);
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+        var s = new Stack();
+            s.push("7");
+            s.push("8");
+            s.push("4");
+            s.push("3");
+            s.push("1");
+            s.push("9");
+
+        function min(s){
+            if(!(s instanceof Stack)){
+                throw new Error("arguments type Error");
+            }
+            var min = s.pop();
+            while(s.length() >=0){
+                var temp = s.pop();
+
+                if(temp<min)
+                    min = temp;
+            }
+            return min;
+
+        }
+        console.info("对于栈：");
+        console.info(s.dataStore);
+        console.info("最小的元素为："+min(s));
+        console.info("输入min查看源码");
+    </script>
+</html>
+

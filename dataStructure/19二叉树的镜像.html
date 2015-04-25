@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>19二叉树的镜像</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+        <script src="../ADT/tree.js"></script>
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>19二叉树的镜像</h3>
+        请完成一个函数，输入一个二叉树，该函数输出它的镜像
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    var nums = new BST();
+        nums.insert(23);
+        nums.insert(45);
+        nums.insert(16);
+        nums.insert(37);
+        nums.insert(3);
+        nums.insert(99);
+        nums.insert(22);
+        console.info("镜像处理前的树结构：");
+        console.info("中序排列 ： "+nums.inOrder());
+        console.info("先序排列 ： "+nums.preOrder());
+        console.info("后序排列 ： "+nums.postOrder());
+
+    function mirrorRecursively(n){
+        if(!(n instanceof Node) )
+                throw new Error("arguments type Error");
+        if(n.left == null && n.right == null){
+            return n;
+        }
+        var temp = n.left;
+        n.left = n.right;
+        n.right = temp;
+
+        if(n.left)
+            mirrorRecursively(n.left);
+        if(n.right)
+            mirrorRecursively(n.right);
+    }
+    console.info("镜像处理后的树结构：");
+    console.info(nums.root);
+    console.info("中序排列 ： "+nums.inOrder());
+        console.info("先序排列 ： "+nums.preOrder());
+        console.info("后序排列 ： "+nums.postOrder());
+    </script>
+</html>
+

@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>22栈的压入、弹出序列</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+        <script src="../ADT/stack.js"></script>
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>22栈的压入、弹出序列</h3>
+       输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。<br>
+       假设1，2，3，4，5是某栈的压入序列，序列4，5，3，2，1是该栈序列对应的一个弹出序列。但4，3，5，1，2就不可能是该栈序列的弹出序列
+
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+        var s = new Stack();
+            s.push("1");
+            s.push("2");
+            s.push("3");
+            s.push("4");
+            s.push("5");
+         
+
+        var p = new Stack();
+            p.push("4");
+            p.push("5");
+            p.push("3");
+            p.push("2");
+            p.push("1");
+
+
+        function idPopOrder(s,p){
+            var res = false;
+            //防御性检测，s和p都要继承自Stack，同时它们的长度要一致
+            if(!(s instanceof Stack) || !(p instanceof Stack) || s.length() != p.length()){
+                throw new Error("arguments type Error");
+            }
+
+            var newStack = new Stack();
+            var pNextPush = s;
+            var  pNextPop = p;
+            while(pNextPop-p<p.length()){
+                while(newStack.top == 0 || newStack.peek() != pNextPop){
+                    if(pNextPush - p == p.length)
+                        break;
+
+                    newStack.push(pNextPush);
+                    pNextPush++;
+                }
+                if(newStack.peek() != pNextPop){
+                    break;
+                }
+                newStack.pop();
+                pNextPop ++;
+            }
+            if(newStack.top == 0 && pNextPop-p == p.length)
+                res = true;
+
+            return res;
+        }
+
+
+    </script>
+</html>
+
