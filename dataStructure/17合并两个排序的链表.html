@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>17合并两个排序的链表</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+        <script src="../ADT/llist.js"></script>
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>17合并两个排序的链表</h3>
+       输入两个递增排序的俩表，合并这两个链表并是新的链表中的结点仍然是按照递增的顺序排列
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    var l1 = new LList();
+    var l2 = new LList();
+        l1.insert("0","head");  l2.insert("0","head");
+        l1.insert("3","0");     l2.insert("1","0");
+        l1.insert("4","3");     l2.insert("2","1");
+        l1.insert("6","4");     l2.insert("5","2");
+        l1.insert("8","6");     l2.insert("7","5");
+                                l2.insert("9","7");
+        
+       
+        function merge(phead1,phead2){
+            //防御性检测，head必须继承自节点Node，即排除了null和undefined的可能
+            if(!(phead1 instanceof Node) && !(phead2 instanceof Node))
+                throw new Error("arguments type Error");
+            if(phead1 == null) return phead2;
+            if(phead2 == null) return phead1;
+
+            var n = new LList();
+            
+            phead1 = phead1.next;
+            phead2 = phead2.next;
+
+            while(phead1 != null && phead2 != null){
+                if(phead1.element < phead2.element){
+                    n.append(phead1.element);
+                    phead1 = phead1.next;
+                }else{
+                   n.append(phead2.element);
+                    phead2 = phead2.next;
+                }
+            }
+            if(phead1 != null)
+                n.append(phead1);
+            if(phead2 != null)
+                 n.append(phead2);
+           
+            return n.head;
+
+        }
+        console.info("合并后的结点：");
+        console.info(merge(l1.head,l2.head));
+        console.info("输入merge获取源码");
+
+
+
+    </script>
+</html>
+

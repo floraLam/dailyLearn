@@ -12,13 +12,64 @@
     </head>
     <body style = "font-family:'微软雅黑'">
         <h3>15链表中倒数第K个节点</h3>
-       
+       输入一个链表，输出该链表中倒数第K个节点。
 
-        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;">请问你可爱的小“F12”，索取答案!</div>
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
         
 	</body>
     <script>
-    
+        var l = new LList();
+            l.insert("0","head");
+            l.insert("1","0");
+            l.insert("2","1");
+            l.insert("3","2");
+            l.insert("4","3");
+            l.insert("5","4");
+            l.insert("6","5");
+            l.insert("7","6");
+            l.insert("8","7");
+            l.insert("9","8");
+        function findKthToTail_1(phead,k){
+        /*遍历链表两次，第一次统计出链表中结点的个数，通过计算，第二次就能找到倒数第k个结点*/
+            //防御性检测，head必须继承自节点Node，即排除了null和undefined的可能
+            if(!(phead instanceof Node) || k == undefined)
+                throw new Error("arguments type Error");
+            var length = 0,currNode = phead;
+            while (!(currNode.next == null)) {
+                length ++;
+                currNode = currNode.next;
+            }
+            currNode = phead;
+            for(var i = 0;i<length-k;i++){
+                currNode = currNode.next;
+            }
+            return currNode;
+        }
+        function findKthToTail_2(phead,k){
+        /*为了实现只遍历一次，就能找到倒数第k个结点，我们可以定义两个指针，第一个指针从链表的头指针开始遍历向前走k-1，第二个指针保持不动。当第一个指针走到链表尾端时候，第二个结点刚好指向倒数第k个节点*/
+            //防御性检测，head必须继承自节点Node，即排除了null和undefined的可能
+            if(!(phead instanceof Node) || k == undefined)
+                throw new Error("arguments type Error");
+            
+            var currNode1 = phead;
+            var currNode2 = phead;
+        
+            for(var i = 0;i<k;i++){
+                currNode1 = currNode1.next;
+            }
+            while (!(currNode1.next == null)) {
+                currNode2 = currNode2.next;
+                currNode1 = currNode1.next;
+            }
+            return currNode2;
+
+        }
+        console.time("遍历两次算法时间");
+        console.info("查找链表中第4个元素："+findKthToTail_1(l.head,4).element);
+        console.timeEnd("遍历两次算法时间");
+        console.time("遍历一次算法时间");
+        console.info("查找链表中第4个元素："+findKthToTail_2(l.head,4).element);
+        console.timeEnd("遍历一次算法时间");
 
 
     </script>

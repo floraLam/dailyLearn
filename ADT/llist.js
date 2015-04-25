@@ -9,6 +9,7 @@ function LList() {
 	this.display = display;
 	this.findPrevious = findPrevious;
 	this.remove = remove;
+	this.append = append;
 }
 function remove(item) {
 	var prevNode = this.findPrevious(item);
@@ -44,4 +45,15 @@ function insert(newElement, item) {
 	var current = this.find(item);
 	newNode.next = current.next;
 	current.next = newNode;
+}
+//NOTE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+function append(newElement) {
+	var newNode = new Node(newElement);
+	var currNode = this.head;
+	while (!(currNode.next == null)) {
+	
+		currNode = currNode.next;
+	}
+	currNode.next = newNode;
+	return this.head;
 }

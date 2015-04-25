@@ -4,9 +4,8 @@ The example code from &lt;JavaScript The Definitive Guide>.
 <h3>javascript实现数据结构题</h3>
 
 <div >
-ADT参考自《数据结构与算法JavaScript描述》<br/><br/>
 
-题目部分来自《剑指offer—名企业面试官精讲典型编程题》<br/><br/>
+使用javascript实现经典的数据结构面试题。练手和温
 
 水平有限，如有缺漏，望见谅！<br/><br/><br/>
 
@@ -33,6 +32,9 @@ ADT参考自《数据结构与算法JavaScript描述》<br/><br/>
 15链表中倒数第K个节点<br/>
 <br/>
 等等
+<br/><br/>
+
+题目部分来自《剑指offer—名企业面试官精讲典型编程题》<br/><br/>
 </div>
 
 	

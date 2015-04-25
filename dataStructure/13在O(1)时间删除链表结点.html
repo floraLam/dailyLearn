@@ -14,20 +14,20 @@
         <h3>13在O(1)时间删除链表结点</h3>
        给定单项链表的头指针和一个结点指针，定义一个函数在O(1)时间删除该结点。
 
-        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;">请问你可爱的小“F12”，索取答案!</div>
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
         
 	</body>
     <script>
     var l = new LList();
-    l.insert("1","head");
-    l.insert("2","1");
-    l.insert("3","2");
-    l.insert("4","3");
-    l.insert("5","4");
-    l.insert("6","5");
-    l.insert("7","6");
-    l.insert("8","7");
-    l.insert("9","8");
+        l.insert("1","head");
+        l.insert("2","1");
+        l.insert("3","2");
+        l.insert("4","3");
+        l.insert("5","4");
+        l.insert("6","5");
+        l.insert("7","6");
+        l.insert("8","7");
+        l.insert("9","8");
 
     function deleteListNode(head,element){
         //防御性检测，head必须继承自节点Node，即排除了null和undefined的可能
