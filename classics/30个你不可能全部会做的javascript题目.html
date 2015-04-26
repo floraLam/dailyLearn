@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>30个你不可能全部会做的javascript题目</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+    
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>30个你不可能全部会做的javascript题目</h3>
+       
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    console.info('1， 运行结果 :');
+    console.info(["1","2","3"].map(parseInt));
+
+    console.info('2， 运行结果 :');
+    console.info([typeof null, null instanceof Object]);
+
+    console.info('3， 运行结果 :');
+   // console.info([[3,2,1].reduce(Math.pow),[].reduce(Math.pow)]);
+    console.info("Error");
+
+    console.info('4， 运行结果 :');
+    var val = 'value';
+    console.info('Value id '+(val === 'value')?'Something':'Nothing');
+
+    console.info('5， 运行结果 :');
+    var name = 'World';
+    (function(){
+        if(typeof name === 'undefined'){
+            var name = "Jack";
+            console.info('Goodbye '+ name);
+        }else{
+            console.info('Hello ' + name);
+        }
+    })();
+   
+    console.info('6， 运行结果 :');
+    var END = Math.pow(2,53);
+    var START = END -100;
+    var count = 0;
+    console.info(END);
+    console.info(START);
+
+    console.info(END-START);
+    /*for(var i = START ; i <= END ;i++){
+        count ++;
+        console.info(count);
+    }
+    console.info(count);*/
+
+    console.info('7， 运行结果 :');
+    var arr = [0,1,2];
+    arr[10] = 10;
+    console.info(arr.filter(function(x){return x === undefined}));
+
+
+    console.info('8， 运行结果 :');
+    var two = 0.2;
+    var one = 0.1;
+    var eight = 0.8;
+    var six = 0.6;
+    console.info([two -one == one,eight- six == two]);
+
+
+    console.info('9， 运行结果 :');
+    function showCase(value){
+        //console.info(value);
+        switch(value){
+            case 'A':
+                console.info('Case A');
+                break;
+            case 'B':
+                console.info('Case B');
+                break;
+            case undefined :
+                console.info('undefined');
+                break;
+            default:
+                console.info('Do not know!');
+        }
+    }
+    showCase(new String('A'));
+
+    console.info('10， 运行结果 :');
+    showCase(String('A'));
+
+    console.info('11， 运行结果 :');
+    function isOdd(num){
+        return num % 2 == 1;  
+    }
+    function isEven(num){
+        return num % 2 == 0;  
+    }
+    function isSane(num){
+        return isEven(num)||isOdd(num);
+    }
+    var values = [7,4,'13',-9,Infinity];
+    console.info(values.map(isSane));
+
+    console.info('12， 运行结果 :');
+    console.info([parseInt(3,8),parseInt(3,2),parseInt(3,0)]);
+
+    console.info('13， 运行结果 :');
+    console.info(Array.isArray(Array.prototype));
+
+    console.info('14， 运行结果 :');
+    var a = [0];
+    if([0]){
+        console.info(a == true);
+    }else{
+        console.info("else");
+    }
+    
+
+    console.info('15， 运行结果 :');
+    console.info([]==[]);
+
+    console.info('16， 运行结果 :');
+    console.info([('5'+3),('5'-3)]);
+
+    console.info('17， 运行结果 :');
+   // console.info(1+-+++-+1);
+   console.info("Error");
+
+    console.info('18， 运行结果 :');
+    var arr = Array(3);
+    arr[0] = 2
+    console.info(arr.map(function(elem){return '1';}));
+
+    console.info('19， 运行结果 :');
+    function sidEffecting(arr){
+        arr[0] = arr[2];
+    }
+    function bar(a,b,c){
+        c = 10;
+        sidEffecting(arguments);
+        return  a+b+c;
+    }
+    console.info(bar(1,1,1));
+
+    console.info('20， 运行结果 :');
+    var a = 111111111111111110000;
+        b = 1111;
+    console.info(a+b);
+
+    console.info('21， 运行结果 :');
+    var x = [].reverse;//Uncaught TypeError: Array.prototype.reverse called on null or undefined 
+    //console.info(x());
+    console.info("Error");
+
+    console.info('22， 运行结果 :');
+    console.info(Number.MIN_VALUE>0);
+
+    console.info('23， 运行结果 :');
+    console.info([1<2<3,3<2<1]);
+
+    console.info('24， 运行结果 :');
+    console.info(2 == [[[2]]]);
+
+    console.info('25， 运行结果 :');
+    //console.info([3.toString(),3..toString(),3...toString()]);
+    //console.info(3.toString());
+    console.info("Error");
+
+    console.info('26， 运行结果 :');
+    (function(){
+        var x1 =y1 =1;
+    })();
+
+    console.info(y1);
+    //console.info(x1);
+    console.info("Error");
+
+    console.info('27， 运行结果 :');
+    /*列绝IE和FF脚本兼容性的问题*/
+
+    console.info('28， 运行结果 :');
+    function initButtons(){
+        var body = document.body,button,i;
+
+        for(i =0;i<5;i++){
+            button = document.createElement("button");
+            button.innerHTML = "Button" + i;
+            button.addEventListener("click",function(e){
+                alert(i);
+            },false);
+            body.appendChild(button);
+        }
+
+    }
+    initButtons();
+
+    console.info('29， 运行结果 :');
+    console.info('30， 运行结果 :');
+ 
+
+
+
+
+    </script>
+</html>
+
