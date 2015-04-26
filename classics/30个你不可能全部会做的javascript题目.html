@@ -19,7 +19,7 @@
     </body>
     <script>
     console.info('1， 运行结果 :');
-    console.info(["1","2","3"].map(parseInt));
+    console.info(["2","3"].map(parseInt));
 
     console.info('2， 运行结果 :');
     console.info([typeof null, null instanceof Object]);
@@ -35,6 +35,7 @@
     console.info('5， 运行结果 :');
     var name = 'World';
     (function(){
+        console.info(name);
         if(typeof name === 'undefined'){
             var name = "Jack";
             console.info('Goodbye '+ name);
@@ -60,7 +61,8 @@
     console.info('7， 运行结果 :');
     var arr = [0,1,2];
     arr[10] = 10;
-    console.info(arr.filter(function(x){return x === undefined}));
+    console.info(arr);
+    console.info(arr.filter(function(x){console.info(x);return x === undefined}));
 
 
     console.info('8， 运行结果 :');
@@ -69,11 +71,11 @@
     var eight = 0.8;
     var six = 0.6;
     console.info([two -one == one,eight- six == two]);
-
+    console.info(eight- six);
 
     console.info('9， 运行结果 :');
     function showCase(value){
-        //console.info(value);
+        console.info(value);
         switch(value){
             case 'A':
                 console.info('Case A');
@@ -103,6 +105,7 @@
     function isSane(num){
         return isEven(num)||isOdd(num);
     }
+    console.info(Infinity %2);
     var values = [7,4,'13',-9,Infinity];
     console.info(values.map(isSane));
 
@@ -110,6 +113,7 @@
     console.info([parseInt(3,8),parseInt(3,2),parseInt(3,0)]);
 
     console.info('13， 运行结果 :');
+    console.info(Array.prototype);
     console.info(Array.isArray(Array.prototype));
 
     console.info('14， 运行结果 :');
@@ -122,19 +126,20 @@
     
 
     console.info('15， 运行结果 :');
-    console.info([]==[]);
+    console.info([1]==[1]);
 
     console.info('16， 运行结果 :');
     console.info([('5'+3),('5'-3)]);
 
     console.info('17， 运行结果 :');
-   // console.info(1+-+++-+1);
+  // console.info(1+-+++-+1);
    console.info("Error");
 
     console.info('18， 运行结果 :');
     var arr = Array(3);
-    arr[0] = 2
-    console.info(arr.map(function(elem){return '1';}).join(","));
+    //arr[0] = 2
+    console.info(arr.map(function(elem){console.info(elem);return '1';}));
+
 
     console.info('19， 运行结果 :');
     function sidEffecting(arr){
@@ -148,15 +153,15 @@
     console.info(bar(1,1,1));
 
     console.info('20， 运行结果 :');
-    var a = 111111111111111110000;
+    var a = 111111111111111110000,
+           
         b = 1111;
-    console.info(111000+111);
-
+    console.info(Number.Max_VALUE<a);
     console.info(a+b);
 
     console.info('21， 运行结果 :');
     var x = [].reverse;//Uncaught TypeError: Array.prototype.reverse called on null or undefined 
-    //console.info(x());
+    console.info(x.call([]));
     console.info("Error");
 
     console.info('22， 运行结果 :');
