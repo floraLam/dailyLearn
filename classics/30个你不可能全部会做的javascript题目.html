@@ -16,7 +16,7 @@
 
         <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
         
-	</body>
+    </body>
     <script>
     console.info('1， 运行结果 :');
     console.info(["1","2","3"].map(parseInt));
@@ -134,7 +134,7 @@
     console.info('18， 运行结果 :');
     var arr = Array(3);
     arr[0] = 2
-    console.info(arr.map(function(elem){return '1';}));
+    console.info(arr.map(function(elem){return '1';}).join(","));
 
     console.info('19， 运行结果 :');
     function sidEffecting(arr){
@@ -150,6 +150,8 @@
     console.info('20， 运行结果 :');
     var a = 111111111111111110000;
         b = 1111;
+    console.info(111000+111);
+
     console.info(a+b);
 
     console.info('21， 运行结果 :');
@@ -159,18 +161,20 @@
 
     console.info('22， 运行结果 :');
     console.info(Number.MIN_VALUE>0);
-
+    console.info(Number.MIN_VALUE);
+/*-------------------------------------------------23---------------------------------------------------*/
     console.info('23， 运行结果 :');
     console.info([1<2<3,3<2<1]);
-
+/*-------------------------------------------------24---------------------------------------------------*/
     console.info('24， 运行结果 :');
+    console.info(parseInt([[[2]]]));
     console.info(2 == [[[2]]]);
-
+/*-------------------------------------------------25---------------------------------------------------*/
     console.info('25， 运行结果 :');
     //console.info([3.toString(),3..toString(),3...toString()]);
-    //console.info(3.toString());
+    console.info(3..toString());//Error ，3
     console.info("Error");
-
+/*-------------------------------------------------26---------------------------------------------------*/
     console.info('26， 运行结果 :');
     (function(){
         var x1 =y1 =1;
@@ -179,31 +183,141 @@
     console.info(y1);
     //console.info(x1);
     console.info("Error");
-
+/*-------------------------------------------------27---------------------------------------------------*/
     console.info('27， 运行结果 :');
-    /*列绝IE和FF脚本兼容性的问题*/
-
+    /*列举IE和FF脚本兼容性的问题
+        （1）window.event
+        表示当前的事件对象，IE有这个对象，FF没有
+        （2）获取事件源
+        IE用srcElement获取事件源，而FF用target获取事件源
+        （3）添加、移除事件
+        IE：element.attachEvent("onclick",function)
+            element.detachEvent("onclick",function)
+        FF:element.addEventListener("click",function,true)
+            element.removeEventListener("click",function,true)
+            */
+/*-------------------------------------------------28---------------------------------------------------*/
     console.info('28， 运行结果 :');
     function initButtons(){
         var body = document.body,button,i;
 
         for(i =0;i<5;i++){
-            button = document.createElement("button");
-            button.innerHTML = "Button" + i;
-            button.addEventListener("click",function(e){
-                alert(i);
-            },false);
-            body.appendChild(button);
+            (function(i){
+                button = document.createElement("button");
+                button.innerHTML = "Button" + i;
+                button.addEventListener("click",function(e){
+                    alert(i);
+                },false);
+                body.appendChild(button);
+            })(i);
+            
         }
 
     }
     initButtons();
 
+
+
+
+/*-------------------------------------------------29---------------------------------------------------*/
     console.info('29， 运行结果 :');
-    console.info('30， 运行结果 :');
- 
+    /*写一段代码。判断一个字符串中出现次数最多的字符串，并统计出现的次数*/
+  
+    function toGetTheMostCharsByArray(s){
+        var r={};
+        for(var i=0;i<s.length;i++){
+            
+            if(!r[s[i]]){
+                r[s[i]] = 1;
+            }else{
+                r[s[i]]++;
+            }
+        }
+        var max = {
+            "value "　:s[0],
+            "num" :  r[s[0]]
+        };
+        
+        for(var n in r){//对象使用in关键字，因为没有length
+
+            if(r[n]>max.num){
+                max.num = r[n];
+                max.value = n; 
+            }
+        }
+        return max;
+    }
+    function toGetTheMostCharsByRegex(s){
+        var a = s.split('');
+        a.sort();
+        s = a.join('');
+
+        var regex = /(\w)\1+/g ;//\1代表重复的
+
+        var max = {
+            "value "　:s[0],
+            "num" :  0
+        };
+        
+        s.replace(regex,function(a,b){
+            if(max.num < a.length){
+                max.num = a.length;
+                max.value= b;
+            }
+        });
+
+        return max;
+
+    }
+    var test = "efdfssssfrhth";
+    console.info("使用常规方法　，出现最多的字符串为："+toGetTheMostCharsByArray(test).value+" ，出现次数："+toGetTheMostCharsByArray(test).num);
+    console.info("使用字符串匹配，出现最多的字符串为："+toGetTheMostCharsByRegex(test).value+" ，出现次数："+toGetTheMostCharsByRegex(test).num);
 
 
+
+
+/*-------------------------------------------------30---------------------------------------------------*/
+
+    console.info('30， 运行结果（输入t30查看解析） :');
+    /*请问下面两段代码有什么不同？*/
+    setTimeout(function(){
+        /*代码块*/
+        setTimeout(arguments.callee,10);
+    },10);
+
+    setInterval(function(){
+        /*代码块*/
+    },10);
+    
+    function t30(){
+    /*
+        javascript的引擎是单线程的
+        javascript的引擎是基于事件驱动的
+
+        setTimeout和setInterval都是往事件队列中增加一个待处理时间而已，
+        setTimeout只触发一次，而setInterval是循环触发
+    */
+
+         setTimeout(function(){
+        //代码块
+            setTimeout(arguments.callee,10);
+        },10);
+
+    /*
+        上段代码可使得setTimeout循环触发。
+        但是，执行完这段代码块才挂起时间，所以两次执行时间会大于10毫秒
+    */
+
+         setInterval(function(){
+            /*代码块*/
+        },10);
+
+    /*
+        而上段代码，是自动在10的时候挂上这个事件，所以两次事件的相隔会小于等于10毫秒。
+
+        当线程阻塞在一个事件的时候，不管是使用setInterval还是setTimeout都需要等待当前事件处理完才能执行。
+    */
+    }
 
 
     </script>
