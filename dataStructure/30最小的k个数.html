@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>30最小的k个数</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+        <script src="../ADT/stack.js"></script>
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>30最小的k个数</h3>
+       输入n个整数，找出最小的k个数。例如输入4,5,1,6,2,7,3,8个数字，则最小的4个数字是1,2,3,4
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    var arr = [4,5,1,1,6,2,7,3,8];
+    function getLeastNumber(a,k){
+        if(!(a instanceof Array) || isNaN(k) || k<=0){
+            throw new Error("arguments type Error!")
+        }
+        var a1 = a.sort();
+        var res = [];
+        for(var i = 0;i<a.length;i++){
+         
+            if(!(res.join(",").indexOf(a[i])>-1) && res.length<k){
+                res.push(a[i]);
+            }
+        }
+        return res;
+    }
+    console.info("对于数组："+arr);
+    console.info("使用方法一获取最小的4个数为：");
+    console.info(getLeastNumber(arr,4));
+    console.info("输入getLeastNumber获取源码！");
+    </script>
+</html>
+
