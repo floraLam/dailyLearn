@@ -7,11 +7,11 @@ function Queue(){
 	this.toString = toString;
 	this.empty = empty;
 }
-function enqueue(){
+function enqueue(element){
 	this.dataStore.push(element);
 }
-function dequeue(){
-	this.dataStore.pop(element);
+function dequeue() {
+	return this.dataStore.shift();
 }
 function front(){
 	return this.dataStore[0];
