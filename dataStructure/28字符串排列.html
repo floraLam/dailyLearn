@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>28字符串排列</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+        <script src="../ADT/stack.js"></script>
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>28字符串排列</h3>
+        输入一个字符串，打印出该字符串中字符的所有排列。例如输入字符串abc，则打印出由该字符串a,b,c排列出来的所有字符串abc、acb、bac、cab、cba
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+        function permutation(a){
+            var res = [];
+            /*
+                针对这种问题，可以考虑将使用冒泡排序法的原理进行遍历，即将后面的字符和前面的字符不断地交换
+            */
+            var str = a.split("");
+            var length  = str.length;
+            for(var i = 0;i<length;i++){
+                for(var j = 0 ;j<length;j++){
+                    var temp = str[i];
+                    str[i] = str[j];
+                    str[j] = temp;
+                  
+                    if(!(res.join(",").indexOf(str.join(""))>-1)){
+                        //防止str中有重复元素
+                        res.push(str.join(""));
+                    }
+                    
+                }
+            }
+            return res;
+            /*问题扩展，求字符的所有组合，对于abc，要输出a,b,c,ab,ac,bc,等等*/
+        }
+
+        console.info("abc字符串的所有组合为：");
+        console.info(permutation("abc"));
+        
+        console.info("abcd字符串的所有组合为：");
+        console.info(permutation("abcd"));
+
+        console.info("输入permutation查看源码！");
+    </script>
+</html>
+

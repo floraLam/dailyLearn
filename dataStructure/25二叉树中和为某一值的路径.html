@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>25二叉树中和为某一值的路径</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+        <script src="../ADT/tree.js"></script>
+        <script src="../ADT/stack.js"></script>
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>25二叉树中和为某一值的路径</h3>
+       输入一棵二叉树和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。从树的根节点开始，往下一直到叶结点的所有经过的结点形成一条路径
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    var nums = new BST();
+        nums.insert(10);
+        nums.insert(5);
+        nums.insert(4);
+        nums.insert(7);
+        nums.insert(11);
+   
+   //console.info(nums.root);
+
+        function findPath(root,expectedSum){
+            /*
+                可将问题分解成为二叉树的广度遍历，当前结点不为子节点时，继续遍历；当当前结点为子节点时，计算栈中的数值总和。
+
+            */
+
+            var s = new Stack();
+            s.push(root);
+
+            var arr = [];//用来存储当前路径的值
+            var res = [];//存储符合的所有路径
+            while(s.top != 0){
+                pNode = s.peek();
+                s.pop();
+                arr.push(pNode.data);
+              
+                if(pNode.right){
+                    s.push(pNode.right);
+
+                }
+                if(pNode.left){
+                    s.push(pNode.left);
+                }
+                    
+                if(pNode.right==null && pNode.left==null ){
+                    //若当前结点为叶子结点，并且路径中结点的和刚好等于，输入的整数，则当前的路径符合要求
+                    var tempSum = 0;
+                    for(var i = 0;i<arr.length;i++){
+                        tempSum += arr[i];
+                    }
+                
+                    if(tempSum == expectedSum){
+                        return arr;
+                    }
+                    
+                    arr.pop();
+                }
+
+            }
+            return res;
+        }
+        console.info("对于树：");
+        console.info(nums.root);
+        console.info("结点值总和为15的路径为：");
+         console.info(findPath(nums.root,22));
+        console.info("输入findPath查看源码");
+       
+    </script>
+</html>
+

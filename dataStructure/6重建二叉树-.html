@@ -32,19 +32,49 @@
         inOrder(nums.root);
         console.info(nums.root);
 
-
+    
         var pre = [1,2,4,7,3,5,6,8];
         var ino = [4,7,2,1,5,3,8,6];
         function constructTree(preorder,inorder,length){
             if(preorder == null || inorder == null ){
                 throw new Error("arguments type Error");
             }
-            return constructCore(preorder,preorder+length-1,inorder,inorder+length-1);
+            console.info(preorder,length-1,inorder,length-1);
+            return constructCore(preorder,length-1,inorder,length-1);
         }
         function constructCore(startPre,endPre,startIno,endIno){
-            
+            var  rootValue = startPre[0];
+             var root = new  Node();
+             root.data = rootValue;
+             root.left = root.right = null;
 
+             if(startPre == endPre && startIno == endPre){//只有一个节点
+                return root;
+             }
+             //在中序遍历中找到根节点
+             var rootInorder = startIno;
+             while(rootInorder <endIno && rootInorder != rootValue){
+                rootInorder++;
+             }
+             if(rootInorder <endIno && rootInorder != rootValue){
+                throw new Error("invalid input");
+             }
+             //中序遍历中，左子树的长度
+             var leftLength = rootInorder -startIno;
+             //在先序遍历中截取左子树
+             var leftPreEnd = startPre + leftLength;
+             if(leftLength > 0){
+                //构建左子树
+                root.left=constructCore(startPre+1,leftPreEnd,startIno,rootInorder-1); 
+             }
+             if(leftLength<endPre-startPre){
+                //构建右子树
+                root.right =constructCore(leftPreEnd+1,endPre,rootInorder+1,endIno)
+             }
+             return root;
         }
+
+        console.info(constructTree(pre,ino,8));
     </script>
 </html>
 
