@@ -1,11 +1,11 @@
 # dailyLearn
-The example code from &lt;JavaScript The Definitive Guide>.
+
 
 <h3>javascript实现数据结构题</h3>
 
 <div >
 
-使用javascript实现经典的数据结构面试题。练手和温
+使用javascript实现经典的数据结构面试题。练手和温习
 
 水平有限，如有缺漏，望见谅！<br/><br/><br/>
 
