@@ -37,6 +37,54 @@
     console.info("使用方法一获取最小的4个数为：");
     console.info(getLeastNumber(arr,4));
     console.info("输入getLeastNumber获取源码！");
+
+    /*console.info(typeof(undefined));
+    console.info(typeof(NaN));
+    console.info(NaN == undefined);
+    console.info(NaN == NaN);
+    var str = "123str";
+    console.info(typeof(str));
+
+    var  x = 1,y = z = 0;
+    function add(n){
+        console.info(n);
+        n = n+1;
+    }
+    y = add(x);
+    function add(n){
+        console.info(n);
+        n = n+3;
+
+    }
+    z= add(x);
+    console.info(x +" : "+y+" : "+z);
+
+    function say(){
+        var num = 888;
+        var sayAalert = function(){alert(num);}
+        num++;
+        return sayAalert;
+    }
+    var sayAalert = say();
+    sayAalert();
+
+    var ninja = function myNinja(){
+        alert(ninja == myNinja);
+    }
+    ninja();
+    //myNinja();
+
+    var b = parseInt("01");
+    alert("b="+b);
+    var c = parseInt("09/08/2009");
+    alert("c="+c);*/
+
+    var foo = "hello";
+    (function(){
+        console.info(foo);
+       var foo = foo || "world";
+        console.info(foo);
+    })();
     </script>
 </html>
 
