@@ -24,17 +24,21 @@
                     return i;
              }
         }
+        /*求最大公约数，常见的有质因数分解法、短除法、辗转相除法、更相减损法*/
     }
+
     function commonMultiple(a,b){
         return Math.min(a,b)/commonDivisor(a,b)*Math.max(a,b);
     }
     console.info("求45和30的最大公约数：");
     console.info(commonDivisor(45,30));
-    console.info("输入commonDivisor查看源码！");
+    console.info("源码:");
+    console.info(commonDivisor);
     console.info("求45和30的最小公倍数：");
     console.info(commonMultiple(45,30));
-    console.info("输入commonMultiple查看源码！");
-
+    console.info("源码:");
+    console.info(commonMultiple);
+    
     </script>
 </html>
 
