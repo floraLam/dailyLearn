@@ -19,18 +19,33 @@
     </body>
     <script>
     console.info('1， 运行结果 :');
-    console.info(["2","3"].map(parseInt));
+    console.info(["1","2","3"].map(parseInt));
+    
 
     console.info('2， 运行结果 :');
     console.info([typeof null, null instanceof Object]);
-
+    console.info(typeof null);
+    console.info(null instanceof Object);
     console.info('3， 运行结果 :');
-   // console.info([[3,2,1].reduce(Math.pow),[].reduce(Math.pow)]);
+    console.info([3,2,1].reduce(Math.pow));
+
+    //console.info([].reduce(Math.pow));
+    function testFuc(x,y){
+        console.info(x +" : "+y);
+        return Math.pow(x,y);
+    }
+    //console.info([].reduce(testFuc));
     console.info("Error");
 
     console.info('4， 运行结果 :');
     var val = 'value';
-    console.info('Value id '+(val === 'value')?'Something':'Nothing');
+    console.info(val == 'value');
+    var val2 = new String('value');
+    console.info('Value id '+(val2 === 'value')?'Something':'Nothing');
+
+    var val = 'value';
+            console.info('Value id '+(val === 'value123')?'Something':'Nothing');
+
 
     console.info('5， 运行结果 :');
     var name = 'World';
@@ -323,7 +338,19 @@
         当线程阻塞在一个事件的时候，不管是使用setInterval还是setTimeout都需要等待当前事件处理完才能执行。
     */
     }
+    function foo() {
+      var val = 'hello';
 
+      function bar() {
+        function baz() {
+          val = 'world;'
+        }
+        baz();
+        console.log(val); //=> hello
+      }
+      bar();
+    }
+    foo();
 
     </script>
 </html>
