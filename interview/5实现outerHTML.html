@@ -32,36 +32,26 @@
     <script>
         if(typeof HTMLElement !== "undefined" && !("outerHTML" in HTMLElement.prototype)) { 
      
-            HTMLElement.prototype.__defineSetter__("outerHTML",function(str){ 
-                var fragment = document.createDocumentFragment(); 
-                var div = document.createElement("div"); 
-                div.innerHTML = str; 
-                for(var i=0, n = div.childNodes.length; i<n; i++){ 
-                    fragment.appendChild(div.childNodes[i]); 
-                } 
-                this.parentNode.replaceChild(fragment, this); 
-            }); 
-            // 
-            HTMLElement.prototype.__defineGetter__("outerHTML",function(){ 
-                var tag = this.tagName; 
-                var attributes = this.attributes; 
-                var attr = []; 
-                //for(var name in attributes){//遍历原型链上成员 
-                for(var i=0,n = attributes.length; i<n; i++){//n指定的属性个数 
-                    if(attributes[i].specified){ 
-                        attr.push(attributes[i].name + '="' + attributes[i].value + '"'); 
-                    } 
-                } 
-                return ((!!this.innerHTML) ? 
-                        '<' + tag + ' ' + attr.join(' ')+'>'+this.innerHTML+'</'+tag+'>' : 
-                        '<' + tag + ' ' +attr.join(' ')+'/>'); 
-            }); 
-        } 
+            HTMLElement.prototype.outerHtml = function(){
+                 if(typeof this === "object"){
+                    // 创建一个空div节点
+                     var div = document.createElement("div");
+                     // 将复制的elemCopy插入到空div节点中 
+                     div.appendChild(this.cloneNode(true));
+                     // 返回div的HTML内容
+                     return div.innerHTML; 
+                 }
+            }
+        };
+
+
         var content = document.getElementById("content"); 
         console.info("对测试元素使用outerHTML");
-        console.info(content.outerHTML);
+        console.info(content.outerHtml());
         console.info("源码：");
        
+        
+        console.info(content.outerHtml);
     </script>
 </html>
 
