@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>9对象深度clone</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>9对象深度clone</h3>
+       
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    function cloneObject(o){
+        if(!o ||  'object'!== typeof o){
+            return o;
+        }
+        //判断是数组还是对象
+        var c = 'function' == typeof o.pop ?[]:{};
+        var p;
+        for( p in o){
+            if(o.hasOwnProperty(p)){//本地属性而非继承属性
+                c[p] = o[p];
+            }
+        }
+        return c;
+    }
+
+    var object = {
+        name :'flora',
+        age :21,
+        color:'yellow'
+    }
+    var arr = ['1','2','3'];
+
+    console.info("克隆对象object：");
+    console.info(cloneObject(object));
+
+    console.info("复制数组arr：");
+    console.info(cloneObject(arr));
+
+    console.info("源码：");
+    console.info(cloneObject);
+    </script>
+</html>
+
