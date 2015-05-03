@@ -26,7 +26,10 @@
         var p;
         for( p in o){
             if(o.hasOwnProperty(p)){//本地属性而非继承属性
-                c[p] = o[p];
+                //c[p] = o[p];
+                 //递归方式处理
+               c[p] = typeof o[p] === 'object' ? cloneObj(o[p]) : o[p];
+
             }
         }
         return c;

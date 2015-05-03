@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>16自定义onload绑定多个事件</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>16自定义onload绑定多个事件</h3>
+       当 onload 事件触发时，页面上所有的DOM，样式表，脚本，图片，flash都已经加载完成了。但是onload只能被一次绑定，后面的方法会覆盖前面的方法。请写出解决方案
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    function addLoadEvent(func){
+        var oldonload=window.onload;
+      
+        if(typeof window.onload!='function'){
+            window.onload=func;
+
+        }else{
+            window.onload=function(){
+                oldonload();
+                func();
+            }
+        }
+   }
+    //    添加要加载执行的事件:
+        addLoadEvent(function(){console.info("绑定第一个函数。")});
+        addLoadEvent(function(){console.info("绑定第二个函数。")});
+    console.info("源码：");
+    console.info(addLoadEvent);
+
+    </script>
+</html>
+
