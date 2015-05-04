@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>28编写ajax</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>28编写ajax</h3>
+       
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+   var xmlHttp = null;
+  
+    // -----------ajax方法-----------//
+    function getLabelsGet(){
+        var xmlHttp ;
+        if (window.XMLHttpRequest){
+          // code for IE7+, Firefox, Chrome, Opera, Safari
+          xmlhttp = new XMLHttpRequest();
+        }else{// code for IE6, IE5
+          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        
+
+        if (xmlHttp == null){
+            alert('您的浏览器不支持AJAX！');
+            return;
+        }
+        var id = document.getElementById('id').value;
+        var url="http://lovermap.sinaapp.com/?id="+id+"&t/"+Math.random();
+        xmlHttp.open("GET",url,true);
+        //发送事件后，收到信息了调用函数
+        xmlHttp.send();
+        if(xmlHttp.readyState==1||xmlHttp.readyState==2||xmlHttp.readyState==3){
+            // 本地提示：加载中
+        }
+        if (xmlHttp.readyState==4 && xmlHttp.status==200){
+            var d= xmlHttp.responseText;
+            // 处理返回结果
+        }
+    }
+   console.info(getLabelsGet);
+
+
+
+    </script>
+</html>
+

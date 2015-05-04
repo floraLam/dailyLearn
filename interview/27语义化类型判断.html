@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>27语义化类型判断</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>27语义化类型判断</h3>
+       编写函数isType，判断参数数据类型
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+        // 类型判断
+        function isType(type){
+            return function(o){
+                return Object.prototype.toString.call(o) === '[object ' + type + ']';
+            }
+        }
+
+        var isString = isType("String");
+        var isObject = isType("Object");
+        var isArray = isType("Array");
+         
+        console.info("I'm floraLam.是字符串："+isString("I'm floraLam."));
+        console.info("[1,2,3]是数组："+isArray([1,2,3]));
+        console.info("{}是对象："+isObject({}));
+
+        console.info("源码：");
+        console.info(isType);
+    </script>
+</html>
+
