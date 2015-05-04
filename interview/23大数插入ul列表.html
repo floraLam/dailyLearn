@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>23大数插入ul列表</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>23大数插入ul列表</h3>
+       有如下代码片段，在javascript代码有items数组，请在提示位置补充javascript代码，<br>
+       要求将items中的每个成员作为列表项插入到ul里<br>
+(1,考虑DOM操作性能的最优，<br>
+2，当items数组长度超过1万时，请考虑如何实现最佳的用户体验<br>
+3，请自行处理高性能和最佳用户体验之间的权衡)<br>
+
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        <ul id = "ul1"></ul>
+        <ul id = "ul2"></ul>
+        <ul id = "ul3"></ul>
+	</body>
+    <script>
+   
+     var a = [];
+        //随机生成长度为10000的数组
+        for(var i =0;i<10000;i++){
+            a.push(Math.floor(Math.random()));
+        }
+   function addLi1(ul ,lis){
+        //文档碎片
+        /*
+            每个新的<li>元素都被添加到文档碎片中，然后这个碎片被作为参数传递给appendChild()。这里对appendChild()的调用实际上并不是把文档碎片本省追加到body元素中，而是仅仅追加碎片中的子节点，然后可以看到明显的性能提升，document.body.appenChild()一次替代十次，这意味着只需要进行一个内容渲染刷新。
+        */
+        var f = document.createDocumentFragment();
+        var length = lis.length;
+        for(var i = 0 ; i < length ; i++){
+            f.appendChild(document.createTextNode(lis[i]));
+        }
+        ul.appendChild(f);
+    }
+    function addLi2(ul ,lis){
+        var f = document.createElement("div");
+        var length = lis.length;
+        for(var i = 0 ; i < length ; i++){
+            var li = document.createTextNode(lis[i]);
+            f.appendChild(li);
+        }
+        ul.appendChild(f);
+    }
+    function addLi3(ul ,lis){
+        var f = document.createElement("div");
+    
+        for(var i = 0 ; i < lis.length ; i++){
+            var li = document.createTextNode(lis[i]);
+            f.appendChild(li);
+        }
+        ul.appendChild(f);
+    }
+
+    console.info("随机产生长度为一万的数组");
+    console.info("");
+    console.info("方法一，使用createDocumentFragment");
+    console.time("方法一执行时间");
+    var ul1 = document.getElementById("ul1");
+    addLi1(ul1,a);
+    console.timeEnd("方法一执行时间");
+
+    console.time("方法二执行时间");
+    console.info("方法二，常规方法存储length");
+    var ul2 = document.getElementById("ul2");
+    addLi2(ul2,a);
+    console.timeEnd("方法二执行时间");
+
+    console.time("方法三执行时间");
+    console.info("方法三，常规方法不存储length");
+    var ul3 = document.getElementById("ul3");
+    addLi3(ul3,a);
+    console.timeEnd("方法三执行时间");
+
+
+    </script>
+</html>
+
