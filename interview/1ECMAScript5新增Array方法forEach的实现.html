@@ -23,7 +23,7 @@
          * @param {Function}  遍历执行方法，执行方法中返回false值，则停止继续遍历
          * @param {Object} [scope] 执行方法的this指针
          */
-         if (!Array.prototype.forEach && typeof Array.prototype.forEach !== "function") {*/
+         if (!Array.prototype.forEach && typeof Array.prototype.forEach !== "function") {
              Array.prototype.forEach = function(callback) {
               
                 // 遍历数组,在每一项上调用回调函数，这里使用原生方法验证数组。

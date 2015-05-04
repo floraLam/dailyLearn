@@ -17,17 +17,30 @@
         
 	</body>
     <script>
-        Array.prototype.flatten =function() {
-            if(!this || Array.isArray("["+this+"]")){
-                throw new Error("arguments type errror");
+    var arr=[1,[[[7,2],8,9],3]];
+    function flatten(arr) {
+        if (Object.prototype.toString.call(arr) != "[object Array]")
+           throw new Error("arguments type error");
+        var newArr = [];
+        var j=0;
+        function fn(arr){
+            for (var i = 0; i < arr.length; i++) {//遍历数组
+                if(arr[i].length){
+                    fn(arr[i]);    //递归调用
+                }else{
+                    newArr.push(arr[i]);
+                }
             }
-            var newArr = [];
-            for(var i = 0;i<this.length;i++){
-                newArr = newArr.cancat(this[i]);
-            }
-            return arr;
         }
-        console.info([1,[2,3]].flatten());
+        fn(arr);
+        return newArr;
+    }
+    console.info("对于数组：[1,[[[7,2],8,9],3]]");
+    console.info(arr);
+    console.info("拍平后：");
+    console.log(flatten(arr));
+    console.info("源码：");
+    console.info(flatten); 
 
 
     </script>

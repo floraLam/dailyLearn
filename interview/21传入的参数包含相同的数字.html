@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>21传入的参数包含相同的数字</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>21传入的参数包含相同的数字</h3>
+       实现一个isDuplicate的方法，如果这个方法传入的参数包含相同的数字则返回true，否则返回false<br>
+例如：<br>
+isDuplicate(1,2,3,4,5)//false<br>
+isDuplicate(1,2,3,2)//true<br>
+
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+        function isDuplicate(){
+            if(!arguments)
+                throw new Error("arguments type error");
+            var arr = [].slice.call(arguments);//将arguments伪数组对象转换为数组
+            var temp = [];
+            for(var i=0;i<arr.length;i++){
+                if(temp.indexOf(arr[i]) <0){
+                    temp.push(arr[i]);
+                }else{
+                    return false;
+                }
+            }
+            console.info(arr);
+            return true;
+        }
+
+        console.info("执行isDuplicate(1,2,3,4,5)结果：　 "+isDuplicate(1,2,3,4,5));
+        console.info("执行isDuplicate(1,2,3,4,5,2)结果："+isDuplicate(1,2,3,4,5,2));
+        console.info("源码：");
+        console.info(isDuplicate);
+
+    </script>
+</html>
+
