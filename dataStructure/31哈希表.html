@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>31哈希表</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+        <script src="../ADT/stack.js"></script>
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>31哈希表</h3>
+       
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+  </body>
+    <script>
+    var HashTable = function () {
+        this.data = {};
+    };
+    HashTable.prototype.add = function (k, v) {
+        this.data[k] = v; //不存在便赋值，存在便更新，判断条件都给省了。。。
+    };
+    HashTable.prototype.remove = function (k) {
+        if (this.data[k]) delete this.data[k];
+    };
+    HashTable.prototype.contains = function (v) {
+        var exist = false;
+        for (var k in this.data) {
+            if (v == this.data[k]) {
+                exist = true;
+                break;
+            }
+        }
+        return exist;
+    };
+    HashTable.prototype.length = function () {
+        var len = 0;
+        for (var k in this.data) {
+            len++;
+        }
+        return len;
+    };
+    var hs = new HashTable();
+
+    hs.add('名字', '林锦欣');
+    hs.add('爱好', '打麻将');
+    hs.add('职业', '学生');
+    onsole.info(hs.data);
+    var c = hs.contains('爱好');
+
+    console.info(c);
+    hs.remove('爱好');
+    console.info(hs.data);
+    var d = hs.contains('爱好');
+    var a = hs.length();
+    
+    console.info("长度："+a);
+    var s = '';
+
+
+    </script>
+</html>
+
