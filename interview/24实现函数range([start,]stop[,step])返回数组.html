@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>24实现函数range([start,]stop[,step])返回数组</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>24实现函数range([start,]stop[,step])返回数组</h3>
+        实现函数range([start,]stop[,step])返回一个数组（step大于1）<br>
+            > range(1,11); => [1,2,3,4,5,6,7,8,9,10]<br>
+            > range(0); => []<br>
+            > range(10); => [0,1,2,3,4,5,6,7,8,9]<br>
+            > range(0,30,5); => [0,5,10,15,20,25]
+
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+        function range(){
+            var argLength = arguments.length;
+            var newArray = [];
+            switch(argLength){
+                case 0 : return newArray;break;
+                case 1 : {
+                    for(var i = 0 ; i < arguments[0] ; i++){
+                        newArray.push(i);
+
+                    }
+                    return newArray;
+                    break;
+                }
+                case 2 : {
+                    for(var i = arguments[0] ; i < arguments[1] ; i++){
+                        newArray.push(i);
+                    }
+                    return newArray;
+                    break;
+                }
+                case 3 : {
+                    for(var i = arguments[0] ; i < arguments[1] ; i = i + arguments[2]){
+                        newArray.push(i);
+                    }
+                    return newArray;
+                    break;
+                }
+                default : throw new Error("arguments type error");break;
+            }
+
+        }
+        console.info("range(1,11):["+range(1,11)+"]");
+        console.info("range(0):["+range(0)+"]");
+        console.info("range(10):["+range(10)+"]");
+        console.info("range(0,30,5):["+range(0,30,5)+"]");
+        console.info("源码：");
+        console.info(range);
+    </script>
+</html>
+
