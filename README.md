@@ -19,7 +19,22 @@
 2求最大公约数和最小公倍数<br/>
 3声明提升<br/>
 4判断字符串中出现次数最多的字符<br/>
-
+5实现outerHTML<br/>
+6求一个字符串的字节长度<br/>
+7四种方法实现数组去重<br/>
+8三种方法生成随机数<br/>
+9对象深度clone<br/>
+10点击标签alert标签名<br/>
+11将url参数解析为一个对象<br/>
+12点击列表alert其index<br/>
+13确保页面中JS加载完全<br/>
+14可鼠标创建拖拽小方块<br/>
+15模拟实现map, reduce 和foreach<br/>
+16自定义onload绑定多个事件<br/>
+17模拟ready事件<br/>
+18动态显示时间<br/>
+19编写ajax<br/>
+20拍平数组<br/>
 <strong>3）dataStructrue　———— 题目和实现源码</strong><br/>
 1数制间的相互转换<br/>
 2回文<br/>
