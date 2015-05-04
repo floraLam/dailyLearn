@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>31将字符串中的年月日时分秒取出来</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>31将字符串中的年月日时分秒取出来</h3>
+        定义一个字符串<br>
+            var str1="2012-04-06 12:30:30"<br>
+要求：将字符串中的年月日时分秒取出来，存到数组里，请用尽可能多的方法实现
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+        //方法一
+        var str1="2012-04-06 12:30:30";
+        var reg=/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/;
+        var arr=[];
+        if(reg.test(str1)){
+            for(var i=1;i<=6;i++){
+               arr.push(eval('(RegExp.$'+i+')'));
+            }
+        }
+        /*
+            写个正则表达式，对str1中的年月日时分秒进行分组，用正则表达式的test方法对str1进行测试，如果返回true，各捕获的各分组会保存在全局的RegExp对象的$1-$6中，将RegExp.$1-RegExp.$6保存在数组中即可
+        */
+        console.info(arr);
+        var str2=str1.replace(reg,'$1年$2月$3日$4时$5分$6秒');
+        console.info(str2);
+
+        //方法二：观察这个字符串，年月日时分秒的数字由短线”-”、冒号”: ”或空格” ”分隔，可以使用String的split方法
+        var str1="2012-04-06 12:30:30";
+        var reg=/[-:\s]/;
+        var arr=str1.split(reg);
+        console.info(arr);
+         
+        
+
+        //方法三：用String的replace方法实现
+        var str1="2012-04-06 12:30:30";
+        var reg=/\d+/g;
+        var arr=[];
+        str1.replace(reg,function(match){
+        arr.push(match);
+        });
+        console.info(arr);
+
+        //方法四：
+        var str1="2012-04-06 12:30:30";
+        var arr=str1.match(/\d+/g);
+        console.info(arr);
+
+    </script>
+</html>
+
