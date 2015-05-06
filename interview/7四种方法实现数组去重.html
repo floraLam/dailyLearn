@@ -24,7 +24,9 @@
         }
         console.info("对于随机产生的长度为1000的数组");
         Array.prototype.unique1 = function(){
-
+            /*
+                创建数组o，存储去重后的数组。遍历this，若无o则加入
+            */
             var l = this.length;
             var o = [];//
             for(var i=0;i<l;i++){
@@ -37,7 +39,9 @@
         console.info(a.unique1());
         console.timeEnd("使用方法一去重时间");
         Array.prototype.unique2 = function(){
-            /*增设变量存储出现的字符*/
+            /*
+                增设变量记录元素是否出现过，遍历this，若无，则加入
+            */
             var key = {},o = [];
             for(var i=0;i<this.length;i++){
                 if(!key[this[i]]){
