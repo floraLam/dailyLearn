@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>32同时包含abc三个字母匹配</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>32同时包含abc三个字母匹配</h3>
+       写出同时包含abc三个字母(三个字母各出现一次)，但不考虑顺序的正则表达式<br>
+
+     匹配         不匹配<br>
+     
+     abcd        abdea<br>
+     acbd         bdcc<br>
+     cab          db<br>
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    //http://www.ablesky.com/kecheng/detail_759285
+    var str1="abcd";
+    var reg=/^[^abc]*([abc])[^abc]*((?!\1)[abc])[^abc]*((?!\1)(?!\2)[abc])[^abc]*$/;
+    console.info("对于 "+str1+" 结果：");
+    console.info(reg.test(str1));
+    console.info("对于 abdea 结果：");
+    console.info(reg.test("abdea"));
+    console.info("对于 bdcc 结果：");
+    console.info(reg.test("bdcc"));
+    console.info("对于 cab 结果：");
+    console.info(reg.test("cab"));
+
+
+    </script>
+</html>
+

@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>30getElementsByClassName</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>30getElementsByClassName</h3>
+        <div id="test">
+            <div class="test1"></div>
+            <div class="test1"></div>
+        </div>
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+         function getElementsByClassName(className,context){
+            context = context || document;
+             
+            if(context.getElementsByClassName){
+                return context.getElementsByClassName(className);
+            }
+             
+            var nodes = context.getElementsByTagName('*');
+            var rets = [];
+            for(var i = 0; i < nodes.length; i++){
+                if(hasClass(className,nodes[i])){
+                    rets.push(nodes[i]);
+                }
+            }
+             
+            return rets;
+        }
+         
+         
+        function hasClass(className,node){
+            var classNames = node.className.split(/\s+/);
+             
+            for(var i = 0; i < classNames.length; i++){
+                if(classNames[i] == className){
+                    return true;
+                }
+            }
+             
+            return false;
+        } 
+       
+            var test = document.getElementById('test');
+            console.info("获取class为test1的元素结点：");
+            console.info(getElementsByClassName('test1',test));     //2
+        console.info("源码：");
+        console.info(getElementsByClassName);
+        console.info(hasClass);
+
+    </script>
+</html>
+

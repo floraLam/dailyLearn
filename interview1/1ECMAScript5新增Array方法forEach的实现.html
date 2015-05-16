@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>1ECMAScript5新增Array方法forEach的实现</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>1ECMAScript5新增Array方法forEach的实现</h3>
+        forEach，对数组中每一项运行给定函数并且该方法没有返回值，作用是对数组进行遍历、循环。但是该方法在IE8及其以下不兼容。
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    //javascript类型比较：http://segmentfault.com/a/1190000000650129
+        /**
+         * 数组遍历
+         * @param {Array|NodeList}
+         * @param {Function}  遍历执行方法，执行方法中返回false值，则停止继续遍历
+         * @param {Object} [scope] 执行方法的this指针
+         */
+         if (!Array.prototype.forEach && typeof Array.prototype.forEach !== "function") {
+             Array.prototype.forEach = function(callback) {
+              
+                // 遍历数组,在每一项上调用回调函数，这里使用原生方法验证数组。
+                if (Object.prototype.toString.call(this) === "[object Array]") {
+                    var i, len;
+                    for (i = 0, len = this.length; i < len; i++) {
+                        if (typeof callback === "function"  && Object.prototype.hasOwnProperty.call(this, i)) {
+                            if (callback.call(this, this[i], i, this) === false) {
+                                break; // or return;
+                            }
+                        }
+                    }
+                }
+             };
+         }
+         console.info("遍历数组[1,2,3,4]:");
+         // 遍历数组
+        [1, 2, 3, 4].forEach(function(index ,value, array) {
+            console.log(index, value, array);
+        });
+        console.info("在IE8及其以下版本源码:");
+        console.info(Array.prototype.forEach);
+
+    </script>
+</html>
+

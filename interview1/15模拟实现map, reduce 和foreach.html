@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>15模拟实现map, reduce 和foreach</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>15 map, reduce 和foreach的区别</h3>
+       模拟实现map, reduce 和foreach
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    Array.prototype.map = function (fn) {
+        var resultArray = [];
+        for (var i = 0,len = this.length; i < len ; i++) {
+             resultArray[i] = fn.apply(this,[this[i],i,this]);
+        }
+        return resultArray;
+    }
+    /*
+        map 就是你手里拿一个盒子（一个新的数组），一个一个叫他们把钱包扔进去。结束的时候你获得了一个新的数组，里面是大家的钱包，钱包的顺序和人的顺序一一对应。
+        var wallets = people.map(function (dude) {
+            return dude.wallet;
+        });
+    */
+
+    Array.prototype.forEach = function (fn) {
+        for (var i = 0,len = this.length; i < len ; i++) {
+             fn.apply(this,[this[i],i,this]);
+        }
+    }
+    /*
+        foreach 就是你按顺序一个一个跟他们做点什么，具体做什么，随便:
+        people.forEach(function (dude) {
+          dude.pickUpSoap();
+        });
+    */
+
+    Array.prototype.reduce= function (fn) {
+        var formerResult = this[0];
+        for (var i = 1,len = this.length; i < len ; i++) {
+             formerResult = fn.apply(this,[formerResult,this[i],i,this]);
+        }
+        return formerResult;
+    }
+    /*
+        reduce 就是你拿着钱包，一个一个数过去看里面有多少钱啊？每检查一个，你就和前面的总和加一起来。这样结束的时候你就知道大家总共有多少钱了。
+        var totalMoney = wallets.reduce(function (countedMoney, wallet) {
+          return countedMoney + wallet.money;
+        }, 0);
+    */
+
+
+    /*
+         filter 的：
+        你一个个钱包数过去的时候，里面钱少于 100 块的不要（留在原来的盒子里），多于 100 块的丢到一个新的盒子里。这样结束的时候你又有了一个新的数组，里面是所有钱多于 100 块的钱包：
+        var fatWallets = wallets.filter(function (wallet) {
+          return wallet.money > 100;
+        });
+    */
+
+    console.info("map");
+    console.info(map);
+    console.info("filter");
+    console.info(filter);
+    console.info("reduce");
+    console.info(reduce);
+    </script>
+</html>
+

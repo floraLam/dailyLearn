@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>1获取url中某键的值</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>1获取url中某键的值</h3>
+       请在url后添加“?id=45&er=78&yr=89&we=14”
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+        function getParameterByName1(name){
+            //使用正则表达式
+            name = name.replace(/[\[]]/,"\\[").replace(/[\[]]/,"\\[");
+            var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"),
+                results = regex.exec(location);
+            return results === null ? "" : decodeURIComponent(results[1]); 
+     
+        }
+        function getParemeterByName2(name){
+            var results;
+            var str = location.search.substring(1);
+            var arr = str.split("&");
+            for(i in arr){
+                var temp = arr[i].split("=");
+                if(temp[0] == name){
+                    return temp[1];
+                }
+            }
+        
+            return results;
+        }
+
+        function getParemeterByName3(name){
+            var str = location.search.substring(1);
+            var results = str.replace(/(.*?\&.*?)/g,function($,$1){
+                    console.info($ + ":"+ $1);
+            })
+        }
+        console.time("使用正则表达式");
+        console.info(getParameterByName1("id"));
+        console.timeEnd("使用正则表达式");
+        console.time("使用数组方法");
+        console.info(getParemeterByName2("id"));
+        console.timeEnd("使用数组方法");
+        //getParemeterByName3("name");
+    </script>
+</html>
+

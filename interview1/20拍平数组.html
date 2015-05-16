@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>20拍平数组</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>20拍平数组</h3>
+       编写一个javascript函数，传入仅包含数字多维数组，返回拍平后的结果，比如传入[1,[2,3]]返回[1,2,3]
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    var arr=[1,[[[7,2],8,9],3]];
+    function flatten(arr) {
+        if (Object.prototype.toString.call(arr) != "[object Array]")
+           throw new Error("arguments type error");
+        var newArr = [];
+        var j=0;
+        function fn(arr){
+            for (var i = 0; i < arr.length; i++) {//遍历数组
+                if(arr[i].length){
+                    fn(arr[i]);    //递归调用
+                }else{
+                    newArr.push(arr[i]);
+                }
+            }
+        }
+        fn(arr);
+        return newArr;
+    }
+    console.info("对于数组：[1,[[[7,2],8,9],3]]");
+    console.info(arr);
+    console.info("拍平后：");
+    console.log(flatten(arr));
+    console.info("源码：");
+    console.info(flatten); 
+
+
+    </script>
+</html>
+

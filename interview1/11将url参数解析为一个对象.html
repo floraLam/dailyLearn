@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>11将url参数解析为一个对象</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>11将url参数解析为一个对象</h3>
+       请编写一个JavaScript函数 parseQueryString，它的用途是把URL参数解析为一个对象
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+        var url = "http://witmax.cn/index.php?key0=0&key1=1&key2=2";
+        function parseQueryString(url){
+             var params = {};
+             var arr = url.split("?");
+             if(arr.length <= 1){
+                    return params;
+             }
+             arr = arr[1].split("&");
+             for(var i =0;i<arr.length ;i++){
+                 var a = arr[i].split("=");
+                 params[a[0]] = a[1];
+             }
+             return params;
+             /*
+                hash        设置或返回从井号 (#) 开始的 URL（锚）。
+                host        设置或返回主机名和当前 URL 的端口号。
+                hostname    设置或返回当前 URL 的主机名。
+                href        设置或返回完整的 URL。
+                pathname    设置或返回当前 URL 的路径部分。
+                port        设置或返回当前 URL 的端口号。
+                protocol    设置或返回当前 URL 的协议。
+                search      设置或返回从问号 (?) 开始的 URL（查询部分）
+
+             */
+        }
+        console.info(window.location.search);//?key0=0&key1=1&key2=2 
+        console.info("解析http://witmax.cn/index.php?key0=0&key1=1&key2=2");
+        console.info(parseQueryString(url));
+        console.info("源码parseQueryString");
+    </script>
+</html>
+

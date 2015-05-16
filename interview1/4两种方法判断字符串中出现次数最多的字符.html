@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>4判断字符串中出现次数最多的字符</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>4判断字符串中出现次数最多的字符</h3>
+       
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    /*写一段代码。判断一个字符串中出现次数最多的字符串，并统计出现的次数*/
+  
+    function toGetTheMostCharsByArray(s){
+        var r={};
+        //r用来装载字符和出现次数
+        for(var i=0;i<s.length;i++){
+            
+            if(!r[s[i]]){
+                r[s[i]] = 1;
+            }else{
+                r[s[i]]++;
+            }
+        }
+        var max = {
+            "value "　:s[0],
+            "num" :  r[s[0]]
+        };
+        
+        for(var n in r){//对象使用in关键字，因为没有length
+
+            if(r[n]>max.num){
+                max.num = r[n];
+                max.value = n; 
+            }
+        }
+        return max;
+    }
+    function toGetTheMostCharsByRegex(s){
+        var a = s.split('');
+        a.sort();
+        s = a.join('');
+
+        var regex = /(\w)\1+/g ;//\1代表重复的
+
+        var max = {
+            "value "　:s[0],
+            "num" :  0
+        };
+        
+        s.replace(regex,function(a,b){
+            if(max.num < a.length){
+                max.num = a.length;
+                max.value= b;
+            }
+        });
+
+        return max;
+
+    }
+    var test = "efdfssssfrhth";
+    console.info("使用常规方法　，出现最多的字符串为："+toGetTheMostCharsByArray(test).value+" ，出现次数："+toGetTheMostCharsByArray(test).num);
+    console.info("源码:");
+    console.info(toGetTheMostCharsByArray);
+    console.info("使用字符串匹配，出现最多的字符串为："+toGetTheMostCharsByRegex(test).value+" ，出现次数："+toGetTheMostCharsByRegex(test).num);
+    console.info("源码:");
+    console.info(toGetTheMostCharsByRegex);
+
+
+    </script>
+</html>
+

@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>5实现outerHTML</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>5实现outerHTML</h3>
+       FF不支持outerHTML，要实现outerHTML还需要特殊处理<br>
+       outerHTML可以用来更改或获取元素内所有的html和文本内容，包含引用该方法元素自身的标签．<br>
+        innerHTML是用来获取元素内的html内容和文本．<br>
+        innerText只获取元素内的文本内容，html标签将被忽略．
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        <div id = "containter" style = "margin:20px;border:1px solid #000;">
+            <div id="content" class="test"> 
+             This is <strong>paragraph</strong> with a list following it  
+            <ul> 
+            <li>Item 1</li> 
+            <li>Item 2</li> 
+            <li>Item 3</li> 
+            <li>Item 4</li> 
+            </ul> 
+            </div> 
+        </div>
+	</body>
+    <script>
+        if(typeof HTMLElement !== "undefined" && !("outerHTML" in HTMLElement.prototype)) { 
+     
+            HTMLElement.prototype.outerHtml = function(){
+                 if(typeof this === "object"){
+                    // 创建一个空div节点
+                     var div = document.createElement("div");
+                     // 将复制的elemCopy插入到空div节点中 
+                     div.appendChild(this.cloneNode(true));
+                     // 返回div的HTML内容
+                     return div.innerHTML; 
+                 }
+            }
+        };
+
+
+        var content = document.getElementById("content"); 
+        console.info("对测试元素使用outerHTML");
+        console.info(content.outerHtml());
+        console.info("源码：");
+       
+        
+        console.info(content.outerHtml);
+    </script>
+</html>
+

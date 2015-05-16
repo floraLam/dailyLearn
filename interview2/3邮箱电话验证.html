@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>3邮箱电话验证</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>3邮箱电话验证</h3>
+       <form id = "form" onsubmit = "fun();">
+            <div id="mobile-row" class="form-row">
+                <label for="mobile">手机</label>
+                <input type="tel" id = "tel"/>
+             
+            </div>
+            <div id="email-row" class="form-row">
+                <label for="email">邮件</label>
+                <input id="email" type="text" />
+            </div>
+            <button type = "submit">提交</button>
+       </form>
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索wwwx取答案!</div>
+        
+        <form  onsubmit="return validate_form(this)" method="post">
+Email: <input type="text" name="email" size="30">
+<input type="submit" value="Submit"> 
+</form>
+	</body>
+    <script>
+     //去空格
+     function validate_form(){
+        alert(0);
+        console.info(0);
+     }
+    String.prototype.Trim = function() {
+        var m = this.match(/^s*(S+(s+S+)*)s*$/);
+        return (m == null) ? "" : m[1];
+    }
+
+ 
+
+    //验证手机号
+    String.prototype.isMobile = function() {
+        if(this.length>0)
+            return (/^(?:13d|15[89])-?d{5}(d{3}|*{3})$/.test(this.Trim()));
+    }
+
+ 
+
+    //验证电话
+    String.prototype.isTel = function() {
+    //"兼容格式: 国家代码(2到3位)-区号(2到3位)-电话号码(7到8位)-分机号(3位)"
+    //return (/^(([0+]d{2,3}-)?(0d{2,3})-)?(d{7,8})(-(d{3,}))?$/.test(this.Trim()));
+        if(this.length)
+            return (/^(([0+]d{2,3}-)?(0d{2,3})-)(d{7,8})(-(d{3,}))?$/.test(this.Trim()));
+    }
+
+ 
+
+    //邮箱验证函数
+    function isEmail(strEmail){
+        if (strEmail.search(/^w+((-w+)|(.w+))*@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+)*.[A-Za-z0-9]+$/) != -1)
+
+            return true;
+        else
+            return false;
+    }
+
+   
+
+//调用函数
+function chkForm(form) {
+    console.info(0);
+    /*console.info(form.tel);
+    //手机号码/电话号码
+    if (form.tel.value.isMobile()||form.tel.value.isTel()) {
+                form.tel.value = form.tel.value.Trim();
+                alert("您的电话/手机号码是:" + form.tel.value);
+                return true;
+    } else {
+                alert("请输入正确的手机号码或电话号码");
+                tel.focus();
+                return false;
+    }
+
+    //邮箱
+    if(!isEmail(form.email.value)){
+        alert("邮箱地址合法,请重新输入!");
+        form.email.focus();
+        return false;
+    }*/
+}
+
+var reg = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
+function check(){
+    var msg = reg.test(document.getElementById('ip1').value) == false ? 'Unavailable' : 'Available';
+    alert(msg);
+}
+
+
+
+    </script>
+</html>
+

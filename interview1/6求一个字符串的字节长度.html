@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>6求一个字符串的字节长度</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>6求一个字符串的字节长度</h3>
+       假设一个英文字符占有一个字节，一个中文字符占有两个字节
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+        function getBytes(s){
+            var l = s.length;
+            var b = l;
+            for(var i=0;i<l;i++){
+                if(s.charCodeAt(i) > 255) b++;
+            }
+            return b;
+        }
+        var s = "你好floraLam!";
+        console.info("对于字符串"+s+"的字节长度为：");
+        console.info(getBytes(s));
+        console.info("源码：");
+        console.info(getBytes);
+    </script>
+</html>
+

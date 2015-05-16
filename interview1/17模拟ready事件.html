@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>17模拟ready事件</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>17模拟ready事件</h3>
+       当 DOMContentLoaded 事件触发时，仅当DOM加载完成，不包括样式表，图片，flash。
+
+我们需要给一些元素的事件绑定处理函数。但问题是，如果那个元素还没有加载到页面上，但是绑定事件已经执行完了，是没有效果的。这两个事件大致就是用来避免这样一种情况，将绑定的函数放在这两个事件的回调中，保证能在页面的某些元素加载完毕之后再绑定事件的函数。<br>
+    自定义ready时间，确保元素加载后才绑定事件
+
+     <!--    <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div> -->
+        
+	</body>
+    <script>
+    //方法一
+    if(document.addEventListener){
+        document.addEventListener("DOMContentLoaded",
+            function() {
+                console.info('DOMContentLoaded is execute')
+            }, false);
+    }
+    //方法二
+    //if(Browser.Engine.webkit){  
+        /*
+            如果是webkit引擎则轮询document的readyState属性，当值为loaded或者complete时则触发DOMContentLoaded事件
+        */
+        timer = window.setInterval(function(){
+    　　if(/loaded|complete/.test(document.readyState))  
+            console.info('/loaded|complete/ is execute');
+    　　},0);
+    //}
+    //方法三，针对IE
+    document.attachEvent("onreadystatechange",
+    　　function(){
+    　　　　if( document.readyState ==="complete"){  
+    　　        document.detachEvent("onreadystatechange", arguments.callee );  
+            console.info('onreadystatechange is execute');
+        }
+    });
+    </script>
+</html>
+

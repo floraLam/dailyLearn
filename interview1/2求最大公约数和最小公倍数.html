@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>2求最大公约数和最a公倍数</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>2求最大公约数和最小公倍数</h3>
+       实现函数，输入两个数值，求两个数值的最小公倍数和最大公约数
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    function commonDivisor(a,b){
+        if(!isNaN(a) && !isNaN(b)){
+            for(i = Math.min(a, b); i > 0; i--){
+                if(a % i == 0 && b % i == 0)
+                    return i;
+             }
+        }
+        /*求最大公约数，常见的有质因数分解法、短除法、辗转相除法、更相减损法*/
+    }
+
+    function commonMultiple(a,b){
+        return Math.min(a,b)/commonDivisor(a,b)*Math.max(a,b);
+    }
+    console.info("求45和30的最大公约数：");
+    console.info(commonDivisor(45,30));
+    console.info("源码:");
+    console.info(commonDivisor);
+    console.info("求45和30的最小公倍数：");
+    console.info(commonMultiple(45,30));
+    console.info("源码:");
+    console.info(commonMultiple);
+    
+    </script>
+</html>
+

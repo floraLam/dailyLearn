@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>14可鼠标创建拖拽小方块</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <style>
+        
+        div{position: absolute;overflow: hidden;}
+        .div{border: 1px dashed #0000ff;height: 0;width: 0;}
+        .ok{border: 1px solid #ccc;background: #EFEFEF;-webkit-user-select:none;cursor: move;}
+        </style>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>14可鼠标创建拖拽小方块</h3>
+       拉动你的小鼠标
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+     /*
+    *  拖拽画块
+    */
+    function dragDraw(){this.init.apply(this,arguments)}
+    dragDraw.prototype={
+        init:function(){
+            window.zIndex=0;
+            this.ok=[];//用来存放已经画好的div
+            this.iScrollTop=this.iScrollLeft=0;
+            this.startX=this.startY=0;
+            this.oDiv=null;
+            this._down();
+        },
+         _divDown:function(){  //获取当前div
+             var _self=this;
+             for(var i=0;i<this.ok.length;i++){
+                 this.ok[i].onmousedown=function(ev){
+                      var evt=window.event || ev;
+                      this.style.zIndex=window.zIndex++;
+                      _self.startX=evt.clientX+_self.iScrollLeft-this.offsetLeft;
+                      _self.startY=evt.clientY+_self.iScrollTop-this.offsetTop;
+                      _self._move(true,this);
+                      _self._up(true);
+                      evt.stopPropagation ? evt.stopPropagation() : (evt.cancelBubble = true);
+                 }
+             }
+        },
+         _down:function(){
+            var _self=this;
+            document.onmousedown=function(e){
+                var evt=window.event || e
+                var oDiv=document.createElement('div');
+                 _self.startX=evt.clientX;
+                 _self.startY=evt.clientY;
+                 _self.iScrollTop=document.documentElement.scrollTop || document.body.scrollTop;
+                 _self.iScrollLeft=document.documentElement.iScrollLeft || document.body.scrollLeft;
+
+                oDiv.className='div';
+                oDiv.style.left=_self.startX+_self.iScrollLeft+'px';
+                oDiv.style.top=_self.startY+_self.iScrollTop+'px';
+                oDiv.style.zIndex=window.zIndex++;
+                document.body.appendChild(oDiv);
+
+                 _self.oDiv=oDiv;
+                 _self._move();
+                 _self._up();
+                this.setCapture && this.setCapture();
+                return false;
+            }
+        },
+        _move:function(f,o){
+             var _self=this;
+            document.onmousemove=function(e){
+                var evt=window.event || e;
+                var endX=evt.clientX-_self.startX;
+                var endY=evt.clientY-_self.startY;
+                if(!f){//元素不存在，设定新div的属性
+                      _self.oDiv.style.width=Math.abs(endX)+'px';
+                      _self.oDiv.style.height=Math.abs(endY)+'px';
+                      _self.oDiv.style.left=_self.startX+_self.iScrollLeft+'px'; 
+                      
+                      _self.oDiv.style.top=_self.startY+_self.iScrollTop+'px'; 
+                }else{
+                      o.style.left=endX+_self.iScrollLeft+'px';
+                      o.style.top=endY+_self.iScrollTop+'px';
+                }
+                return false;
+           }
+      },
+      _up:function(f){//若元素被选中，即元素存在，f为true
+           var _self=this;
+          document.onmouseup=function(){
+
+                if(!f){//元素不存在，创建新div
+                      var ofianlDiv=document.createElement('div');
+                      ofianlDiv.style.left=_self.oDiv.style.left;
+                      ofianlDiv.style.top=_self.oDiv.style.top;
+                      ofianlDiv.style.width=_self.oDiv.style.width;
+                      ofianlDiv.style.height=_self.oDiv.style.height;
+                      ofianlDiv.className='ok';
+                      ofianlDiv.style.zIndex=window.zIndex++;
+                      document.body.removeChild(_self.oDiv);
+                      document.body.appendChild(ofianlDiv);
+                      _self.ok.push(ofianlDiv);
+                      _self._divDown();
+                }
+                document.onmousemove=document.onmouseup=null;
+                //_self.releaseCapture && _self.releaseCapture();
+            }
+        }
+    }
+    var t = new dragDraw();
+
+
+    </script>
+</html>
+

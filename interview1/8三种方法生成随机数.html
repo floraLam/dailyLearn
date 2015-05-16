@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>8三种方法生成随机数</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>8三种方法生成随机数</h3>
+       
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+        console.info("使用内置的Math.random()方法：");
+        console.info("生成0-1之间的浮点数："+Math.random());
+        console.info("生成1-10之间的整数："+Math.floor(Math.random()*10+1));
+ 
+        console.info("基于时间，产生随机数:");   
+
+        var now=new Date(); 
+        console.info("基于目前时间的0到59的整数："+now.getSeconds()); //这将产生一个基于目前时间的0到59的整数。
+        console.info("基于目前时间的0到42的整数："+now.getSeconds()%10); //这将产生一个基于目前时间的0到42的整数。   
+
+
+        console.info("JS生成GUID函数,类似.net中的NewID()：");
+        //JS生成GUID函数,类似.net中的NewID(); 
+        function S4() {
+          return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+        }
+         console.info(((1 + Math.random()) * 0x10000) | 0);
+        function NewGuid() {
+          return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
+        }
+
+        console.info(NewGuid());
+    </script>
+</html>
+

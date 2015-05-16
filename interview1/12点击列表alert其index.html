@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>12点击列表alert其index</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>12点击列表alert其index</h3>
+        <ul id="test">
+            <li>这是第一条</li>
+            <li>这是第二条</li>
+            <li>这是第三条</li>
+        </ul>
+
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+        (function(){
+            var index = 1;
+            var ul = document.getElementById("test");
+            var obj ={};
+            for(var i = 0;i<ul.childNodes.length;i++){
+                var li = ul.childNodes[i];               
+                    if (ul.childNodes[i].tagName == "LI") {
+                        li.addEventListener("click",function(e){
+                           alert(index++);
+                       },false);
+                        
+                    };
+            };
+        })();
+       
+
+
+    </script>
+</html>
+
