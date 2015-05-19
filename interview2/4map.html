@@ -142,6 +142,43 @@
       
        var words = ["foot","gooze","moose","kangaroo"];
         console.info(words.map(fuzzyPlural));
+
+function forEach(obj){
+    console.info(JSON.stringify(obj));
+}
+
+var obj = Object.create({x:1,y:2},{
+    z:{value:3,writable:true,enumerable:true,configurable:true}
+});
+forEach(obj);//{"z":3}
+obj.z=5;
+console.log(obj);//Object {z: 5, x: 1, y: 2}
+
+
+Object.defineProperties(obj,{
+a:{value:"a",writable:false,enumerable:true,configurable:true},
+b:{value:"b",writable:false,enumerable:true,configurable:true}
+})
+forEach(obj);//{"z":5,"a":"a","b":"b"}
+
+
+console.log("=====================================================")
+
+var p = {x:1,y:2}
+
+Object.freeze(p);
+
+p.x =2;
+
+console.log(p);
+
+console.log(Object.isFrozen(p)) //true，一旦冻结 无法解冻
+
+console.log("=====================================================")
+
+
+
+
     </script>
 </html>
 
