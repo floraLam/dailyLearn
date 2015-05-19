@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>5map</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script type="text/javascript" src = "jquery-1.8.3.min.js"></script>
+        <script ></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>5map</h3>
+       
+
+        map方法会给原数组中每个元素都按照顺序执行一次callback函数，每次执行函数后的结果返回一个数组。<br/>
+
+        自动传入两个参数：数组元素,数组索引，
+
+        <form > 
+        您喜欢的水果？<br /><br /> 
+            <label><input name="Fruit" type="checkbox" value="" data-id = "1" />苹果 </label> 
+            <label><input name="Fruit" type="checkbox" value="" data-id = "2" checked = "checked"/>桃子 </label> 
+            <label><input name="Fruit" type="checkbox" value="" data-id = "3" checked = "checked" />香蕉 </label> 
+            <label><input name="Fruit" type="checkbox" value="" data-id = "4" />梨 </label> 
+          
+        </form> 
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+
+        var o = {a : [0]};
+        //浅拷贝
+        var o1 = $.extend({},o);
+        console.info(o1.a === o.a);
+        //深拷贝
+        var o2 = $.extend(true,{},o);
+        console.info(o2.a === o.a);
+
+        function clone(myObj){
+        
+            if(typeof(myObj) != 'object' ||myObj == null){
+                return myObj;
+            }
+            var newObj = new Object();
+            for(var i in myObj){
+                newObj[i] = clone(myObj[i]);
+            }
+            return newObj
+        }
+
+        var o3 = clone(o);
+        console.info(o3.a === o.a);
+
+        function copy(obj){
+            return JSON.parse(JSON.stringify(obj));
+        }
+
+        var o4 = copy(o);
+        console.info(o4.a === o.a);
+
+       function a(e,i){
+        console.info(e);
+         return $(i).data("id");
+       }
+        console.info($("input:checked").map(a));
+       //获取选中的data-id
+        console.info($("input:checked").map(function(x,y){
+                return $(y).data("id");
+            })
+        );
+
+        //将数组中的所有单词转换为复数形式
+
+        function fuzzyPlural(single){
+            var res = single.replace(/o/g,"e");
+            if(single == "kangaroo"){
+                res += "se"
+            }
+            return res;
+        }
+
+        var words = ["foot","gooze","moose","kangaroo"];
+        console.info(words.map(fuzzyPlural));
+
+        //求每个数组中每个元素的平方根
+
+        var nums = [1,2,3];
+        console.info(nums.map(Math.sqrt));
+
+        //字符串上使用map
+
+        console.info(Array.prototype.map.call("helloword",function(x){return x.charCodeAt(0);}));
+    
+  
+        //对于parseInt的注意
+        var a = [1,2,3];
+        console.info(a.map(parseInt));//[1,NaN,NaN]
+        //等同于执行parseInt(1,0) ;parseInt(2,1) ;parseInt(3,2)
+
+        console.info(a.map(function(x,y){return parseInt(x,10)}));
+       
+       Array.prototype.map = function(){console.info("NOTE : map is not a function")};
+       a.map();
+
+       Array.prototype.map = function(callback,thisArg){
+
+            //防御性检查，this和callback
+            if(this == null){
+                throw new Error("this is null or not defined");
+            }
+          
+            if({}.toString.call(callback) != "[object Function]"){
+
+               throw new Error("callback  is not a function");
+            }
+
+            var O = Object(this);
+            var len = O.length ;
+            
+            
+            var _t = thisArg || this;
+            var res =[];
+
+            var k = 0;
+            while( k < len){
+                var _kValue,_mappedValue;
+                if(k in O){
+                 
+                    _kValue = O[k];
+                    _mappedValue = callback.call(_t,_kValue,k,O);
+                    res[k] = _mappedValue;
+                }
+                k++;
+            }
+            return res;
+         
+       }
+      
+       var words = ["foot","gooze","moose","kangaroo"];
+        console.info(words.map(fuzzyPlural));
+    </script>
+</html>
+
