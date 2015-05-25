@@ -1,0 +1,22 @@
+%float-left-box{
+    float : left;  
+}
+
+%float-right-box{
+    float : right;  
+}
+
+%clearfix {
+    zoom:1;
+    &:after {
+        content: "";
+        display: block;
+        visibility: hidden;
+        height: 0;
+        clear: both
+    }
+}
+
+%display-none{
+    display: none !important;
+}

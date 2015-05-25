@@ -1,0 +1,120 @@
+/* css rest Eric Meyer */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, 
+a, strong,b, i,dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, tbody, tfoot, thead, tr, th, td,
+aside, canvas, footer, header, hgroup,
+menu, nav, section, audio, video{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    // font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+//  -ms-touch-action:none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+button{
+    outline: none;
+}
+html,body,p,div,button,input,textarea,a,span{
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+
+body, input, textarea, button {
+    font-family:Helvetica;
+}
+
+input,input:active,textarea,textarea:active{
+    outline: none;
+}
+
+body{
+    background-color: #fff;
+}
+
+// Fix width 100% with padding it will break
+div{
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+     box-sizing: border-box;
+}
+
+html{
+    -webkit-text-size-adjust:100%;
+    -moz-text-size-adjust:100%;
+    -ms-text-size-adjust:100%;
+}
+ol,ul {
+    list-style: none
+}
+
+blockquote,q {
+    quotes: none
+}
+
+blockquote:after,blockquote:before,q:after,q:before {
+    content: '';
+    content: none
+}
+
+img {
+    border: none;
+    outline: 0
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+button,input {
+    outline: 0
+}
+
+input::-ms-clear {
+    display: none
+}
+
+input[type=password]::-ms-reveal {
+    display: none
+}
+
+html,
+body,
+p,
+div,
+button,
+input,
+textarea,
+a,
+span {
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
+    -webkit-tap-highlight-color: transparent; 
+}

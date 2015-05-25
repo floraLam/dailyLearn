@@ -1,0 +1,98 @@
+@import "placeholder";
+@import "flexbox";
+/* set font  style */
+$yahei : "Microsoft Yahei";
+$song : "simsun";
+@mixin font($color, $fontSize:14px, $font:null) {
+    @if $color && type_of($color) == "color" {
+        color: $color;
+    }
+    @if $font {
+        font-family: $font;
+    }
+    font-size: $fontSize;
+}
+/* end the hover and active less */
+/* link color setting */
+@mixin link-color($color:null) {
+    &:link {
+        color: $color;
+    }
+    &:visited {
+        color: $color;
+    }
+    &:active {
+        color: $color;
+    }
+}
+/* clear float */
+@mixin clearfix(){
+    &:after{
+        content: "";
+        height: 0;
+        font-size: 0;
+        display: block;
+        visibility: hidden;
+        clear: both;
+    }
+}
+
+/**
+ * px -> em
+ * @param  {[type]} $size px size
+ * @return {[type]}       em size
+ */
+@function calcREM($size){
+  $remSize : ($size/2)/16;
+  @return #{$remSize}rem;
+}
+
+/**
+ * sprite icon
+ * @param  {[type]} $sprite   [iconName]
+ * @param  {[type]} $path       [description]
+ * @param  {[type]} $retinaPath [description]
+ * @return {[type]}             [description]
+ * @example
+ *  @import "common/fn";
+ *  .icon-add{
+        @include gen-sprite('icons/*.png','club-dep-setting-plus');
+    }
+ */
+@mixin gen-sprite($sprite,$path,$retinaPath) {
+    
+    $icons: sprite-map($path, $layout: smart);
+    $icons-2x:sprite-map($retinaPath, $layout: smart);
+    
+    background-image: sprite-url($icons);
+    background-position: sprite-position($icons, $sprite);
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: block;
+    height: image-height(sprite-file($icons, $sprite));
+    width: image-width(sprite-file($icons, $sprite));
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+        background-image: sprite-url($icons-2x);
+        background-size: (image-width(sprite-path($icons-2x)) / 2) (image-height(sprite-path($icons-2x)) / 2);
+        -webkit-background-size: (image-width(sprite-path($icons-2x)) / 2) (image-height(sprite-path($icons-2x)) / 2);
+        background-position: round(nth(sprite-position($icons-2x, $sprite), 1) / 2) round(nth(sprite-position($icons-2x, $sprite), 2) / 2);
+        height: image-height(sprite-file($icons-2x, $sprite)) / 2;
+        width: image-width(sprite-file($icons-2x, $sprite)) / 2 + 0.5;
+    }
+}
+
+/**
+ * opacity
+ * @param  {[type]} num 
+ * @example
+ *  @import "common/fn";
+ *  .icon-add{
+        backg
+    }
+ */
+@mixin opacity($num) {
+    filter:alpha(opacity=($num*100));  
+    -moz-opacity:$num;  
+    -khtml-opacity: $num;  
+    opacity: $num;  
+}
