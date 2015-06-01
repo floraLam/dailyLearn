@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>36数组中的逆序对</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="使用javascript实现数据结构和算法题目" />
+        <meta name="keywords" content="数据结构和算法,javascript" />
+        <meta name="author" content="floraLam" />
+        <script src="../ADT/stack.js"></script>
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>36数组中的逆序对</h3>
+       在数组中的两个数字如果前面一个数字大雨后面的数字，则对这两个数字组成一个逆序对。输入一个数组，求出这个数组中逆序对的总数。<br>
+
+        在数组中，{7,5,6,4}中，一共存在5个逆序对，分别是{7,6},{7,5},{7,4},{6,4},{5,4}
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+        function inversePaise_1(data){
+            if(Object.prototype.toString.call(data) !== '[object Array]' ){
+                throw new Error("arguments type Error") ;
+            }
+            var res = [];
+            for(var i = 0;i<data.length-1;i++){
+                for(var j = i+1;j<data.length;j++){
+                     if(data[i]>data[j]){
+                        var temp = [];
+                        temp.push(data[i]);
+                        temp.push(data[j]);
+                            res .push(temp);
+                     }
+                }
+               
+            }
+            return res;
+        }
+        function inversePaise_2(data){
+            if(Object.prototype.toString.call(data) !== '[object Array]' ){
+                throw new Error("arguments type Error") ;
+            }
+        }
+        var data  = [7,5,6,4];
+        console.info(inversePaise_1(data));
+
+        console.info(inversePaise_2(data));
+    </script>
+</html>
+
