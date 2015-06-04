@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>6删除任意s个数，获取最小数</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="常见面试题" />
+        <meta name="keywords" content="常见面试题,javascript" />
+        <meta name="author" content="floraLam" />
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h3>6删除任意s个数，获取最小数</h3>
+        通过键盘输入一个高精度的正整数n(n的有效位数≤240)，去掉其中任意s个数字后，剩下的数字按原左右次序将组成一个新的正整数。编程对给定的n 和s，寻找一种方案，使得剩下的数字组成的新数最小。<br/>
+        【样例输入】<br/>
+        178543<br/>
+        S=4<br/>
+        【样例输出】<br/>
+        13<br/>
+
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        
+	</body>
+    <script>
+    //穷举法
+        function getMinNum_exhaustion(str,n){
+            var i ,j;
+               // while(str>0){
+                    i=0;/*每次删除后重头开始*/
+                   // while(i<str.length && str[i]<=str[i+1])
+                      //  i++;/*算法核心*/
+                       // for(j=i;j<str.length;j++)
+                           // str[j]=str[j+1];/*移位将删除的覆盖*/
+                          //  str--;      
+               // }
+                console.info(str);
+        }
+
+        console.info(getMinNum_exhaustion(50267539,4));
+
+var data = "50267539";
+var n = 4;
+var bit;
+function GetMinBit( data,start,end ){
+      
+        if( 0 <= start && start <= end && end < data.length ){
+            var min = data[start] ;
+            bit = start;       
+            for( var i=start  ; i <= end  ;  i++ ){
+                 if( data[i] < min ){
+                     min = data[i];                    
+                     bit = i;
+                 }       
+            }   
+                     
+        }else{
+            console.info("pause") ;
+        }
+   
+}
+
+function GetMinData(data,k )
+{
+  
+        if( 0 <= k && k < data.length ){
+            
+            var result = 0 ;
+            var bit = 0 ;
+            var end = k ;
+            while( end<data.length ){
+                GetMinBit( data,bit+1,end );
+                console.info(result);
+                console.info(data[bit]);
+                result = parseInt(result)*10 + data[bit];                
+                end++ ;
+                console.info(result);
+            }
+            
+            return result ;            
+        }
+    
+} 
+
+console.info(GetMinData( data,n));
+
+
+    </script>
+</html>
+
