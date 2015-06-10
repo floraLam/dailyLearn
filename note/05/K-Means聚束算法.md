@@ -8,5 +8,36 @@ K-Means是一种基于距离的迭代式算法。
 
 #### 2）算法过程
 
+##### 1,取得K个初始中心点
+![hello world](images/k001.png)
+
+##### 2,把每个点划分进相应的簇
+![hello world](images/k002.png)
+
+##### 3,重新计算中心点
+![hello world](images/k003.png)
+
+##### 4,迭代计算中心点
+![hello world](images/k004.png)
+
+##### 5,收敛
+![hello world](images/k005.png)
+
+* 1，从数据中随机抽取k个点作为初始聚类的中点，由这个中心代表各个聚类
+* 2， 
+
+http://wenku.baidu.com/link?url=7awO36cGdH-UG16Ukl01MmEbH5qZyUuhVn5_aMgj6M1l4bW9lSgKy2eRgsnAil0SRiv_IBP-S2HFaYY1RTDwI3d8MZRIzdUiVQszc9HS-5S
+
+http://www.cnblogs.com/luowende2012/archive/2012/06/21/2557781.html
+
+http://blog.sina.com.cn/s/blog_797e573c0101ks23.html
+
+http://m.blog.csdn.net/blog/hwwn2009/38312613
 
 
+
+
+
+http://www.jb51.net/article/5477.htm
+
+http://www.jb51.net/article/49780.htm

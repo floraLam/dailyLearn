@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>K-Means聚束算法</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="K-Means聚束算法" />
+        <meta name="keywords" content="K-Means聚束算法,javascript" />
+        <meta name="author" content="floraLam" />
+        <style>
+        td{
+            width: 5px;
+            height: 5px;
+            border: 1px solid #ccc;
+
+        }
+
+        </style>
+        <script src = "data.js"></script>
+        
+    </head>
+    <body >
+        <h3>K-Means聚束算法演示</h3>
+        <table id = "tab">
+            <tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+           <tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+           <tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+           <tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+           <tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+        </table>
+
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+	</body>
+    <script>
+    function createTable(tableRC){
+        //在页面上创建tableRC x tableRC的表格
+        var table = [];
+        for(var i = 0 ; i < tableRC ;i++){
+            var tr = document.createElement("tr");
+            for(var j = 0; j<tableRC ;j++){
+                var e = document.createElement("td");
+                var object = board.appendChild(e);
+            }
+        }
+    }
+    function getRandowData(poiterSum,tableRC){
+        /*生成poiterSum个位于x和y在tableRC范围的数据
+        对于poiterSum = 300，tableRC = 10000，生成（x从0到10000，y从0到10000）格式数据300个
+
+        点位(x,y)对象，点集合为数组格式返回
+        */
+        var res = [];
+        var i = 0;
+        while(i < poiterSum){
+            var poiter = {};
+            poiter.x =  Math.floor(Math.random()*tableRC+1);
+            poiter.y =  Math.floor(Math.random()*tableRC+1);
+            if(!(poiter in res)){
+                i++;
+                res.push(poiter);
+            }
+           
+        }
+        return res;
+
+    }
+
+    function getTdValue() { 
+        var tableId = document.getElementById("tab"); 
+        var str = ""; 
+        for(var i=1;i<tableId.rows.length;i++){ 
+            alert(tableId.rows[i].cells[1].innerHTML); 
+        } 
+    } 
+        console.info(getRandowData(300,10000));
+   
+    </script>
+</html>
+
