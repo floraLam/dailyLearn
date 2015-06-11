@@ -24,7 +24,9 @@ K-Means是一种基于距离的迭代式算法。
 ![hello world](images/k005.png)
 
 * 1，从数据中随机抽取k个点作为初始聚类的中点，由这个中心代表各个聚类
-* 2， 
+* 2， 计算数据中所有点到这K个点的距离，将点归到离其最近的聚类里。
+* 3， 调整聚类中心 ，即将聚类的中心一道几何中心（即平均值）处，也就是k-means中的mean的含义
+* 4， 重复2，3步，知道聚类的中心不再移动，此时算法收敛。
 
 http://wenku.baidu.com/link?url=7awO36cGdH-UG16Ukl01MmEbH5qZyUuhVn5_aMgj6M1l4bW9lSgKy2eRgsnAil0SRiv_IBP-S2HFaYY1RTDwI3d8MZRIzdUiVQszc9HS-5S
 

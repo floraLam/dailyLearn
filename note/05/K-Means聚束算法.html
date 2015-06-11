@@ -8,72 +8,327 @@
         <meta name="keywords" content="K-Means聚束算法,javascript" />
         <meta name="author" content="floraLam" />
         <style>
+        *{
+            text-align: center;
+        }
         td{
-            width: 5px;
-            height: 5px;
+            width: 3px;
+            height: 3px;
             border: 1px solid #ccc;
 
         }
+        table{
+            margin : 10px auto;
 
+        }
         </style>
         <script src = "data.js"></script>
         
     </head>
-    <body >
+    <body style = "font-family : '微软雅黑'">
         <h3>K-Means聚束算法演示</h3>
+        <div>共 <span id = "pLength">1173</span> 个点，选定其中 3 个点为K点 ( 按F12键，可查看相关点参数 ) </div>
         <table id = "tab">
-            <tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
-           <tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
-           <tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
-           <tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
-           <tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
         </table>
 
-        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%">请问你可爱的小“F12”，索取答案!</div>
+        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%"></div>
 	</body>
     <script>
-    function createTable(tableRC){
+
+    var POINTER = [];   //所有点
+    var K =[];          //选取聚束的k点
+
+
+    //唯一值判断
+    function unique(obj){
+        display(obj);
+        var length = POINTER.length;
+        if(length == 0) return true;
+      
+        for(var i = 0;i<length;){
+            if(POINTER[i].x != obj.x || POINTER[i].y != obj.y)
+                i++;
+            else
+                return true;
+        }
+        return false;
+    }
+
+
+    function createTable(tableR,tableC){
         //在页面上创建tableRC x tableRC的表格
-        var table = [];
-        for(var i = 0 ; i < tableRC ;i++){
+        var table = document.getElementById("tab");
+        for(var i = 0 ; i < tableR ;i++){
             var tr = document.createElement("tr");
-            for(var j = 0; j<tableRC ;j++){
+            for(var j = 0; j<tableC ;j++){
                 var e = document.createElement("td");
-                var object = board.appendChild(e);
+                var object = tr.appendChild(e);
             }
+           table.appendChild(tr); 
         }
     }
-    function getRandowData(poiterSum,tableRC){
+
+
+    function getRandowData(tableR,tableC){
         /*生成poiterSum个位于x和y在tableRC范围的数据
-        对于poiterSum = 300，tableRC = 10000，生成（x从0到10000，y从0到10000）格式数据300个
+        对于poiterSum = 300，tableR*tableC = 10000，生成（x从0到10000，y从0到10000）格式数据300个
 
         点位(x,y)对象，点集合为数组格式返回
         */
         var res = [];
         var i = 0;
-        while(i < poiterSum){
+        while(i < 1000){
             var poiter = {};
-            poiter.x =  Math.floor(Math.random()*tableRC+1);
-            poiter.y =  Math.floor(Math.random()*tableRC+1);
-            if(!(poiter in res)){
-                i++;
-                res.push(poiter);
-            }
-           
-        }
-        return res;
+            poiter.x =  Math.floor(Math.random()*(tableR-1)+1);
+            poiter.y =  Math.floor(Math.random()*(tableC-1)+1);
+            i++;
+            if(unique(poiter))
+                POINTER.push(poiter);
 
+            if(getTdValue(poiter.x,poiter.y).style.background)
+                getTdValue(poiter.x,poiter.y).style.background = "rgba(0,0,0,0.4)";
+            else
+                getTdValue(poiter.x,poiter.y).style.background = "rgba(0,0,0,0.2)";
+        }
+       
+        
+         return res;
     }
 
-    function getTdValue() { 
-        var tableId = document.getElementById("tab"); 
-        var str = ""; 
-        for(var i=1;i<tableId.rows.length;i++){ 
-            alert(tableId.rows[i].cells[1].innerHTML); 
-        } 
+
+    function getThreePointer(tableR,tableC){
+        var res = [];
+        for(var i = 0 ; i < 3;i++){
+            var poiter = {};
+
+            poiter.x =  Math.floor(Math.random()*(tableR-1)+1);
+            poiter.y =  Math.floor(Math.random()*(tableC-1)+1);
+            if(unique(poiter))
+                POINTER.push(poiter);
+            res.push(poiter);
+            getTdValue(poiter.x,poiter.y).style.background = "red";
+        
+            //聚集点的个数
+            var num1 = 200;
+            //聚集范围
+            var num2 = 10;
+          
+            var j =0;
+            while(j < num1){
+
+                var rpoiter = {};
+                rpoiter.x =  Math.floor(Math.random()*(num2*2)+poiter.x-num2);
+                rpoiter.y =  Math.floor(Math.random()*(num2*2)+poiter.y-num2);
+               
+                j++;
+                if(0< rpoiter.x & rpoiter.x  <tableR && 0<rpoiter.y && rpoiter.y< tableC){
+                        POINTER.push(rpoiter);
+                    if(getTdValue(rpoiter.x,rpoiter.y).style.background == "red"){}
+                    else if(getTdValue(rpoiter.x,rpoiter.y).style.background)
+                        getTdValue(rpoiter.x,rpoiter.y).style.background = "rgba(0,0,0,0.4)";
+                    else
+                        getTdValue(rpoiter.x,rpoiter.y).style.background = "rgba(0,0,0,0.2)";
+                }
+               
+            }
+        }
+        return res;
+    }
+
+    //工具类，获取当前单元格
+    function getTdValue(i,j) { 
+        var table = document.getElementById("tab");
+        if(table.rows[i].cells[j])
+            return (table.rows[i].cells[j]);       
     } 
-        console.info(getRandowData(300,10000));
+    //判断两个数组是否相等
+    function equal(obj1,obj2){
+        if(obj1.length == obj2.length){
+            var temp = 1;
+            var length = obj1.length;
+            for(var i = 0;i<length;i++){
+               if(obj1[i].x != obj2[i].x || obj1[i].y != obj2[i].y){
+                  temp = 0;
+               }
+            }
+            if(temp)
+                return true;
+            else
+                return false;
+        }
+    }    
+    //将点数组转换为展示格式
+    function display(obj){
+        var length = obj.length;
+        var res = [];
+        for(var i = 0;i<length;i++){
+            res.push("("+obj[i].x+","+obj[i].y+")");
+        }
+        //if(var i =0 ;i<length;i++){
+            //
+        //}
+        return res.join(",");
+    }
    
+
+   /*
+     * 聚类函数主体。
+     * 针对一维 double 数组。指定聚类数目 k。
+     * 将数据聚成 k 类。
+     */
+    function cluster(p,c) {
+       
+        // 存放新计算的聚类中心
+        var nc = [];
+        // 存放放回结果
+        var  g= [];
+        // 初始化聚类中心
+        // 经典方法是随机选取 k 个
+        // 本例中采用前 k 个作为聚类中心
+        // 聚类中心的选取不影响最终结果
+      
+        
+        // 循环聚类，更新聚类中心
+        // 到聚类中心不变为止
+        while (true) {
+            // 根据聚类中心将元素分类
+            g = group(p, c);
+            // 计算分类后的聚类中心
+            for (var i = 0; i < g.length; i++) {
+                nc[i] = center(g[i]);
+            }
+            // 如果聚类中心不同
+            if (!equal(nc, c)) {
+                // 为下一次聚类准备
+                c = nc;
+                nc = [];
+            } else // 聚类结束
+                break;
+        }
+        // 返回聚类结果
+        return nc;
+    }
+    /*
+     * 聚类中心函数
+     * 简单的一维聚类返回其算数平均值
+     * 可扩展
+     */
+    function center(p) {
+        var sumObj = sum(p);
+        var pointer = {
+            x : 0,
+            y : 0
+        }
+        pointer.x  = Math.round(sumObj.x/ sumObj.num);    
+        pointer.y  = Math.round(sumObj.y/ sumObj.num);
+    
+        return pointer; 
+    }
+    /*
+     * 给定 double 型数组 p 和聚类中心 c。
+     * 根据 c 将 p 中元素聚类。返回二维数组。
+     * 存放各组元素。
+     */
+    function group(p, c) {
+        // 中间变量，用来分组标记
+        var gi = [];
+        // 考察每一个元素 pi 同聚类中心 cj 的距离
+        // pi 与 cj 的距离最小则归为 j 类
+        for (var i = 0; i < p.length; i++) {
+            // 存放距离
+            var d = [];
+            // 计算到每个聚类中心的距离
+            for (var j = 0; j < c.length; j++) {
+                d[j] = distance(p[i], c[j]);
+            }
+            // 找出最小距离
+            var ci = min(d);
+            // 标记属于哪一组
+            gi[i] = ci;
+        }
+        // 存放分组结果
+        var g = [];
+        // 遍历每个聚类中心，分组
+        for (var i = 0; i < c.length; i++) {
+            // 中间变量，记录聚类后每一组的大小
+            var s = 0;
+            // 计算每一组的长度
+            for (var j = 0; j < gi.length; j++)
+                if (gi[j] == i)
+                    s++;
+            // 存储每一组的成员
+            g[i] = [];
+            s = 0;
+            // 根据分组标记将各元素归位
+            for (var j = 0; j < gi.length; j++)
+                if (gi[j] == i) {
+                    g[i][s] = p[j];
+                    s++;
+                }
+        }
+        // 返回分组结果
+        return g;
+    }
+ 
+    /*
+     * 计算两个点之间的距离， 这里采用最简单得一维欧氏距离， 可扩展。
+     */
+    function distance(obj1, obj2) {
+        return Math.sqrt((obj1.x-obj2.x)*(obj1.x-obj2.x)+(obj1.y-obj2.y)*(obj1.y-obj2.y));
+    }
+ 
+    /*
+     * 返回给定 double 数组各元素之和。
+     */
+    function sum( p) {
+        var sum = {
+            x : 0.0,
+            y : 0.0,
+            num : p.length
+        }
+        for (var i = 0; i < p.length; i++){
+            sum.x += p[i].x;
+            sum.y += p[i].y;
+        }
+      
+        return sum;
+    }
+ 
+    /*
+     * 给定 double 类型数组，返回最小值得下标。
+     */
+    function  min(p) {
+        var i = 0;
+        var m = p[0];
+        for (var j = 0; j < p.length; j++) {
+            if (p[j] < m) {
+                i = j;
+                m = p[j];
+            }
+        }
+        return i;
+    }
+
+    //1，创建table
+    createTable(40,100);
+    //2，随机获取点点
+    getRandowData(40,100);
+    //3，选取k个点
+    console.info("预计K点信息：");
+    var K = getThreePointer(40,100);
+    console.info(display(K));
+    //4，获取所有点
+    console.info("所有点信息：");
+    console.info(display(POINTER));
+    document.getElementById("pLength").innerHTML = POINTER.length;
+ 
+    console.info("最终K点信息：");
+    console.info(display(cluster(POINTER,K)) );
+
+  
+
+
+
     </script>
 </html>
 
