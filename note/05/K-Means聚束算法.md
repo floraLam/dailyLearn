@@ -28,18 +28,7 @@ K-Means是一种基于距离的迭代式算法。
 * 3， 调整聚类中心 ，即将聚类的中心一道几何中心（即平均值）处，也就是k-means中的mean的含义
 * 4， 重复2，3步，知道聚类的中心不再移动，此时算法收敛。
 
-http://wenku.baidu.com/link?url=7awO36cGdH-UG16Ukl01MmEbH5qZyUuhVn5_aMgj6M1l4bW9lSgKy2eRgsnAil0SRiv_IBP-S2HFaYY1RTDwI3d8MZRIzdUiVQszc9HS-5S
 
-http://www.cnblogs.com/luowende2012/archive/2012/06/21/2557781.html
-
-http://blog.sina.com.cn/s/blog_797e573c0101ks23.html
-
-http://m.blog.csdn.net/blog/hwwn2009/38312613
-
-
-
-
-
-http://www.jb51.net/article/5477.htm
-
-http://www.jb51.net/article/49780.htm
+#### 3)二分K-means算法
+K-Means算法是基于原型的聚类技术，简单、快速并有效处理大规模数据。  缺点是存在过度依赖初始条件，如聚类数目K值的确定、初始聚类中心的选取以及数据的输入次序的变化等都会影响聚类结果，制约了其应用范围。  
+二分K均值聚类算法是K-Means算法的变种算法，通过使用基本K-Means算法能够产生划分聚类算法或层次聚类算法，具有不受初始质心选择影响的优点。该算法在文本挖掘领域有着广泛的应用，通过优化算法的二分初始点的选择过程，把多次循环判断最优点改进为一次选择极大值点，提高了算法的整体运行速度，实验表明了算法的高效性
