@@ -21,6 +21,17 @@
             margin : 10px auto;
 
         }
+        #pannel{
+            position:absolute;
+            width:50px;
+            height:45px;
+            background:#fff;
+            border:1px solid #ccc;
+            font-size:14px;
+            top:0;
+            left: 0;
+          
+        }
         </style>
         <script src = "data.js"></script>
         
@@ -30,8 +41,11 @@
         <div>共 <span id = "pLength">1173</span> 个点，选定其中 3 个点为K点 ( 按F12键，可查看相关点参数 ) </div>
         <table id = "tab">
         </table>
-
-        <div style = "font-family: '微软雅黑';text-align: center;border: 1px dotted #000;color: #000;margin-top: 30px;padding: 20px 0;position:absolute;bottom:30px;width:98%"></div>
+        <div id = "pannel" >
+            x : <span id = "pannlX">0</span><br/>
+            y : <span id = "pannlY">0</span>
+        </div>
+      
 	</body>
     <script>
 
@@ -62,6 +76,33 @@
             var tr = document.createElement("tr");
             for(var j = 0; j<tableC ;j++){
                 var e = document.createElement("td");
+                e.setAttribute("data_x",i);
+                e.setAttribute("data_y",j);
+                var myBackground ;
+
+                //鼠标在表格上
+                e.onmouseover = function(event){
+                    myBackground = this.style.background;
+                    this.style.background = "#00f";
+                    event = event || window.event;
+
+                    //获取当前鼠标坐标
+                    var x = event.clientX + document.documentElement.scrollLeft;
+                    var y =  event.clientY + document.documentElement.scrollTop;
+
+                    //设置浮层样式、数据
+                    var pannel = document.getElementById("pannel");
+                    pannel.style.top = y+20+"px";
+                    pannel.style.left = x+20+"px";
+                    pannel.style.display = "block";
+                    document.getElementById("pannlX").innerHTML = this.getAttribute("data_x");
+                    document.getElementById("pannlY").innerHTML = this.getAttribute("data_y");
+                }
+                //鼠标离开表格
+                e.onmouseout = function(){
+                    this.style.background = myBackground;
+                }
+
                 var object = tr.appendChild(e);
             }
            table.appendChild(tr); 
