@@ -32,13 +32,34 @@
             left: 0;
           
         }
+        #console{
+            font-family: '微软雅黑';
+            text-align: center;
+            border: 1px dotted #000;
+            color: #000;
+            width: 960px;
+            margin-top: 30px;
+            padding: 20px 0;
+            margin : 10px auto;
+            
+        }
+        button{
+            
+            border: 0;
+            background: rgb(0,108,128);
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: '微软雅黑';
+        }
         </style>
         <script src = "data.js"></script>
         
     </head>
     <body style = "font-family : '微软雅黑'">
         <h3>K-Means聚束算法演示</h3>
-        <div>共 <span id = "pLength">1173</span> 个点，选定其中 3 个点为K点 ( 按F12键，可查看相关点参数 ) </div>
+         <div>共 <span id = "pLength">1173</span> 个点，选定其中 3 个点为K点 ( 按F12键，可查看相关点参数 ) </div>
         <table id = "tab">
         </table>
         <div id = "pannel" >
@@ -46,6 +67,12 @@
             y : <span id = "pannlY">0</span>
         </div>
       
+        <div id = "console">
+            <span id = "consoleText">产生 40 x 100 区域面板</span>
+            
+
+        </div>
+        <button>下一步</button>
 	</body>
     <script>
 
@@ -106,9 +133,10 @@
                 var object = tr.appendChild(e);
             }
            table.appendChild(tr); 
-        }
-        document.getElementsByTagName("td").onclick = function(){
-            alert(this);
+           table.onmouseout = function(){
+                var pannel = document.getElementById("pannel");
+                pannel.style.display = "none";
+           }
         }
     }
 
@@ -353,7 +381,33 @@
         return i;
     }
 
-    //1，创建table
+
+    
+    /*//1，创建table
+    createTable(40,100);
+
+    setTimeout(function(){
+        document.getElementById("consoleText").innerHTML = "在 40 x 100 表格上模拟数据";
+        //2，随机获取点点
+        getRandowData(40,100);
+        //3，选取k个点
+        console.info("预计K点信息：");
+        var K = getThreePointer(40,100);
+        console.info(display(K));
+    },1000);
+
+    setTimeout(function(){
+       
+        //4，获取所有点
+        console.info("所有点信息：");
+        console.info(display(POINTER));
+        document.getElementById("consoleText").innerHTML = "共 "+POINTER.length+" 个点，选定其中 3 个点为K点 ( 按F12键，可查看相关点参数 ) ";
+       
+        console.info("最终K点信息：");
+        console.info(display(cluster(POINTER,K)) );
+    },2000);
+   
+    */ //1，创建table
     createTable(40,100);
     //2，随机获取点点
     getRandowData(40,100);
@@ -364,10 +418,11 @@
     //4，获取所有点
     console.info("所有点信息：");
     console.info(display(POINTER));
-    document.getElementById("pLength").innerHTML = POINTER.length;
+    //document.getElementById("pLength").innerHTML = POINTER.length;
  
     console.info("最终K点信息：");
     console.info(display(cluster(POINTER,K)) );
+    
 
   
 
