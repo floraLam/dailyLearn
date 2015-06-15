@@ -28,7 +28,6 @@ K-Means是一种基于距离的迭代式算法。
 * 3， 调整聚类中心 ，即将聚类的中心一道几何中心（即平均值）处，也就是k-means中的mean的含义
 * 4， 重复2，3步，知道聚类的中心不再移动，此时算法收敛。
 
-http://wenku.baidu.com/link?url=7awO36cGdH-UG16Ukl01MmEbH5qZyUuhVn5_aMgj6M1l4bW9lSgKy2eRgsnAil0SRiv_IBP-S2HFaYY1RTDwI3d8MZRIzdUiVQszc9HS-5S
 
 http://www.cnblogs.com/luowende2012/archive/2012/06/21/2557781.html
 
