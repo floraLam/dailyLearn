@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>多道批处理系统两级调度的模拟</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="多道批处理系统两级调度的模拟" />
+        <meta name="keywords" content="多道批处理系统两级调度的模拟,javascript" />
+        <meta name="author" content="floraLam" />
+        <style>
+            *{
+                text-align: center;
+            }
+            .warp{
+                width:500px;
+                margin : 0 auto;
+            }
+
+            table {
+                margin : 0 auto;
+                border : 1px solid #ccc;
+                border-collapse: collapse;
+
+            }
+            table thead{
+                background:#222;
+                 color: #fff;
+            }
+            table thead td{
+                padding: 0 20px;
+            }
+            table td{
+                border : 1px solid #ccc;
+                font-size: 14px;
+                padding: 0 3px;
+            }
+            #console{
+                width : 500px;
+                border : 2px solid #000;
+                margin:10px auto;
+            }
+        </style>
+        
+    </head>
+    <body style = "font-family : '微软雅黑'" id = "body">
+        <h3>K-Means聚束算法演示（点击页面，进行下一步）</h3>
+        <div class = "warp">
+            <h4>模拟数据</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <td>作业</td>
+                        <td>到达时间</td>
+                        <td>运行时间</td>
+                        <td>内存需要</td>
+                        <td>磁带机需要</td>
+                    </tr>
+                </thead>
+                <tbody id = "simulated">
+
+                </tbody>
+            </table>
+        </div>
+       <div id = "console"></div>
+       
+	</body>
+    <script>
+        var para = document.createElement("p");
+        para.innerHTML = "版本";
+        para.setAttribute("id","blink");
+        document.getElementById("console").appendChild(para);
+
+        setInterval(blink,500);
+        function blink(){
+            var blink=document.getElementById('blink');
+            if(blink.style.color=="#fff" || blink.style.color=="rgb(255, 255, 255)"){
+                blink.style.color="#000";
+            }else{
+                blink.style.color="#fff";  
+            }
+           
+        }
+        var data = [//演示数据，采用对象数据格式。
+            {
+                name         : "JOB1",
+                arrivalTime　: "10:00",
+                runTime      : "25",
+                memory       : "15",
+                tape         : "2"
+            },{
+                name         : "JOB2",
+                arrivalTime　: "10:20",
+                runTime      : "30",
+                memory       : "60",
+                tape         : "1"
+            },{
+                name         : "JOB3",
+                arrivalTime　: "10:30",
+                runTime      : "10",
+                memory       : "50",
+                tape         : "3"
+            },{
+                name         : "JOB4",
+                arrivalTime　: "10:35",
+                runTime      : "20",
+                memory       : "10",
+                tape         : "2"
+            },{
+                name         : "JOB5",
+                arrivalTime　: "10:40",
+                runTime      : "15",
+                memory       : "30",
+                tape         : "2"
+          
+            }
+        ];
+
+        function displaySimulated(){
+            var tbody = "";
+            for(var i = 0;i<data.length;i++){
+                 tbody += "<tr><td>"+data[i].name+
+                          "</td><td>"+data[i].arrivalTime　+
+                          "</td><td>"+data[i].runTime　+
+                          "</td><td>"+data[i].memory　+
+                          "</td><td>"+data[i].tape　+
+                          "</tr>";
+            }
+           
+            document.getElementById("simulated").innerHTML = tbody;
+        }
+        displaySimulated();
+
+        document.getElementById("body").onclick = function(){
+           
+        }
+        var tapeMachine = 4;    //磁带机数目
+        var primaryMemory = 100;//内存空间
+        /*
+           假定某系统可供用户使用的主存空间共100KB，并有4台磁带机。
+        */
+
+        /*
+            主存分配采用可变分区分配方式且主存中信息不允许移动，
+            对磁带机采用静态分配策略，
+            作业调度分别采用先来先服务算法和最小作业优先算法，
+            进程调度采用先来先服务和最短进程优先算法。
+        */
+
+    </script>
+</html>
+

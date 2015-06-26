@@ -19,7 +19,8 @@
         }
         table{
             margin : 10px auto;
-
+            overflow: hidden;
+            z-index: 10
         }
         #pannel{
             position:absolute;
@@ -32,47 +33,51 @@
             left: 0;
           
         }
-        #console{
-            font-family: '微软雅黑';
-            text-align: center;
-            border: 1px dotted #000;
-            color: #000;
-            width: 960px;
-            margin-top: 30px;
-            padding: 20px 0;
+        .tabContainer{
+            height:360px;
+            width:900px;
+            overflow: hidden;
             margin : 10px auto;
-            
+            margin-top: -370px;
+            border : 1px solid #000;
         }
-        button{
-            
-            border: 0;
-            background: rgb(0,108,128);
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: '微软雅黑';
+        .tabBox{
+            width:170px;
+            height:170px;
+            position:relative;
+            border-radius: 20px;
+            display: none;
         }
+         #purple{
+            background:rgba(153,102,153,0.3);
+        }
+         #blue{
+            background:rgba(255,102,102,0.3);
+        }
+        #green{
+            background:rgba(153,204,102,0.3);
+        }
+       
         </style>
         <script src = "data.js"></script>
         
     </head>
     <body style = "font-family : '微软雅黑'">
         <h3>K-Means聚束算法演示</h3>
-         <div>共 <span id = "pLength">1173</span> 个点，选定其中 3 个点为K点 ( 按F12键，可查看相关点参数 ) </div>
-        <table id = "tab">
+         <div id = "tips"></div>
+        <table id = "tab" >
         </table>
+        <div class = "tabContainer">
+            <div class = "tabBox" id ="purple"> </div>
+            <div class = "tabBox" id ="blue"> </div>
+            <div class = "tabBox" id ="green"> </div>
+        </div>
         <div id = "pannel" >
             x : <span id = "pannlX">0</span><br/>
             y : <span id = "pannlY">0</span>
         </div>
       
-        <div id = "console">
-            <span id = "consoleText">产生 40 x 100 区域面板</span>
-            
-
-        </div>
-        <button>下一步</button>
+       
 	</body>
     <script>
 
@@ -178,7 +183,7 @@
             if(unique(poiter))
                 POINTER.push(poiter);
             res.push(poiter);
-            getTdValue(poiter.x,poiter.y).style.background = "red";
+            //setTimeout(function(){getTdValue(poiter.x,poiter.y).style.background = "red";},2000);
         
             //聚集点的个数
             var num1 = 200;
@@ -249,7 +254,7 @@
      * 将数据聚成 k 类。
      */
     function cluster(p,c) {
-       
+        var time = 0;
         // 存放新计算的聚类中心
         var nc = [];
         // 存放放回结果
@@ -265,18 +270,54 @@
         while (true) {
             // 根据聚类中心将元素分类
             g = group(p, c);
+
             // 计算分类后的聚类中心
             for (var i = 0; i < g.length; i++) {
                 nc[i] = center(g[i]);
             }
+
+            //------------------------------------------
+            setTimeout(function(){
+                time ++;
+                var tableTop = document.getElementById("tab").offsetTop;
+                var tableLeft =  document.getElementById("tab").offsetLeft;
+                for (var i = 0; i < 3; i++) {
+                    getTdValue(c[i].x,c[i].y).style.background = "rgba(0,0,0,0.4)";
+                }
+
+                document.getElementById("purple").style.top = getTdValue(c[0].x,c[0].y).offsetTop-85 + "px";
+                document.getElementById("blue").style.top = getTdValue(c[1].x,c[1].y).offsetTop-85-170 + "px";
+                document.getElementById("green").style.top = getTdValue(c[2].x,c[2].y).offsetTop-85-340 + "px";
+
+
+                document.getElementById("purple").style.left = getTdValue(c[0].x,c[0].y).offsetLeft-85 + "px";
+                document.getElementById("blue").style.left = getTdValue(c[1].x,c[1].y).offsetLeft-85 + "px";
+                document.getElementById("green").style.left = getTdValue(c[2].x,c[2].y).offsetLeft-85 + "px";
+
+
+                document.getElementById("purple").style.display = "block";
+                document.getElementById("blue").style.display = "block";
+                document.getElementById("green").style.display = "block";
+                console.info("进行第 "+time+ "次循环 ，得出中心点： ");
+                document.getElementById("tips").innerHTML = "第四步，进行第 "+time+ "次循环 ，圈定区域 ";
+                console.info(display(nc));
+                for (var i = 0; i < 3; i++) {
+                    getTdValue(nc[i].x,nc[i].y).style.background = "red";
+                }
+            },timeClock*1);
+            
+
+            //------------------------------------------
             // 如果聚类中心不同
             if (!equal(nc, c)) {
                 // 为下一次聚类准备
                 c = nc;
                 nc = [];
+
             } else // 聚类结束
                 break;
         }
+        
         // 返回聚类结果
         return nc;
     }
@@ -407,21 +448,55 @@
         console.info(display(cluster(POINTER,K)) );
     },2000);
    
-    */ //1，创建table
+
+    */ 
+    var timeClock = 3000;
+
+
+
+
+    //1，创建table
     createTable(40,100);
-    //2，随机获取点点
-    getRandowData(40,100);
-    //3，选取k个点
-    console.info("预计K点信息：");
-    var K = getThreePointer(40,100);
-    console.info(display(K));
-    //4，获取所有点
-    console.info("所有点信息：");
-    console.info(display(POINTER));
-    //document.getElementById("pLength").innerHTML = POINTER.length;
+    document.getElementById("tips").innerHTML = "第一步，创建40 x 100网格，承载数据点";
+    setTimeout(function(){
+         //2，随机获取点点
+        getRandowData(40,100);
+         //3，选取k个点
+        
+        var K = getThreePointer(40,100);
+        
+        document.getElementById("tips").innerHTML = "第二步，共 <span id = 'pLength'>0</span> 个点，选定其中 3 个点为K点 ";
+        document.getElementById("pLength").innerHTML = POINTER.length;
+        setTimeout(function(){
+            for(var i = 0;i<K.length;i++){
+                getTdValue(K[i].x,K[i].y).style.background = "red";
+            }
+            console.info("预计K点信息：");
+            console.info(display(K));
+            document.getElementById("tips").innerHTML = "第三步，随机选取K聚点预计点";
+            //4，获取所有点
+            console.info("所有点信息：");
+            console.info(display(POINTER));
+
+        },timeClock*2);
+        setTimeout(function(){
+            console.info("最终K点信息：");
+            for(var i = 0;i<K.length;i++){
+                getTdValue(K[i].x,K[i].y).style.background = "rgba(0,0,0,0.4)";
+            }
+            
+            display(cluster(POINTER,K)) ;
+            
+        },timeClock*4);
+    },timeClock*2);
+    //
+    setTimeout(function(){
+        document.getElementById("tips").innerHTML = "最后，K-means算法演示 结束 ，具体信息点击F12查看";
+    },timeClock*9);
+    
+    
  
-    console.info("最终K点信息：");
-    console.info(display(cluster(POINTER,K)) );
+    
     
 
   
