@@ -12,15 +12,23 @@
                 text-align: center;
             }
             .warp{
-                width:500px;
+                width:520px;
                 margin : 0 auto;
             }
-
+         
+            .clear{
+                clear: both;
+            }
             table {
-                margin : 0 auto;
+             
                 border : 1px solid #ccc;
                 border-collapse: collapse;
+                margin:0 20px 10px;
 
+            }
+            table caption{
+                font-weight: bold;
+                margin-bottom: 10px;
             }
             table thead{
                 background:#222;
@@ -36,7 +44,7 @@
             }
             #console{
                 width : 500px;
-                border : 2px solid #000;
+                border : 2px solid #ccc;
                 margin:10px auto;
             }
         </style>
@@ -45,41 +53,80 @@
     <body style = "font-family : '微软雅黑'" id = "body">
         <h3>K-Means聚束算法演示（点击页面，进行下一步）</h3>
         <div class = "warp">
-            <h4>模拟数据</h4>
+                <table>
+                    <caption>模拟数据</caption>
+                    <thead>
+                        <tr>
+                            <td>作业</td>
+                            <td>到达时间</td>
+                            <td>运行时间</td>
+                            <td>内存需要</td>
+                            <td>磁带机需要</td>
+                        </tr>
+                    </thead>
+                    <tbody id = "simulated">
+
+                    </tbody>
+                </table>
+               
+                <div class="clear"></div> 
+        </div>
+         <h4>控制台</h4>
+         <div style = "float:left;">
             <table>
                 <thead>
                     <tr>
-                        <td>作业</td>
-                        <td>到达时间</td>
-                        <td>运行时间</td>
-                        <td>内存需要</td>
-                        <td>磁带机需要</td>
+                        <td>剩余磁盘机</td>
                     </tr>
                 </thead>
-                <tbody id = "simulated">
-
+                <tbody>
+                    <tr>
+                        <td  id = "tape">0</td>
+                    </tr>
                 </tbody>
             </table>
+            <table>
+                <thead>
+                    <tr>
+                        <td>内存空间表</td>
+                    </tr>
+                </thead>
+                <tbody id = "memory">
+                    <tr>
+                        <td>0KB</td>
+                    </tr>
+                </tbody>
+            </table>
+            
         </div>
-       <div id = "console"></div>
+       
+       <div id = "console">hello world</div>
        
 	</body>
     <script>
-        var para = document.createElement("p");
-        para.innerHTML = "版本";
-        para.setAttribute("id","blink");
-        document.getElementById("console").appendChild(para);
+    (function(){
+        function addConsole(target,text){
+            var para = document.createElement("div");
+            para.innerHTML = text;
+            document.getElementById(target).appendChild(para);
 
-        setInterval(blink,500);
-        function blink(){
-            var blink=document.getElementById('blink');
-            if(blink.style.color=="#fff" || blink.style.color=="rgb(255, 255, 255)"){
-                blink.style.color="#000";
-            }else{
-                blink.style.color="#fff";  
-            }
-           
+            
+            (function blink(){
+               
+                for(var i = 0;i<6;i++){
+                    setTimeout(function(){
+                        if(para.style.color=="#fff" || para.style.color=="rgb(255, 255, 255)"){
+                            para.style.color="#000";
+                        }else{
+                            para.style.color="#fff";  
+                        }
+
+                    },500*i);
+                   
+                }
+            })();
         }
+       
         var data = [//演示数据，采用对象数据格式。
             {
                 name         : "JOB1",
@@ -114,25 +161,6 @@
           
             }
         ];
-
-        function displaySimulated(){
-            var tbody = "";
-            for(var i = 0;i<data.length;i++){
-                 tbody += "<tr><td>"+data[i].name+
-                          "</td><td>"+data[i].arrivalTime　+
-                          "</td><td>"+data[i].runTime　+
-                          "</td><td>"+data[i].memory　+
-                          "</td><td>"+data[i].tape　+
-                          "</tr>";
-            }
-           
-            document.getElementById("simulated").innerHTML = tbody;
-        }
-        displaySimulated();
-
-        document.getElementById("body").onclick = function(){
-           
-        }
         var tapeMachine = 4;    //磁带机数目
         var primaryMemory = 100;//内存空间
         /*
@@ -145,6 +173,34 @@
             作业调度分别采用先来先服务算法和最小作业优先算法，
             进程调度采用先来先服务和最短进程优先算法。
         */
+        function displaySimulated(){
+            var tbody = "";
+            for(var i = 0;i<data.length;i++){
+                 tbody += "<tr><td>"+data[i].name+
+                          "</td><td>"+data[i].arrivalTime　+
+                          "</td><td>"+data[i].runTime　+
+                          "</td><td>"+data[i].memory　+
+                          "</td><td>"+data[i].tape　+
+                          "</tr>";
+            }
+            document.getElementById("simulated").innerHTML = tbody;
+            document.getElementById("tape").innerHTML = tapeMachine;
+            document.getElementById("memory").innerHTML = "<tr><td>"+primaryMemory+"KB</td></tr>";
+        }
+        displaySimulated();
+
+        var step = 0;
+        document.getElementById("body").onclick = function(){
+            switch (step){
+                case 0 : addConsole("console","版本"+step++);break;
+                case 1 : addConsole("console","版本"+step++);break;
+                case 2 : addConsole("console","版本"+step++);break;
+                case 3 : addConsole("console","版本"+step++);break;
+            }
+        }
+     
+    })();
+        
 
     </script>
 </html>
