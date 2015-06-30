@@ -105,28 +105,21 @@
 	</body>
     <script>
     (function(){
-        function addConsole(target,text){
-            var para = document.createElement("div");
-            para.innerHTML = text;
-            document.getElementById(target).appendChild(para);
 
-            
-            (function blink(){
-               
-                for(var i = 0;i<6;i++){
-                    setTimeout(function(){
-                        if(para.style.color=="#fff" || para.style.color=="rgb(255, 255, 255)"){
-                            para.style.color="#000";
-                        }else{
-                            para.style.color="#fff";  
-                        }
+        /*
+            题目要求：
+            主存分配采用可变分区分配方式且主存中信息不允许移动，
+            对磁带机采用静态分配策略，
+            作业调度分别采用先来先服务算法和最小作业优先算法，
+            进程调度采用先来先服务和最短进程优先算法。
+        */
 
-                    },500*i);
-                   
-                }
-            })();
-        }
-       
+
+        /*
+           假定某系统可供用户使用的主存空间共100KB，并有4台磁带机。
+        */
+        var tapeMachine = 4;    //磁带机数目
+        var primaryMemory = 100;//内存空间
         var data = [//演示数据，采用对象数据格式。
             {
                 name         : "JOB1",
@@ -161,19 +154,39 @@
           
             }
         ];
-        var tapeMachine = 4;    //磁带机数目
-        var primaryMemory = 100;//内存空间
-        /*
-           假定某系统可供用户使用的主存空间共100KB，并有4台磁带机。
+        /*\
+            控制台提示语句添加
+            target          目标元素的位置
+            text            提示文本
         */
+        function addConsole(target,text){
+            var para = document.createElement("div");
+            para.innerHTML = text;
+            document.getElementById(target).appendChild(para);
 
-        /*
-            主存分配采用可变分区分配方式且主存中信息不允许移动，
-            对磁带机采用静态分配策略，
-            作业调度分别采用先来先服务算法和最小作业优先算法，
-            进程调度采用先来先服务和最短进程优先算法。
-        */
-        function displaySimulated(){
+            //当前行文本高亮闪烁
+            (function blink(){
+                //每五十毫秒闪烁一次
+                for(var i = 0;i<6;i++){
+                    setTimeout(function(){
+                        if(para.style.color=="#fff" || para.style.color=="rgb(255, 255, 255)"){
+                            para.style.color="#000";
+                        }else{
+                            para.style.color="#fff";  
+                        }
+
+                    },500*i);
+                   
+                }
+            })();
+        }
+       
+        
+       
+       
+
+        //模拟数据显示，描绘模拟数据表格
+        (function displaySimulated(){
             var tbody = "";
             for(var i = 0;i<data.length;i++){
                  tbody += "<tr><td>"+data[i].name+
@@ -186,9 +199,9 @@
             document.getElementById("simulated").innerHTML = tbody;
             document.getElementById("tape").innerHTML = tapeMachine;
             document.getElementById("memory").innerHTML = "<tr><td>"+primaryMemory+"KB</td></tr>";
-        }
-        displaySimulated();
+        })();
 
+        //当前步骤 标记
         var step = 0;
         document.getElementById("body").onclick = function(){
             switch (step){
@@ -198,7 +211,43 @@
                 case 3 : addConsole("console","版本"+step++);break;
             }
         }
-     
+        //对模拟数据，针对到达时间进行排序
+        /*
+            由于时间格式是hh:mm因此，时间排序有特殊处理
+        */
+        function bubbleSort(arr) {
+            var length  = arr.length;
+          
+  
+            var tempExchangVal;
+            for(var i = 0;i< length;i++){
+                for(var j = 0;j< length-i-1;j++){
+                    if(arr[j][0] > arr[j+1][0] ){
+                        tempExchangVal = arr[j];
+                        arr[j] = arr[j+1];
+                        arr[j+1] = tempExchangVal;
+                    }
+
+                }
+            }
+           for(var i = 0;i< length;i++){
+                for(var j = 0;j< length-i-1;j++){
+                    if(arr[j][2] > arr[j+1][2] && arr[j][0] == arr[j+1][0]){
+                        tempExchangVal = arr[j];
+                        arr[j] = arr[j+1];
+                        arr[j+1] = tempExchangVal;
+                    }
+
+                }
+            }
+            return arr;
+
+        
+        }
+ 
+/*var arr = ["3:0", "2:1", "4:5", "4:4", "1:5", "1:0","5:0", "7:1", "6:0", "8:1"];*/
+
+//alert(arrSorted);
     })();
         
 
