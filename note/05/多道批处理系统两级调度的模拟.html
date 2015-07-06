@@ -51,7 +51,7 @@
         
     </head>
     <body style = "font-family : '微软雅黑'" id = "body">
-        <h3>多道批处理系统两级调度的模拟（点击页面，进行下一步）</h3>
+        <h3>多道批处理系统两级调度的模拟（按F12，查看详细运行结果）</h3>
         <div class = "warp">
                 <table>
                     <caption>模拟数据</caption>
@@ -71,7 +71,27 @@
                
                 <div class="clear"></div> 
         </div>
-         <h4>控制台</h4>
+        <div class = "warp">
+                <table>
+                    <caption>运行结果</caption>
+                    <thead>
+                        <tr>
+                            <td>作业</td>
+                            <td>到达时间</td>
+                            <td>运行时间</td>
+                            <td>结束时间</td>
+                            <td>周转时间</td>
+
+                        </tr>
+                    </thead>
+                    <tbody id = "simulated2">
+
+                    </tbody>
+                </table>
+               
+                <div class="clear"></div> 
+        </div>
+         <!-- <h4>控制台</h4>
          <div style = "float:left;">
             <table>
                 <thead>
@@ -100,7 +120,7 @@
             
         </div>
        
-       <div id = "console">hello world</div>
+       <div id = "console">hello world</div> -->
        
 	</body>
     <script>
@@ -110,8 +130,7 @@
             题目要求：
             主存分配采用可变分区分配方式且主存中信息不允许移动，
             对磁带机采用静态分配策略，
-            作业调度分别采用先来先服务算法和最小作业优先算法，
-            进程调度采用先来先服务和最短进程优先算法。
+            作业调度先来先服务算法
         */
 
 
@@ -159,7 +178,7 @@
             target          目标元素的位置
             text            提示文本
         */
-        function addConsole(target,text){
+        /*function addConsole(target,text){
             var para = document.createElement("div");
             para.innerHTML = text;
             document.getElementById(target).appendChild(para);
@@ -179,10 +198,7 @@
                    
                 }
             })();
-        }
-       
-        
-       
+        }*/
        
 
         //模拟数据显示，描绘模拟数据表格
@@ -197,12 +213,12 @@
                           "</tr>";
             }
             document.getElementById("simulated").innerHTML = tbody;
-            document.getElementById("tape").innerHTML = tapeMachine;
-            document.getElementById("memory").innerHTML = "<tr><td>"+primaryMemory+"KB</td></tr>";
+            //document.getElementById("tape").innerHTML = tapeMachine;
+            //document.getElementById("memory").innerHTML = "<tr><td>"+primaryMemory+"KB</td></tr>";
         })();
 
         //当前步骤 标记
-        var step = 0;
+       /* var step = 0;
         document.getElementById("body").onclick = function(){
             switch (step){
                 case 0 : addConsole("console","版本"+step++);break;
@@ -210,7 +226,7 @@
                 case 2 : addConsole("console","版本"+step++);break;
                 case 3 : addConsole("console","版本"+step++);break;
             }
-        }
+        }*/
         //对模拟数据，针对到达时间进行排序
         /*
             由于时间格式是hh:mm因此，时间排序有特殊处理
@@ -254,7 +270,7 @@
             设置内存列表
         
         */
-        function  schedule(){
+        function  schedule(type){
             var res = [];
             //对模拟数据进行排序结果
             var queue = bubbleSort(data);
@@ -278,102 +294,35 @@
             var nowTime = standbyQueue[0].arrivalTime;
 
             var nowProcess = 0;
+            //记录当前步骤
+            var markStep = 1;
             while(timeTable[0] != undefined){
 
                 //
-                console.info("---------------------------");
+                console.info("-------------第"+markStep+"步--------------");
+                
                 console.info("当前时间 ："+ nowTime);
                 console.info("剩余磁盘机 ："+tapeMachine);
                 console.info("时间表 ： " +timeTable.join(","));
 
+                markStep++;
 
-                if(standbyQueue[nowProcess] != undefined)
-                    if(standbyQueue[nowProcess].arrivalTime　<= nowTime && (tapeMachine-standbyQueue[nowProcess].tape) >= 0){
-                        for(var i = 0;i<memoryTable.length;i++){
-                            //满足内存条件
-                            if(memoryTable[i].lastIndexOf("K") >= 0){
-                                var theFirstMemory = parseInt(memoryTable[i].substring(0,memoryTable[i].length-1))
-                               if(standbyQueue[nowProcess].memory <= theFirstMemory){
-                                    //当前运行进程
-                                    var needProcess = standbyQueue[nowProcess];
-                                    tapeMachine -= needProcess.tape;
 
-                                    //加入当前操作步骤信息
-                                  /*  var nowStep = {
-                                        nowTime : nowTime,
-                                        name :　needProcess.name,
-                                        tape :  tapeMachine 
-                                    }
-                                    res.push(nowStep);*/
-                                    console.info(" **执行进程 ："+needProcess.name);
-                                    var finishTime = parseInt(needProcess.arrivalTime)+parseInt(needProcess.runTime);
-                                    needProcess.finishTime = finishTime;
-                                    runQueue.push(needProcess);
-                                    console.info(" >>正在运行的进程");
-                                    console.info(runQueue);
-                                     //将预备运行借结束时间加入时间列表
-                                    timeTable.push(finishTime);
-                                    var timeTable = bubbleSortTime(timeTable);
-                                  
-                               
-                                    memoryTable.splice(i,1,needProcess.name);
-                                  
-                                    var surplusMemory = (theFirstMemory-standbyQueue[nowProcess].memory) +"K";
-                                  
-                                        memoryTable.splice(i+1,0,surplusMemory);
-
-                               }
-                               break;
-                            }
-                        }
-                        console.info(memoryTable);
-
-                         //从当前预备队列中删除该进程
-                        standbyQueue.splice(0,1);
-
-                    }else{
-                        if(parseInt(standbyQueue[nowProcess].arrivalTime)　> nowTime){
-                            
-                            
-
-                            console.info(" >>正在运行的进程");
-                            console.info(runQueue);
-                            //从内存表中删除该进程，腾出空间
-
-                        }else if(parseInt(standbyQueue[nowProcess].arrivalTime)　<= nowTime ){
-                            var needProcess = standbyQueue[nowProcess];
-
-                            console.info(" >>正在运行的进程");
-                            console.info(runQueue);
-                           
-                            console.info("进程 : "+needProcess.name+"未能调入内存");
-                            
-                        }else if((tapeMachine-standbyQueue[nowProcess].tape) < 0){
-                            console.info(" >>正在运行的进程");
-                            console.info(runQueue);
-                        }
-                    }else{
-                        if(timeTable[0] != undefined){
-                            console.info(" >>正在运行的进程");
-                            console.info(runQueue);
-                         
-                        }
-
-                    }
-                     for (var i = runQueue.length - 1; i >= 0; i--) {
+                    //判定当前时间是否有进程结束
+                    for (var i = runQueue.length - 1; i >= 0; i--) {
+                     
                         if(runQueue[i].finishTime == nowTime){
                             tapeMachine = parseInt(tapeMachine)+ parseInt(runQueue[i].tape);
                             var runProcessIndex = memoryTable.indexOf(runQueue[i].name);
+
                             var runProcessMemory = runQueue[i].memory;
                             console.info(" **有进程结束" +runQueue[i].name);
-                          
+                           
                             memoryTable.splice(runProcessIndex,1,runProcessMemory+"K");
-                            console.info(runQueue);
-                            runQueue.splice(runProcessIndex,1);
+                            runQueue.splice(i,1);
+                           
                         }
                     };
-                    
-
                     //合并内存
                     for (var i = 0; i < memoryTable.length-1; i++) {
                      
@@ -385,20 +334,118 @@
                                       memoryTable.splice(i,2,tempMemory);
                                       i--;
                             }
-                        
                         }
-                            
                     };
-                    //运行时间
+
+                    //输出当前内存表信息
+                    console.info("内存表信息:");
+                    console.info(memoryTable);
+
+                    //
+                    for(var j = 0;j<standbyQueue.length;j++){
+                                 
+                        if(standbyQueue[j].arrivalTime　<= nowTime && (tapeMachine-standbyQueue[j].tape) >= 0){
+                            for(var i = 0;i<memoryTable.length;i++){
+                                //满足内存条件
+
+                                if(memoryTable[i].lastIndexOf("K") >= 0){
+                                    var theFirstMemory = parseInt(memoryTable[i].substring(0,memoryTable[i].length-1))
+
+                                   if(standbyQueue[j].memory <= theFirstMemory){
+                                        //当前运行进程
+                                        var needProcess = standbyQueue[j];
+                                        tapeMachine -= needProcess.tape;
+                                        console.info(" **执行进程 ："+needProcess.name);
+                                        
+                                        var finishTime = parseInt(nowTime)+parseInt(needProcess.runTime);
+                                       
+                                        needProcess.finishTime = trimTime(finishTime);
+                                        res.push(needProcess);
+                                        runQueue.push(needProcess);
+                                    
+                                         //将预备运行借结束时间加入时间列表
+                                        if(timeTable)
+                                            timeTable.push(trimTime(finishTime));
+                                        var timeTable = bubbleSortTime(timeTable);
+                                      
+                                   
+                                        memoryTable.splice(i,1,needProcess.name);
+                                      
+                                        var surplusMemory = (theFirstMemory-standbyQueue[j].memory) +"K";
+                                      
+                                            memoryTable.splice(i+1,0,surplusMemory);
+                                        for(var t = 0;t<standbyQueue.length;t++){
+                                            if(standbyQueue[t].name == needProcess.name){
+                                                //从当前预备队列中删除该进程
+                                                standbyQueue.splice(t,1);
+                                            }
+                                        }
+                                        
+
+                                   }else{
+                                        console.info(standbyQueue[j].name +"不满足内存需要");
+                                    }
+                                   break;
+                                }
+                            }
+                          
+
+                        }else if(parseInt(standbyQueue[j].arrivalTime)　<= nowTime ){
+                                var needProcess = standbyQueue[j];
+                                console.info("进程 : "+needProcess.name+"未能调入内存");
+                        }
+                     
+                    }
+                    
+                    console.info("运行队列 ： ");
+                    console.info(getName(runQueue));
+                     //输出预备队列
+                    console.info("预备队列：");
+                    console.info(getName(standbyQueue)); 
+                    
+
+                    //输出当前内存表信息
+                    console.info("内存表信息:");
+                    console.info(memoryTable);
                    
+                    //运行时间
                     timeTable.splice(0,1);
                     nowTime = timeTable[0]　;
        
-                    
+                    if(runQueue[0] == undefined && standbyQueue[0] == undefined)
+                        console.info("-------------运行结束-------------");
+
             }
             return res;
         
         }
+    /*获取当前数组中对象的name属性，返回一个数组，便于查看当前运行队列或备用队列*/
+    function getName(obj){
+        var res = [];
+        for(var i = 0;i<obj.length;i++){
+            res.push(obj[i].name);
+        }
+        return res;
+    }
+    /*修剪时间，将当前时间和运行时间相加所得的不符合时间格式的时间数据，转化为合适的时间数据类型*/
+    function trimTime(s){
+        var mins = s%100;
+        var hour = parseInt(s/100);
+     
+        if(mins > 60){
+            hour++;
+            return hour*100+mins%60;
+        }
+        return hour*100+mins;
+    }
+    /*数组唯一值判定，判断a数组中是否含有b元素*/
+    function uniquePush(a,b){
+        for(var i =0;i<a.length;i++){
+            if(a[i] == b) return false; 
+        }
+    
+        return true;
+    }
     console.info(schedule());
     })();
         
