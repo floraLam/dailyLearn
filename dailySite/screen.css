@@ -13,13 +13,10 @@
 	6.  Tag Archive
 	7.  Read Next
 	8.  Third Party Elements
-	9.  Pagination
+	9. Canlender
 	10.  Footer
 	11. Media Queries (Tablet)
 	12. Media Queries (Mobile)
-	13. Animations
-	14. code highlight
-
 */
 
 /* ==========================================================================
@@ -165,6 +162,7 @@ body {
 	-o-font-feature-settings: 'kern' 1;
 	text-rendering: geometricPrecision;
 	-webkit-font-smoothing: antialiased;
+	overflow-x:hidden;
 }
 
 h1, h2, h3,
@@ -178,26 +176,12 @@ h4, h5, h6 {
 	text-rendering: geometricPrecision;
 }
 
-h1 {
-	font-size: 3rem;
-}
-
-h2 {
-	font-size: 2.5rem;
-}
-
-h3 {
-	font-size: 2rem;
-}
-
-h4 {
-	font-size: 1.5rem;
-}
-
+h1 {font-size: 3rem;}
+h2 {font-size: 2.5rem;}
+h3 {font-size: 2rem;}
+h4 {font-size: 1.5rem;}
 h5,
-h6 {
-	font-size: 1.2rem;
-}
+h6 {font-size: 1.2rem;}
 
 a {
 	color: #18BC9C;
@@ -285,7 +269,7 @@ blockquote cite a { font-weight: normal; }
 
 code, tt {
 	padding: 1px 3px;
-	font-family: Inconsolata, monospace, sans-serif;
+	font-family: Consolas,"Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
 	font-size: 0.85em;
 	white-space: pre-wrap;
 	border: #E3EDF3 1px solid;
@@ -305,7 +289,8 @@ pre {
 	font-size: 0.9em;
 	white-space: pre;
 	overflow: auto;
-	background: #F7FAFB;
+	background: #000;
+	color: #fff;
 	border-radius: 3px;
 }
 
@@ -473,70 +458,7 @@ margin on the iframe, cause it breaks stuff. */
 	text-overflow: ellipsis;
 }
 
-.subscribe-button {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	display: block;
-	position: absolute;
-	bottom: 30px;
-	left: 30px;
-	right: 30px;
-	height: 38px;
-	padding: 0 20px;
-	color: #111 !important;
-	text-align: center;
-	font-size: 12px;
-	text-transform: uppercase;
-	text-decoration: none;
-	line-height: 35px;
-	border-radius: 3px;
-	background: #fff;
-	transition: all ease 0.3s;
-}
-.subscribe-button:before {
-	font-size: 9px;
-	margin-right: 6px;
-}
 
-.menu-button {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	display: inline-block;
-	float: right;
-	height: 38px;
-	padding: 0 15px;
-	border: #bfc8cd 1px solid;
-	opacity: 1;
-	color: #9EABB3;
-	text-align: center;
-	font-size: 12px;
-	text-transform: uppercase;
-	line-height: 35px;
-	white-space: nowrap;
-	border-radius: 3px;
-	background: rgba(0,0,0,0.1);
-	transition: all 0.5s ease;
-}
-.menu-button:before {
-	font-size: 12px;
-	font-weight: bold;
-	margin-right: 6px;
-	color: #fff !important;
-	position: relative;
-	top: 1px;
-	transition: all 0.5s ease;
-}
-.menu-button:focus {
-	outline: 0;
-}
-
-/* Add a border to the buttons on hover */
-.menu-button:hover {
-	border-color: #555;
-	color: #555;
-}
 
 /* The details of your blog. Defined in ghost/settings/ */
 .page-title {
@@ -720,6 +642,49 @@ body:not(.post-template) .post-title {
 	display: block;
 	font-size: 1.4rem;
 	line-height: 1.5em;
+}
+
+/*------index-----*/
+.post-header .post-dictum-author{
+	float:right;
+	margin-right:2rem;
+}
+.post-header .post-dictum-button{
+	font-size:.6rem;
+	color: #ccc;
+	border:0;
+	background: none;
+
+}
+.post-content .post-search-input{
+	padding:10px;
+	width: 70%;
+}
+.post-content .post-search-button{
+	padding:1rem;
+	font-size:.6rem;
+	color:#fff;
+	background: #999;
+	border:2px solid #999;
+}
+.post-content .post-search-button:hover{
+	color:#999;
+	background: #fff;
+}
+.post-content .post-content-tags{
+	width: 100%;
+    padding: 3rem 0;
+}
+.post-content .post-content-tags ul{
+	  margin-left: -4.3rem;
+}
+.post-content .post-content-tags li{
+	list-style :none;
+	padding: .2rem .8rem;
+	font-size:1.4rem;
+    float: left;
+    margin: .5rem 1rem;
+    border: 1px solid #ccc;
 }
 
 
@@ -963,6 +928,7 @@ side bar style
 	background-size: cover;
 	background-position: center center;
 	border-radius: 100%;
+	background-image: url(images/woman35.png);
 }
 
 .author-profile .author-image {
@@ -1136,28 +1102,201 @@ side bar style
     right: 0;
     margin: 0;
 }
-
 /* ==========================================================================
-   8. Third Party Elements - Embeds from other services
+   9. Canlender - to record my study habits
    ========================================================================== */
 
-/* Github */
-.gist table {
+.canlender_box{
+	width: 255px;
+	padding: 1px;
+	box-shadow: 0 1px 1px #ebedea;
+	font:12px 'Courgette', cursive;
+	color: #000;
+	line-height: 32px;
+	font-weight: bold;
+	background: #a2a4a1;
+	border-radius: 5px;
+	margin:50px auto;
+}
+.canlender_box > h2{
+	margin:0 -1px 0 0;
+	border-radius: 3px 3px 0 0;
+	padding:15px 8px 0;
+	text-align: center;
+	color: #fff;
+	text-shadow:0 -1px 0px #999;
+	height: 32px;
+
+}
+/* *{
 	margin: 0;
-	font-size: 1.4rem;
-}
-.gist td {
-	line-height: 1.4;
-}
-.gist .line-number {
-	min-width: 25px;
+	padding: 0;
 }
 
-/* Pastebin */
-.content .embedPastebin {
-	margin-bottom: 1.75em;
+
+h2{
+	font-size: 14px;
+}*/
+.canlender_box h2{
+	font-size: 14px;
+}
+.canlender_box ul{
+	margin: 0;
+	list-style: none;
+}
+.canlender_box a{
+	color:#fff;
+	text-decoration: none;
+	letter-spacing: -3px;
+}
+.canlender_box .canlender_left{
+	float: left;
+}
+.canlender_box .canlender_right{
+	float:right;
 }
 
+.canlender_box .canlender_cal:after,
+.canlender_box .canlender_cal:before {
+	content:"";
+	display: table;
+}
+.canlender_box .canlender_cal:after {
+	clear:both;
+	overflow: hidden;
+}
+.canlender_box .canlender_cal{
+
+	border:1px solid #818380;
+	font-size: 0;
+	background: #fff;
+	box-shadow:0 1px 1px #d9d9d9,0 2px 1px #555;
+
+	zoom: 1;
+	margin:0;
+	padding: 0;
+}
+
+.canlender_box .canlender_cal > li{
+	float:left;
+	width:35px;
+	border-right: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	text-align: center;
+	font-size: 12px;
+	cursor:pointer;
+}
+.canlender_box .canlender_cal > li:nth-of-type(7n){
+	border-right: none;
+}
+.canlender_fgray{
+	color: #ccc;
+}
+.canlender_tip{
+	position: relative;
+	color:orange;
+}
+.canlender_tip:after{
+	display: block;
+	content: "";
+	position: absolute;
+	border:4px solid orange;
+	border-color:orange orange transparent transparent ;
+	top: 0;
+	right: 0;
+}
+.canlender_gray,
+.canlender_pink{
+	position: relative;
+}
+.canlender_pink{
+	color: #80bd01;
+	background: #fff6f6;
+}
+.canlender_gray{
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(216,216,216,1)), color-stop(100%,rgba(255,255,255,1)));
+	background-image: -webkit-linear-gradient(top, rgba(216,216,216,1) 0%, rgba(255,255,255,1) 100%);
+	background-image: -moz-linear-gradient(top, rgba(216,216,216,1) 0%, rgba(255,255,255,1) 100%);
+	background-image: -o-linear-gradient(top, rgba(216,216,216,1) 0%, rgba(255,255,255,1) 100%);
+	background-image: -ms-linear-gradient(top, rgba(216,216,216,1) 0%, rgba(255,255,255,1) 100%);
+	background-image: linear-gradient(top, rgba(216,216,216,1) 0%, rgba(255,255,255,1) 100%);
+
+}
+.canlender_gray:before,
+.canlender_pink:before{
+	content: "·";
+	position:absolute;
+	display:block;
+	font-size: 16px;
+	top: 10px;
+	left: 50%;
+	margin-left:-3px;
+	font-family: "Microsoft YaHei";
+}
+.canlender_gray:before{
+	color: #d8d8d8;
+}
+.canlender_pink:before{
+	color: #80bd01;
+}
+
+.canlender_tooltipBox{
+	position: absolute;
+	top:32px;
+	left:-15px;
+	z-index: 99;
+	display: none;
+	width: 215px;
+	background: #eaeff5;
+	border:1px solid #64777e;
+	border-radius:5px;
+	box-shadow:0 1px 0 #cdd5d8,0 2px 0 #64777e,0 3px 0 #cdd5d8,0 4px 0 #64777e;
+}
+.canlender_box .canlender_cal > li:hover .canlender_tooltipBox{
+	display: block;
+}
+.canlender_tooltipBox:after,
+.canlender_tooltipBox:before{
+	position: absolute;
+	display: block;
+	content: "";
+	border-style: solid;
+}
+.canlender_tooltipBox:after{
+	border-width: 10px;
+	border-color: transparent  transparent #64777e;
+	top: -20px;
+	left: 20px;
+	z-index: 2;
+}
+.canlender_tooltipBox:before{
+	border-width: 8px;
+	border-color:transparent  transparent #717f8a;
+	top:-16px;
+	left: 22px;
+	z-index: 3;
+}
+.canlender_tooltipBox > h2{
+	background: #717f8a;
+	line-height: 40px;
+	color: #fff;
+	border-radius:  4px 4px 0 0;
+	text-indent: 1em;
+}
+.canlender_tooltip li{
+	min-height: 36px;
+	padding: 5px;
+	border-bottom: 1px solid #a8adb1;
+	box-shadow: 0 1px 1px #fff;
+	color: #232323;
+}
+
+
+
+.canlender_ttext {
+	overflow: hidden;
+	zoom:1;
+}
 /* ==========================================================================
    9. Pagination - Tools to let you flick between pages
    ========================================================================== */
@@ -1233,7 +1372,8 @@ side bar style
 
 .site-footer {
 	overflow: hidden;
-	margin-top: 2em
+	margin-top: 2em;
+	background:#2C3E50;
 }
 .site-footer ol,
 .site-footer ul{
@@ -1245,10 +1385,7 @@ side bar style
 	color: #000;
 	padding: 2rem 0
 }
-.widgets-wrap,.copyright{
-	width: 960px;
-	margin: 0 auto;
-}
+
 .footer-widgets .widget{
 	float: left;
 	width: 320px;
@@ -1272,19 +1409,15 @@ side bar style
 	margin-top: 1.5rem
 }
 .copyright{
+	font-family: "微软雅黑";
 	padding: 2rem 0 2rem 1rem;
 	line-height: 1.4;
+	font-size: .8rem;
+	text-align: center;
+	color: #fff;
 }
 
-/*
-duoshuo
-*/
 
-#disqus_thread{
-	padding: 2rem;
-	background-color: #fff;
-	margin: 2rem 0
-}
 /* ==========================================================================
    11. Media Queries - Smaller than 900px
    ========================================================================== */
@@ -1447,6 +1580,7 @@ duoshuo
 
 	.post-template .site-footer {
 		margin-top: 0;
+
 	}
 
 	.post-content img {
@@ -1519,148 +1653,18 @@ duoshuo
     .read-next .post {
         width: 100%;
     }
-
-}
-
-
-/* ==========================================================================
-   13. Animations
-   ========================================================================== */
-
-/* Used to fade in title/desc on the home page */
-@-webkit-keyframes fade-in-down {
-	0% {
-		opacity: 0;
-		-webkit-transform: translateY(-10px);
-		transform: translateY(-10px);
-	}
-	100% {
-		opacity: 1;
-		-webkit-transform: translateY(0);
-		transform: translateY(0);
-	}
-}
-@keyframes fade-in-down {
-	0% {
-		opacity: 0;
-		-webkit-transform: translateY(-10px);
-		transform: translateY(-10px);
-	}
-	100% {
-		opacity: 1;
-		-webkit-transform: translateY(0);
-		transform: translateY(0);
+	.post-dictum-button{
+		border :3px solid #f00;
 	}
 }
 
 
-/* ==========================================================================
-   14. code highlight, use highlight.js
-   ========================================================================== */
-.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  background: #002b36;
-  color: #839496;
-  -webkit-text-size-adjust: none;
-}
 
-.hljs-comment,
-.diff .hljs-header,
-.hljs-doctype,
-.hljs-pi,
-.lisp .hljs-string,
-.hljs-javadoc {
-  color: #586e75;
-}
 
-/* Solarized Green */
-.hljs-keyword,
-.hljs-winutils,
-.method,
-.hljs-addition,
-.css .hljs-tag,
-.hljs-request,
-.hljs-status,
-.nginx .hljs-title {
-  color: #859900;
-}
 
-/* Solarized Cyan */
-.hljs-number,
-.hljs-command,
-.hljs-string,
-.hljs-tag .hljs-value,
-.hljs-rule .hljs-value,
-.hljs-phpdoc,
-.hljs-dartdoc,
-.tex .hljs-formula,
-.hljs-regexp,
-.hljs-hexcolor,
-.hljs-link_url {
-  color: #2aa198;
-}
-
-/* Solarized Blue */
-.hljs-title,
-.hljs-localvars,
-.hljs-chunk,
-.hljs-decorator,
-.hljs-built_in,
-.hljs-identifier,
-.vhdl .hljs-literal,
-.hljs-id,
-.css .hljs-function,
-.hljs-name {
-  color: #268bd2;
-}
-
-/* Solarized Yellow */
-.hljs-attribute,
-.hljs-variable,
-.lisp .hljs-body,
-.smalltalk .hljs-number,
-.hljs-constant,
-.hljs-class .hljs-title,
-.hljs-parent,
-.hljs-type,
-.hljs-link_reference {
-  color: #b58900;
-}
-
-/* Solarized Orange */
-.hljs-preprocessor,
-.hljs-preprocessor .hljs-keyword,
-.hljs-pragma,
-.hljs-shebang,
-.hljs-symbol,
-.hljs-symbol .hljs-string,
-.diff .hljs-change,
-.hljs-special,
-.hljs-attr_selector,
-.hljs-subst,
-.hljs-cdata,
-.css .hljs-pseudo,
-.hljs-header {
-  color: #cb4b16;
-}
-
-/* Solarized Red */
-.hljs-deletion,
-.hljs-important {
-  color: #dc322f;
-}
-
-/* Solarized Violet */
-.hljs-link_label {
-  color: #6c71c4;
-}
-
-.tex .hljs-formula {
-  background: #073642;
-}
 /* ==========================================================================
    End of file. Animations should be the last thing here. Do not add stuff
    below this point, or it will probably fuck everything up.
    ========================================================================== */
+
+
