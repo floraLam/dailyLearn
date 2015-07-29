@@ -1,0 +1,6 @@
+{
+  "name": "ace-nodejs",
+  "version": "0.0.1",
+  "description": "ace app sample",
+  "main": "main.js"
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>随机获取花名</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+        <meta name="description" content="随机获取花名" />
+        <meta name="keywords" content="随机获取花名,javascript" />
+        <meta name="author" content="floraLam" />
+        <style type="text/css">
+        .mask{
+            height: 500px;
+            width: 500px;
+            text-align: center;
+            background-color: rgba(200, 200, 200, .2);
+            display:table;
+            position: relative;
+            left: 50%;
+            top: 20%;
+            margin-top:150px;
+            margin-left: -250px;
+        }
+
+
+        .dialog{
+           display:table-cell;
+           vertical-align:middle;
+           border: 3px solid lightblue;
+        }
+
+        #name{
+            font-size: 16px;
+            font-weight: bold;
+            margin:50px;
+        }
+        </style>
+        <script></script>
+    </head>
+    <body style = "font-family:'微软雅黑';">
+        <div class="mask">
+            <div class="dialog">
+
+            <button id= "getName">获取花名</button>
+
+            <div id = "name">花名</div>
+            </div>
+        </div>
+
+        </div>
+	</body>
+    <script>
+    document.getElementById("getName").onclick = function(){
+
+        var res = "";
+        for(var i =0;i<2;i++){
+            eval( "var word=" +  '"\\u' + (Math.round(Math.random() * (26960-19968)) + 19968).toString(16)+'"')
+            res += word;
+        }
+        document.getElementById("name").innerHTML = res;
+    }
+
+
+    </script>
+</html>
+
+

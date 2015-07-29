@@ -1,0 +1,106 @@
+#!/usr/bin/env node
+
+/* jshint latedef: false */
+
+var util = require('util');
+var fs = require('fs');
+var path = require('path');
+var htmlmin = require('../index');
+
+var commands = require('commander');
+
+var packageConfig = fs.readFileSync(path.join(path.dirname(fs.realpathSync(process.argv[1])), '../package.json'));
+var buildVersion = JSON.parse(packageConfig).version;
+
+var isWindows = process.platform == 'win32';
+
+// Specify commander options to parse command line params correctly
+commands
+    .version(buildVersion, '-v, --version')
+    .usage('[options] <source-file>')
+    .option('--nojsmin', 'not minified inline js')
+    .option('--nocssmin', 'not minified inline css')
+    .option('--not-case-sensitive', 'if this set, all tags will to lowwer case')
+    .option('--not-remove-comment', 'not remove all comment expect <--!xx-->')
+    .option('--remove-ignored', 'remove tags not recognize')
+    .option('--remove-optional-tags', 'some tag can without end tag, remove these end tags')
+    .option('--collapse-whitespace', 'collapse whitespace')
+    .option('-o, --output [output-file]', 'Use [output-file] as output instead of STDOUT')
+
+commands.on('--help', function() {
+    util.puts('  Examples:\n');
+    util.puts('    %> htmlmin one.html');
+    util.puts('    %> htmlmin -o one-min.html one.html');
+    if (isWindows) {
+        util.puts('    %> type one.html two.html three.html | htmlmin -o merged-and-minified.html');
+    } else {
+        util.puts('    %> cat one.html two.html three.html | htmlmin -o merged-and-minified.html');
+        util.puts('    %> cat one.html two.html three.html | htmlmin | gzip -9 -c > merged-minified-and-gzipped.html.gz');
+    }
+    util.puts('');
+    process.exit();
+});
+
+commands.parse(process.argv);
+
+var options = {
+    source: null,
+    target: null
+};
+
+var minOptions = {};
+var fromStdin = !process.env.__DIRECT__ && !process.stdin.isTTY;
+
+if (!fromStdin && commands.args.length === 0) {
+    commands.outputHelp();
+    return 0;
+}
+
+if (commands.nojsmin)
+    minOptions.jsmin = false;
+if (commands.nocssmin)
+    minOptions.cssmin = false;
+if (commands.notCaseSensitive)
+    minOptions.caseSensitive = false;
+if (commands.notRemoveComments)
+    minOptions.removeComments = false;
+if (commands.removeIgnored)
+    minOptions.removeIgnored = true;
+if (commands.collapseWhitespace)
+    minOptions.collapseWhitespace = true;
+
+if (commands.args.length > 0) {
+    var source = commands.args[0];
+    options.source = source;
+    minOptions.relativeTo = path.dirname(path.resolve(source));
+}
+
+if (options.source) {
+    fs.readFile(options.source, 'utf8', function(error, data) {
+        if (error)
+            throw error;
+        minify(data);
+    });
+} else {
+    var stdin = process.openStdin();
+    stdin.setEncoding('utf-8');
+    var data = '';
+    stdin.on('data', function(chunk) {
+        data += chunk;
+    });
+    stdin.on('end', function() {
+        minify(data);
+    });
+}
+
+function minify(data) {
+    var minified = htmlmin(data, minOptions)
+    output(minified);
+}
+
+function output(minified) {
+    if (options.target)
+        fs.writeFileSync(options.target, minified, 'utf8');
+    else
+        process.stdout.write(minified);
+}

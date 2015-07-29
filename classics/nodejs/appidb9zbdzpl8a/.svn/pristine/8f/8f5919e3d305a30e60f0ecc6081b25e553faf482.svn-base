@@ -1,0 +1,119 @@
+/*
+	可切换日历
+*/
+var calendar = {
+	dayTable:[], 			//初始化TABLE
+	year:null, 				//初始化年
+	month:null, 			//初始化月份
+	date:null,
+	selectedYear  : null,
+	selectedMonth : null,
+	selectedDate  : null,
+	getFirstDay:function(year,month){ 				//获取每个月第一天星期几
+		var firstDay = new Date(year,month,1);
+			return firstDay.getDay();
+	},
+	getMonthLen:function(year,month){ 				//获取当月总共有多少天
+		var nextMonth = new Date(year,month+1,1); 	//获取下个月的第一天
+			nextMonth.setHours(  nextMonth.getHours() - 3);
+		return nextMonth.getDate();
+	},
+	createTable : function(){
+		//获取上个月的天数
+		this.dayTable  = [];
+
+		var selectMonthLen = this.getMonthLen(this.selectedYear,this.selectedMonth);
+		if(
+			this.selectedYear  == this.year &&
+			this.selectedMonth == this.month&&
+			this.selectedDate  == this.date
+		){
+
+			//打印该月所有日期
+			for (var i = selectMonthLen;
+				i > this.selectedDate; i--) {
+				this.dayTable.unshift(
+					'<li>'+i+'</li>'
+				);
+			}
+
+			this.dayTable.unshift(
+				'<li class="canlender_gray">'+
+				this.selectedDate+'</li>'
+			);
+
+			for (var i = this.selectedDate-1; i > 0; i--) {
+				this.dayTable.unshift('<li>'+i+'</li>');
+			}
+		}else{
+			//打印该月所有日期
+			for (var i = this.getMonthLen(this.selectedYear,this.selectedMonth);
+				i > 0; i--) {
+				this.dayTable.unshift(
+					'<li>'+i+'</li>'
+				);
+			}
+		}
+		//获取当月第一天星期几
+		var thisFirstDay = this.getFirstDay(this.selectedYear,this.selectedMonth);
+		var lastMonthDate  = this.getMonthLen(this.selectedYear,this.selectedMonth-1);
+		//获取表格开始日期
+		for (var i = lastMonthDate,j=thisFirstDay; j>0; i--,j--) {
+			this.dayTable.unshift(
+				'<li class="canlender_fgray">'+i+'</li>'
+			);
+		}
+
+			//获取结束日期星期几
+		var nextMonthDay  = this.getFirstDay(this.selectedYear,this.selectedMonth+1);
+
+		//获取表格结束时间
+		for (var i = nextMonthDay,j=1; i<= 6; i++,j++) {
+
+			this.dayTable.push(
+				'<li class="canlender_fgray">'+j+'</li>'
+			);
+		}
+
+		//补加时间
+		if(this.dayTable.length<42){
+				//获取表格结束时间
+			for (var i = 0; i<= 6; i++,j++) {
+				this.dayTable.push(
+					'<li class="canlender_fgray">'+j+'</li>'
+				);
+			}
+		}
+
+		document.getElementById("canlender").innerHTML = this.dayTable;
+
+	},
+	init:function(){
+		//获取当前时间
+		var now 	= new Date();
+		var selecedMonthSpan = document.getElementById("selecedMonth");
+		var self = this;
+		this.year   = this.selectedYear  = now.getFullYear();
+		this.month  = this.selectedMonth = now.getMonth();
+		this.date   = this.selectedDate  = now.getDate();
+
+		/*this.year   = this.selectedYear  = 2015;
+		this.month  = this.selectedMonth = 5;
+		this.date   = this.selectedDate  = 5;*/
+		selecedMonthSpan.innerHTML = this.selectedYear +" - "+(this.selectedMonth+1);
+		this.createTable();
+		document.getElementById("last").onclick = function(){
+			self.selectedMonth--;
+			selecedMonthSpan.innerHTML =self.selectedYear +" - "+(self.selectedMonth+1);
+			self.createTable();
+
+		}
+		document.getElementById("next").onclick = function(){
+			selecedMonthSpan.innerHTML =self.selectedYear +" - "+(self.selectedMonth+1);
+			self.selectedMonth++;
+			self.createTable();
+
+		}
+	}
+}
+calendar.init();

@@ -1,0 +1,60 @@
+var express = require('express');
+var router = express.Router();
+
+var markdown = require( "markdown" ).markdown;
+//console.log(  markdown.toHTML("Hello *World*!" ) );
+
+
+
+/*为文件提供制度数据流*/
+var pathname = "./public/data/0511.md";
+
+var fs = require('fs');
+// 读入 Markdown 源文件
+fileContent = fs.readFileSync(pathname, 'utf8');
+// 使用 MarkdownJS 模块把源文件转换为 HTML 源代码
+fileContent = markdown.toHTML(fileContent);
+
+
+var htmlmin = require('htmlmin')
+fileContent = htmlmin(fileContent);
+
+
+/*
+	如果写入速度跟不上读取速度的话，只写数据流内部的缓存会爆仓。
+	我们可以根据.write方法的返回值来判断传入的数据是写入目标了，
+	还是临时放在了缓存了，并根据drain事件来判断什么时候只写数据
+	流已经将缓存中的数据写入目标，可以传入下一个待写数据了。
+*/
+
+/*为文件提供制度数据流*/
+var src = "./public/data/0511.md";
+var dst = "./views/a.ejs";
+
+// 保存
+fs.writeFileSync(dst, fileContent);
+console.log('Done!');
+
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', {
+  	title: 'HTML5 中 div section article 的区别' ,
+  	date : '0707 2015',
+  	tag1 : 'nodejs',
+  	tag2 : 'html',
+  	tag3 : 'javascript',
+  	text : 'text'
+  });
+
+});
+router.get('/article', function (req, res) {
+/*	res.send('hello,world!');*/
+	res.render('article', {
+	  	title: 'HTML5 中 div section article 的区别' ,
+	  	date : '0707 2015',
+	  	tags : 'nodejs',
+	  	text : fileContent
+	});
+});
+module.exports = router;

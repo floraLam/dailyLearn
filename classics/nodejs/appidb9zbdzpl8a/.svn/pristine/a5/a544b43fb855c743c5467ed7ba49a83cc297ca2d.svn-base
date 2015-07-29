@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>  每日一记 | floralam</title>
+		<meta name="description" content="">
+		<meta name="HandheldFriendly" content="True">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="MobileOptimized" content="320">
+		<meta name="theme-color" content="#2c3e50">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	    <meta name="google-site-verification" content="ERxwvLrqp2lRLHjmDo-9E1LNehbiI3l7FPRTzRn-_oA">
+
+		<link rel="stylesheet" type="text/css" href="../public/stylesheets/screen.css">
+
+    </head>
+
+	<body class="post-template tag-html5 tag-tips tag-front-end nav-closed">
+		<div class="site-wrapper">
+
+        <header class="main-header post-head no-cover">
+            <nav class="main-nav clearfix">
+        		<div class="inner">
+                    <div class="nav">
+                    <ul>
+                        <li class="nav-home" role="presentation"><a href="http://floralam.github.io/dailySite.html">Home</a></li>
+                        <li class="nav-about" role="presentation"><a href="http://floralam.github.io/">About</a></li>
+
+                    </ul>
+                </div>
+
+
+        			<a href="#">Subscribe</a>
+        		</div>
+        	</nav>
+
+        	<div class="main-header-content">
+        		<h3 class="page-title"><a href="http://www.qianduan.net/">每日一记</a></h3>
+        	</div>
+        </header>
+
+
+        <div class="main-content">
+            <main class="content" role="main">
+                <article class="post tag-html5 tag-tips tag-front-end">
+                    <!--BEGIN : quotes by famous people circuly and randomly-->
+                    <header class="post-header">
+                        <h3 class="post-dictum-text">熟能变巧，巧能变精</h3>
+                        <span class = "post-dictum-author" >——朱自清</span>
+                        <button class = "post-dictum-button" >换一个</button>
+                    </header>
+                    <!--END : quotes by famous people circuly and randomly-->
+
+                    <!--BEGIN : Screening of tags-->
+                    <section class="post-content" id = "post-content" >
+                        <div class ="post-search">
+                            <input type = "text" class = "post-search-input" placeholder="keyword" autofocus />
+                            <button class = "post-search-button" >　 Seach 　</button>
+                        </div>
+                        <div class = "post-content-tags clearfix">
+                            <ul>
+                                <li><a href="#" title="grunt" target="_blank">grunt</a></li>
+                                <li><a href="#" title="性能优化" target="_blank">性能优化</a></li>
+                                <li><a href="#" title="section和div的区别" target="_blank">section和div的区别</a></li>
+                                <li><a href="#" title="Sublime Text 2插件" target="_blank">Sublime Text 2插件</a></li>
+                                <li><a href="#" title="高性能 CSS3 动画" target="_blank">高性能 CSS3 动画</a></li>
+                                <li><a href="#" title="gulp-lint" target="_blank">gulp-lint</a></li>
+                                <li><a href="#" title="前端观察" target="_blank">前端观察</a></li>
+                                <li><a href="#" title="meta标签常用属性整理" target="_blank">meta标签常用属性整理</a></li>
+                                <li><a href="#" title="HTML5 中 div section article 的区别" target="_blank">HTML5 中 div section article 的区别</a></li>
+                                <li><a href="#" title="利用伪元素仿苹果手机官网导航" target="_blank">利用伪元素仿苹果手机官网导航</a></li>
+
+                            </ul>
+                        </div>
+                    </section>
+                    <!--END : Screening of tags-->
+
+                    <!--BEGIN : infomation of author-->
+                    <footer class="post-footer">
+                        <figure class="author-image">
+                            <a class="img" href="http://floralam.github.io/" ></a>
+                        </figure>
+
+                        <section class="author">
+                            <h4><a href="http://floralam.github.io/">飞一般的欣姐姐</a></h4>
+                                <p>女汉子 &amp; 宅女，工科女 &amp; 好学生，吃货 &amp; 萌妹子，程序媛</p>
+                            <div class="author-meta">
+
+                                <span class="author-link icon-link"><a href="http://floralam.github.io/">http://floralam.github.io/</a></span>
+                            </div>
+                        </section>
+                    </footer>
+                    <!--BEGIN : infomation of author-->
+                </article>
+               <!--  <section class="read-next">
+               <a class="read-next-story no-cover" href="#">
+                   <section class="post">
+                       <h2>zen coding更新到 0.7</h2>
+                   </section>
+               </a>
+               <a class="read-next-story prev no-cover" href="#">
+                   <section class="post">
+                       <h2>网页中的大字体设计</h2>
+                   </section>
+               </a>
+               </section> -->
+
+
+            <noscript>Please enable JavaScript to view the &lt;a href="https://disqus.com/?ref_noscript" rel="nofollow"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+            </main><aside class="sidebar">
+                <div class="widget">
+                    <h3 class="widget-title">日历</h3>
+                    <div class="canlender_box" id="canlender_box">
+                        <h2>
+                            <a href="#" class="canlender_left">&lt;&lt;</a>
+                            <a href="#" class="canlender_right">&gt;&gt;</a>
+                            June
+                        </h2>
+                        <ul class="canlender_cal">
+                            <li class="canlender_fgray">29</li>
+                            <li class="canlender_fgray">30</li>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                            <li>5</li>
+                            <li>6</li>
+                            <li>7</li>
+                            <li>8</li>
+                            <li>9</li>
+                            <li class="canlender_pink">10</li>
+                            <li>11</li>
+                            <li>12</li>
+                            <li>13</li>
+                            <li>14</li>
+                            <li class="canlender_gray">15</li>
+                            <li>16</li>
+                            <li>17</li>
+                            <li>18</li>
+                            <li>19</li>
+                            <li>20</li>
+                            <li>21</li>
+                            <li>22</li>
+                            <li>23</li>
+                            <li>24</li>
+                            <li class="canlender_tip">25
+                                <div class="canlender_tooltipBox">
+                                    <h2>Your Journey(2 items)</h2>
+                                    <ul class="canlender_tooltip">
+                                        <li>
+                                            <div class="canlender_ttext">我的計劃 A</div>
+                                        </li>
+                                        <li>
+                                            <div class="canlender_ttext">我的計劃 B</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>26</li>
+                            <li>27</li>
+                            <li>28</li>
+                            <li class="canlender_tip">29
+                                <div class="canlender_tooltipBox">
+                                    <h2>Your Journey(2 items)</h2>
+                                    <ul class="canlender_tooltip">
+                                        <li>
+                                            <div class="canlender_ttext">我的計劃 A</div>
+                                        </li>
+                                        <li>
+                                            <div class="canlender_ttext">我的計劃 B</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>30</li>
+                            <li>31</li>
+                            <li class="canlender_fgray">1</li>
+                            <li class="canlender_fgray">2</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="widget">
+                    <h3 class="widget-title">我的收藏</h3>
+                    <div class="widget-box clearfix blue-font">
+                        <ul>
+                            <li><a href="#" title="grunt" target="_blank">grunt</a></li>
+                            <li><a href="#" title="性能优化" target="_blank">性能优化</a></li>
+                            <li><a href="#" title="section和div的区别" target="_blank">section和div的区别</a></li>
+                            <li><a href="#" title="Sublime Text 2插件" target="_blank">Sublime Text 2插件</a></li>
+                            <li><a href="#" title="高性能 CSS3 动画" target="_blank">高性能 CSS3 动画</a></li>
+                            <li><a href="#" title="gulp-lint" target="_blank">gulp-lint</a></li>
+                            <li><a href="#" title="前端观察" target="_blank">前端观察</a></li>
+                            <li><a href="#" title="meta标签常用属性整理" target="_blank">meta标签常用属性整理</a></li>
+                            <li><a href="#" title="HTML5 中 div section article 的区别" target="_blank">HTML5 中 div section article 的区别</a></li>
+                            <li><a href="#" title="利用伪元素仿苹果手机官网导航" target="_blank">利用伪元素仿苹果手机官网导航</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        <!--END : main content -->
+
+        <!--BEGIN : footer for copyright -->
+        <footer class="site-footer clearfix">
+         <!-- <input type="file">-->
+            <section class="copyright">
+                <a href="http://floralam.github.io/blog.html">学习记录</a> © 2015-2016 All rights reserved.<br>
+                Design by <a href="http://floralam.github.io/">flora lam</a><br>
+                published in <a href="https://www.github.com/">Github</a>
+            </section>
+        </footer>
+        <!--END : footer for copyright -->
+
+	</div>
+
+</body>
+</html>

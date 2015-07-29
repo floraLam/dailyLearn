@@ -1,0 +1,27 @@
+var express = require('express');
+var router = express.Router();
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', {
+  	title: 'HTML5 中 div section article 的区别' ,
+  	date : '0707 2015',
+  	tag1 : 'nodejs',
+  	tag2 : 'html',
+  	tag3 : 'javascript',
+  	text : '<p>段落 段落<code>引用</code>、<code>引用</code>、<code>引用</code> 段落 段落</p><h2 id="div">标题</h2'
+  });
+
+});
+app.get('/article', function (req, res) {
+	res.send('hello,world!');
+	res.render('article', {
+	  	title: 'HTML5 中 div section article 的区别' ,
+	  	date : '0707 2015',
+	  	tag1 : 'nodejs',
+	  	tag2 : 'html',
+	  	tag3 : 'javascript',
+	  	text : '<p>段落 段落<code>引用</code>、<code>引用</code>、<code>引用</code> 段落 段落</p><h2 id="div">标题</h2'
+	});
+});
+module.exports = router;
