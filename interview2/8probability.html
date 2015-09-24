@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>probability</title>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="author" content="floraLam" />
+        
+    </head>
+    <body style = "font-family:'微软雅黑'">
+        <h5>竹筒有20根签，10根白色，10根红色。抽取10根颜色一致可获得100元奖励，抽取9根颜色一致可获得50元奖励，但是抽取5根白色5根就损失50元</h5>
+        
+        <button id="check">开始游戏</button><br/><br/>
+
+        <div id="container"></div>
+       
+        
+	</body>
+    <script>
+        //方法一，只能完成基本的题目要求
+        function probability1(){
+            //通用C函数
+            function C(a,b){
+                var r = 1;
+                for(var i=a,j=0;j<b;i--,j++){
+                    r *=i;
+                }
+                return r;
+            }
+           
+            return  C(10,10)*2/C(20,10)*100+//抽取10根相同颜色的概率*100
+                    C(10,9)*C(10,1)*2/C(20,10)*50+//抽取9根相同颜色的概率*50
+                    C(10,5)*C(10,5)/C(20,10)*(-50);//抽取5根相同颜色的概率*（-50）
+            
+        }
+       /* console.time("方法一执行时间：");
+        console.info("方法一得到的期望："+probability1());
+        console.timeEnd("方法一执行时间：");*/
+
+
+       //方法二，在方法一的基础上避免计算重复的C
+       function probability2(){
+            //通用C函数
+            function C(a,b){
+                if(!resOfC[a+','+b]){
+                    var r = 1;
+                    for(var i=a,j=0;j<b;i--,j++){
+                        r *=i;
+                    }
+                    resOfC[a+','+b] = r;
+                    return r;
+                }else{
+                    return resOfC[a+','+b]; 
+                }
+                
+            }
+            
+            var resOfC = {}; //一个新的临时数组,存储可能出现的结果
+            //如果之前计算过C(10,10),可以直接从
+            return  C(10,10)*2/C(20,10)*100+
+                    C(10,9)*C(10,1)*2/C(20,10)*50+
+                    C(10,5)*C(10,5)/C(20,10)*(-50);
+            
+       }
+
+      /*  console.time("方法二执行时间：");
+        console.info("方法二得到的期望："+probability2());
+        console.timeEnd("方法二执行时间：");*/
+
+        //方法三，利用递归和动态规划来求解组合数
+        function probability3(){
+            //C(a，b)=C(a-1,b-1)+C(a-1,b)
+            //通用C函数
+           function C(a,b){
+                if(b==0){
+                    return 1;
+                }
+                var temp = [];//
+                for (var  i = 0; i < a; i++) {
+                    temp[i] = [];
+                    temp[i][0] = 1;//每行首尾为1
+                    temp[i][i+1] = 1;//每行末尾为1
+                    
+                    for (var j=1;j<=i;j++) {
+                        temp[i][j] =temp[i-1][j-1]+temp[i-1][j];////计算第i行第j列的值
+                    }
+                }
+                return temp[a-1][b];
+            }
+            return  C(10,10)*2/C(20,10)*100+
+                    C(10,9)*C(10,1)*2/C(20,10)*50+
+                    C(10,5)*C(10,5)/C(20,10)*(-50);
+        }
+       
+        //开始，玩游戏，获取其中一种签的数值
+        function getRes(){
+            //随机获取0和1，分别代表白签和红签，再统计1的数量
+             var n = "";
+             for(var i=0;i<20;i++)
+                 n += Math.round(Math.random());
+            
+             var r = {value:0,income:0};
+
+             for(var i=0;i<20;i++)
+                 if(n[i] == '1')r.value++;
+
+            //注意，不能通过直接获取0-20的随机数来模拟抽取白签和红签的数量，因为这样不满足正态分布
+            
+            //收益规则
+            //收益规则方法一，可读性强
+            // switch(r.value){
+            //     case 10: r.income=100;break;
+            //     case 9 : r.income=50;break;
+            //     case 11: r.income=50;break;
+            //     case 5 : r.income=-50;break; 
+            // }
+            //收益规则方法二，节省代码
+            ((r.value==10)?r.income=100:((r.value==5)?r.income=-50:((r.value==9||r.value==11)?r.income=50:'')));
+
+            return r;
+
+        }
+        document.getElementById("check").onclick = function(){
+            var r = getRes();
+            document.getElementById('container').innerHTML = "抽取了红签"+r.value+"枝，白签"+(20-r.value)+"枝。"+((r.income==0)?("无损失，无收获。"):((r.income>0)?"获得了":"损失")+r.income+"元。");
+        }
+        
+
+        //考虑代码重用性,可以动态修改规则
+       var probability = {
+            sum:20,         //总抽数
+            type:2,         //总类型数
+            possibility :{  //可能性，和收益对应表
+                '10,10' :   100,
+                '9,11'  :   50,
+                '5,5'   :   -50
+            },
+            //计算期待
+            getExpectation : function(){
+
+            }
+       }
+
+    </script>
+</html>
+

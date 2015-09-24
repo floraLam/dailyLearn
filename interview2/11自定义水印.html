@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <title>自定义水印</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  	<style type="text/css">
+  		div {
+  			border:2px solid #000;
+  			width: 1000px;
+  			height: 800px;
+  			overflow: hidden;
+
+  		}
+		canvas{
+			transform:rotate(-30deg);
+		}
+  	</style>
+ </head>
+
+ <body>
+	<div>
+	     <canvas id="my_canvas"></canvas>
+	</div>
+	<script type="text/javascript">
+
+		var elem = document.getElementById("my_canvas");
+
+		//同一张canvar重复水印，无法实现全部水印都能够旋转相同角度，因此考虑在body内自动创建若干张canvar标签
+		/**
+		 * 自定义水印
+		 * 特定区域内dom创建重复水印text
+		 *
+		 * @param  {[dom]} 需要填充的节点 []
+		 * @param  {[text]} 填充的文本内容 [节点将会完全覆盖该text文字]
+		 * @return {[type]}    [description]
+		 */
+		(function createWaterMark(dom,text){
+
+
+			if (dom && dom.getContext)  {
+				var fontSize = 20;
+				//获取水印文本长度，水印长度 = 单个文字大小 x 水印文本长度
+				var textLength = text.length * fontSize;
+
+				//设定canvas长宽
+				dom.width = dom.parentNode.clientWidth+textLength;
+				dom.height = dom.parentNode.clientHeight+textLength;
+
+
+				//获取当前dom宽度长度，确定需要描绘的分布及数量
+
+				var rows = Math.ceil(dom.width/textLength)+1;
+				var cols = Math.ceil(dom.height/textLength)+1;
+
+
+				for(var i = 0;i<cols;i++){
+					for(var j = 0;j<rows;j++){
+						var context = dom.getContext("2d");
+						//font：文字字体，同 CSSfont-family 属性
+						context.font         = 'bold  '+fontSize+'px Consolas';
+						//斜体 30像素 微软雅黑字体
+
+						//textAlign：文字水平对齐方式。可取属性值: start, end, left,right, center。默认值:start.
+						context.textAlign = 'left';
+						context.fillStyle    = 'rgba(0, 0, 0, 0.25)';
+						//文字竖直对齐方式。可取属性值：top, hanging, middle,alphabetic, ideographic, bottom。默认值：alphabetic
+						context.textBaseline = 'top';
+
+						//要输出的文字内容，文字位置坐标, 第四个参数为可选选项——最大宽度。如果需要的话，浏览器会缩减文字以让它适应指定宽度
+
+						context.fillText(text, 200*i, 200*j,textLength);    //有填充
+					}
+
+				}
+
+			}
+		})(elem,"林锦欣 101445");
+
+
+	</script>
+ </body>
+</html>

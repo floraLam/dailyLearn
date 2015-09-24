@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>water_down_前端开发</title>
+<style type="text/css">
+#water{position:absolute;left:0;top:0;width:400px;height:188px;
+background-color: #ff6600;-moz-user-select:none}
+</style>
+</head>
+<body>
+<div id="water"></div>
+<script  type="text/javascript">
+var $ = function(id){return typeof id == 'string' ? document.getElementById(id) : id;};
+(function(o){
+    if(o){var o = $(o);}else{return false;};
+    var d = document,x,y;
+    o.onselectstart = function(){return false;}; 
+    o.onmousedown = function(e){
+        e = e || window.event;
+        x = e.clientX-o.offsetLeft;
+        y = e.clientY-o.offsetTop;
+        d.onmousemove = function(e){
+            e = e || window.event;
+            o.style.left = e.clientX - x + "px";
+            o.style.top = e.clientY - y + "px";
+        };
+        d.onmouseup = function(){ d.onmousemove = null; };
+    };
+})('water');
+</script>
+</body>
+</html> 

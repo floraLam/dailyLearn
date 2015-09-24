@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>去哪儿网笔试题目</title>
+<meta name="author" content="Jquery-School" />
+<meta name="Copyright" content="Jquery-School,www.jq-school.com" />
+
+
+
+<style type="text/css">
+
+</style>
+
+</head>
+<body>
+<div id="tagsList"> 
+	<div></div>
+	<div></div>
+	
+</div>
+</body>
+<script type="text/javascript">
+
+//题目一，找出最新的稳定版本
+var data = [
+	'7',
+	'12.4.6',
+	'12.4.8',
+	'9.2.16',
+	'11.4.20',
+	'11.3.14',
+	'2.1.12',
+
+	'12.4',
+	//'12.6.2',
+	'13.5'
+];
+
+function getAvailable(data){
+	var res = [];
+	//判断奇偶数
+	function getEven(n){
+		if(n%2)
+			return false;
+		else
+			return true;
+	}
+	function sort(arr){
+		var m = arr[0];
+		for(var i=1;i<arr.length;i++){
+			if(parseInt(arr[i].split(".")[0])>=parseInt(m.split(".")[0])){
+				m = arr[i];
+			}
+			//console.info(m);	
+		}
+
+		return m;
+	}
+	//获取稳定版本
+	for(var i=0;i<data.length;i++){
+		if(getEven(parseInt(data[i].split(".").pop()))){
+			res.push(data[i]);
+		}
+	}
+	if(res.length==0){
+		return 'no stable available'
+	}
+	console.info(res);
+	if(res.length==1){
+		return res[0];
+	}else{
+		return sort(res);
+	}
+	return res
+
+}
+
+
+console.info(getAvailable(data));
+
+//题目二，获取三个数组中共同的数字
+
+var arr1 = [1,9,30,2,7,10,94,64,82,13];
+var arr2 =[4,9,5,23,65,34,2,10,21];
+var arr3 =[10,97,47,38,82,91,2,71,2];
+
+//数组去重
+function unique(a){
+	a.sort(); //先排序
+	var res = [a[0]];
+	for(var i = 1; i < a.length; i++){
+		if(a[i] !== res[res.length - 1]){
+			res.push(a[i]);
+		}
+	}
+	 return res;
+}
+//获取数组中相同的值
+function getTheSameNum(arr1,arr2,arr3){
+	var temp = [];
+	for(var i=0;i<arr1.length;i++){
+		for(var j=0;j<arr2.length;j++){
+			if(arr1[i] == arr2[j])
+				temp.push(arr1[i]);
+		}
+	}
+	temp = unique(temp);
+	var res =[];
+	for(var j=0;j<temp.length;j++){
+		for(var i=0;i<arr3.length;i++){
+			if(arr3[i] == temp[j]){
+				res.push(temp[j]);
+			}
+				
+		}
+	}
+	return unique(res);
+}
+
+console.info(getTheSameNum(arr1,arr2,arr3));
+
+
+//判断死锁数量
+var sample = {
+	'127':{
+		have:[1010],
+		need:[1100]
+	},
+	'123':{
+		have:[1001,1002],
+		need:[1003]
+	},
+	
+	'128':{
+		have:[1100],
+		need:[1010]
+	},
+	'129':{
+		have:[],
+		need:[]
+	},
+	'124':{
+		have:[1007],
+		need:[1008]
+	},
+	'125':{
+		have:[1003],
+		need:[1004]
+	},
+	'126':{
+		have:[1004],
+		need:[1002]
+	}
+}
+
+function getDeadlock(a){
+	var lock = [],r=0;
+	for(k in a){
+		console.info(lock);
+		for(var i=0;i<a[k].have.length;i++){
+
+			for(p in a){
+				for(var j=0;j<a[p].need.length;j++){
+					if(a[k].have[i] == a[p].need[j]){
+						lock.push(k);
+						if(a[lock[0]].have[i] == a[k].need[j])
+						console.info(a[k].need[j]);
+						/*for(var ii=0;ii<a;ii++){
+							if(lock== [] )
+								break;
+							for(var jj=0;jj<a[k].need.length;jj++){
+								console.info(a[lock[0]].have[ii]);
+								console.info(a[k].need[jj]);
+								if(a[lock[0]].have[ii] == a[k].need[jj]){
+									lock = [];
+									r++;
+									break;
+
+								}
+									
+							}
+						}*/
+						
+					}
+
+						
+				}
+			}
+			
+
+		}
+
+	}
+	return r;
+}
+console.info(getDeadlock(sample));
+</script>
+</html>

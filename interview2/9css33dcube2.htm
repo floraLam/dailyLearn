@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>test rotate</title>
+  <style type="text/css" media="screen">
+   
+
+    #container {
+        width: 100%;
+        -webkit-perspective: 800; 
+        -webkit-perspective-origin: 50% 225px;
+    }
+    
+    #shape {
+        position: relative;
+        top: 90px;
+        margin: 0 auto;
+        height: 100px;
+        width: 100px;
+        left: -50px;
+        -webkit-transform-style: preserve-3d;
+        transform: rotateY(0deg);
+    }
+    
+    .plane {
+        position: absolute;
+        height: 200px;
+        width: 200px;
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+    }
+
+    /* 前部*/.cube > .front   {background:pink;         -webkit-transform: scale3d(0.5, 0.5, 0.5) translateZ(100px);                 }
+    /* 左部*/.cube > .left {opacity: 0.5;            -webkit-transform: scale3d(0.4, 0.5, 0.4) rotateY(90deg) translateZ(100px);    }
+    /* 后部*/.cube > .back  {background:lightblue;    -webkit-transform: scale3d(0.5, 0.5, 0.5) rotateY(180deg) translateZ(100px);   }
+    /* 右侧*/.cube > .right  {opacity: 0.5;            -webkit-transform: scale3d(0.4, 0.5, 0.4) rotateY(-90deg) translateZ(100px);   }
+   
+
+
+    #origin{
+        position: absolute;
+        background: #000;
+        width: 10px;
+        height: 10px;
+        border-radius: 10px;
+        margin-left: -5px;
+    }
+    .line{
+        width: 180px;
+        height: 10px;
+        margin: 0 auto;
+        margin-top:280px;
+        left: 100px;
+       
+    }
+  </style>
+ 
+</head>
+    <body >
+
+      <div id="container">
+          <div id="shape" class="cube backfaces">
+           
+            <div class="plane front"></div>
+            <div class="plane left"></div>
+            <div class="plane back"></div>
+            <div class="plane right" ></div>
+          
+          </div>
+            <div class="line">
+                 <div id="origin"></div>
+            </div>
+        </div>
+        
+
+
+    </body>
+    <script>
+     var $ = function(id){
+        return typeof id == 'string' ? document.getElementById(id) : id;
+    };
+
+    //时间关系，没有做太多兼容性考虑
+    if( '-webkit-transform-style' in document.documentElement.style && '-webkit-perspective' in document.documentElement.style){
+
+        //初始化小黑点位置，为屏幕中央位置
+        var o = $('origin');
+            o.style.left = clientWidth+ "px";
+
+        //获取浏览器窗口中间x坐标，当小黑点在浏览器中央时，用户仅能看到front
+        var clientWidth = document.body.clientWidth/2;
+
+        //移动鼠标，修改小黑点位置及旋转立方体
+        document.onmousemove = function(ev){
+            var oEvent=ev||event;
+            var oLeft=oEvent.clientX+'px';
+            //固定小黑点区域，即用户可行走的区域
+            if(ev.clientX>=(clientWidth-95) && ev.clientX<=(clientWidth+90)){
+                //修改小黑点x位置
+                o.style.left = ev.clientX + "px";
+                //修改立方体旋转角度
+                $("shape").style.transform = "rotateY("+(-(ev.clientX-clientWidth)/2)+"deg)";
+            }
+        };
+    }else{
+        alert("当前浏览器不支持-webkit-transform属性");
+
+    }
+   
+    
+    </script>
+</html>

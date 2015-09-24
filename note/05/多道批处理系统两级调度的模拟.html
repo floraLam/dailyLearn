@@ -446,7 +446,19 @@
     
         return true;
     }
-    console.info(schedule());
+    var result = schedule();
+    var tbody = "";
+    for(var i = 0;i<result.length;i++){
+         tbody += "<tr><td>"+result[i].name+
+                  "</td><td>"+result[i].arrivalTime　+
+                  "</td><td>"+result[i].runTime　+
+                  "</td><td>"+data[i].memory　+
+                  "</td><td>"+data[i].tape　+
+                  "</tr>";
+    }
+    document.getElementById("simulated").innerHTML = tbody;
+    //document.getElementById("tape").innerHTML = tapeMachine;
+    //document.getElementById("memory").innerHTML = "<tr><td>"+primaryMemory+"KB</td></tr>";
     })();
         
 

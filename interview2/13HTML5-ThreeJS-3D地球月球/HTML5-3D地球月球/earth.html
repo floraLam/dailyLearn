@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="three.min.js"></script>
+<title>3D地球-技术交流群123552714</title>
+<!--auth:肖邦也没谱-->
+<!--更多交流HTML5、Web3D、Three.js技术，请加入QQ群123552714进行交流-->
+<style type="text/css">
+div#canvas-frame {
+    border: none;
+    cursor: pointer;
+    width: 800px;
+    height: 600px;
+    background-color: #EEEEEE;
+}
+</style>
+<script>    
+    var width, height;
+	var SCREEN_WIDTH = window.innerWidth-20, SCREEN_HEIGHT = window.innerHeight-20;
+	var aspct = SCREEN_WIDTH/SCREEN_HEIGHT;
+    var renderer;
+    function initThree() {
+        width = document.getElementById('canvas-frame').clientWidth;
+        height = document.getElementById('canvas-frame').clientHeight;
+        renderer = new THREE.WebGLRenderer({
+            antialias : true
+        });
+
+		renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+        document.getElementById('canvas-frame').appendChild(renderer.domElement);
+        renderer.setClearColorHex(0x000000, 1.0);
+    }
+
+    var camera;
+    function initCamera() {
+        camera = new THREE.PerspectiveCamera(45, aspct, 1, 10000);
+        camera.position.set(300,50, 20);
+        camera.up.x = 0;
+        camera.up.y = 0;
+        camera.up.z = 1;
+        
+        camera.lookAt({x : 0,y : 0,z : 0});
+    }
+    var scene;
+    function initScene() {
+        scene = new THREE.Scene();
+    }
+    var light,light2;
+    function initLight() {
+        light = new THREE.DirectionalLight(0xffffff, 1.0, 0);
+        light.position.set(0, 300, 30);
+        scene.add(light);
+        
+        light2 = new THREE.AmbientLight(0x777777);
+        scene.add(light2);
+    }
+
+    var sphere1, sphere2 ;
+    function initObject() {
+    	// 地球
+    	var texture1  = THREE.ImageUtils.loadTexture('earth.jpg');
+        sphere1 = new THREE.Mesh(new THREE.SphereGeometry(50, 50,50),
+               //new THREE.MeshLambertMaterial({color:0x0ffff0})
+               new THREE.MeshLambertMaterial({  map: texture1})
+        ); 
+                
+        scene.add(sphere1);
+        sphere1.position.set(0,0,0);
+        
+		// 月球
+		var texture2  = THREE.ImageUtils.loadTexture('moon.jpg');
+        sphere2 = new THREE.Mesh(
+                new THREE.SphereGeometry(8,20,20),
+                new THREE.MeshLambertMaterial({map:texture2})
+            );
+         scene.add(sphere2);
+         sphere2.position.set(0,250,0);
+         
+    }
+
+    var t=0;
+    function loop() {
+        t++;
+        renderer.clear();
+        sphere1.rotation.set( Math.PI/2 , t/100, 0 );   
+        sphere2.rotation.set( Math.PI/2 , t/200, 0 );
+        sphere2.position.set( -70*Math.sin(t/200) , 70*Math.cos(t/200) ,0);
+        renderer.render(scene, camera);
+        window.requestAnimationFrame(loop);
+    }   
+    
+    function threeStart() {
+        initThree();
+        initCamera();
+        initScene();
+        initLight();
+        initObject();
+        loop();
+       //renderer.clear();
+        //renderer.render(scene, camera); 
+    }
+    
+</script>
+</head>
+<body onload="threeStart();">
+    <div id="canvas-frame"></div>
+</body>
+</html>
